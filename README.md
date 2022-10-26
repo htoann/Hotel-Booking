@@ -1,3 +1,3 @@
-# BookingRoom - Find your next stay
+# BookingHotel - Find your next stay
 
 ### Search deals on hotels, homes, and much more...
