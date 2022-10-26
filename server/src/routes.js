@@ -1,13 +1,15 @@
-import Authentication from "./api/authentication";
-import logger from "./util/logger";
+import middlewares from "./api/middlewares";
+import authRouter from "./auth/authRouter";
+import userRouter from "./user/userRouter";
+import logger from "./utils/logger";
 
 export default function route(app) {
   app.get("/", (req, res) =>
     res.json({ source: "https://github.com/htoann/mern" })
   );
 
-  app.post("/auth/register", Authentication.register);
-  app.post("/auth/login", Authentication.login);
+  app.use("/", authRouter);
+  app.use("/users", middlewares.auth, userRouter);
 
   app.use((err, req, res, next) => {
     logger.error(err.message);

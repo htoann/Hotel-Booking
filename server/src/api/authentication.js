@@ -1,5 +1,5 @@
-import token from "../util/token";
-import UserModel from "../user/model";
+import token from "../utils/token";
+import User from "../user/userModel";
 
 export default {
   register: (req, res, next) => {
@@ -10,16 +10,16 @@ export default {
         .status(422)
         .send({ error: "You must provide email and password." });
     }
-    UserModel.findOne(
+    User.findOne(
       {
         email: email,
       },
       function (err, existingUser) {
         if (err) return res.status(422).send(err);
         if (existingUser) {
-          return res.status(422).send({ error: "Email is in use" });
+          return res.status(422).send({ error: "User has been created." });
         }
-        const user = new UserModel({
+        const user = new User({
           ...req.body,
           password: password,
         });
@@ -29,10 +29,12 @@ export default {
             return next(err);
           }
 
+          const username = email.split("@")[0];
           const { password, ...info } = user._doc;
 
           res.json({
-            user: { ...info, token: token.generateToken(savedUser) },
+            user: { ...info, username },
+            token: token.generateToken(savedUser),
           });
         });
       }
@@ -47,7 +49,7 @@ export default {
         .status(422)
         .send({ error: "You must provide email and password." });
     }
-    UserModel.findOne(
+    User.findOne(
       {
         email: email,
       },
@@ -58,10 +60,13 @@ export default {
         if (existingUser) {
           existingUser.comparedPassword(password, function (err, good) {
             if (err || !good) {
-              return res.status(401).send(err || "User not found");
+              return res.status(401).send(err || "Wrong username or password.");
             }
 
+            const { password, ...info } = existingUser._doc;
+
             res.send({
+              user: { ...info },
               token: token.generateToken(existingUser),
             });
           });

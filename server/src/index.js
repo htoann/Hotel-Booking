@@ -2,9 +2,9 @@ import http from "http";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import logger from "./util/logger";
+import logger from "./utils/logger";
 import route from "./routes";
-import initDB from "./database";
+import initDatabase from "./initDatabase";
 
 const app = express();
 
@@ -13,7 +13,7 @@ if (!process.env.JWT_SECRET) {
   logger.warn(err.message);
 }
 
-initDB();
+initDatabase();
 
 // App Setup
 app.use(

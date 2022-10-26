@@ -1,5 +1,5 @@
-import UserModel from "../user/model";
-import token from "../util/token";
+import User from "../user/userModel";
+import token from "../utils/token";
 
 export default {
   auth: (req, res, next) => {
@@ -9,14 +9,14 @@ export default {
       });
 
     // Validate jwt
-    let try_token = req.header("Authorization").split(" ")[0];
+    let try_token = req.header("Authorization").split(" ")[1];
     token.verifyToken(try_token, (err, payload) => {
       if (err) return res.status(401).send(err);
-      UserModel.findById(payload.sub).exec((err, user) => {
+      User.findById(payload.sub).exec((err, user) => {
         if (err || !user) {
           return res.status(404).send(
             err || {
-              error: "Middleware: user not found!!!",
+              error: "Middleware: User not found!!!",
             }
           );
         }
