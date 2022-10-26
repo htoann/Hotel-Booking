@@ -1,29 +1,10 @@
-import http from "http";
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
-import logger from "./utils/logger";
+import app from "./app";
 import route from "./routes";
+import http from "http";
+import logger from "./utils/logger";
 import initDatabase from "./initDatabase";
 
-const app = express();
-
-if (!process.env.JWT_SECRET) {
-  const err = new Error("No JWT_SECRET in env variable");
-  logger.warn(err.message);
-}
-
 initDatabase();
-
-// App Setup
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-  })
-);
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 // Routes Init
 route(app);
