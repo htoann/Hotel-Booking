@@ -1,4 +1,4 @@
-const AppError = require("../utils/appError");
+const AppError = require("./appError");
 const APIFeatures = require("./apiFeatures");
 
 exports.deleteOne = (Model) => async (req, res, next) => {
@@ -6,12 +6,7 @@ exports.deleteOne = (Model) => async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
-      return next(
-        new AppError(404, "fail", "No document found with that id"),
-        req,
-        res,
-        next
-      );
+      return next(new AppError(404, "fail", "No document found with that id"));
     }
 
     res.status(204).json({
@@ -31,12 +26,7 @@ exports.updateOne = (Model) => async (req, res, next) => {
     });
 
     if (!doc) {
-      return next(
-        new AppError(404, "fail", "No document found with that id"),
-        req,
-        res,
-        next
-      );
+      return next(new AppError(404, "fail", "No document found with that id"));
     }
 
     res.status(200).json({
@@ -66,12 +56,7 @@ exports.getOne = (Model) => async (req, res, next) => {
     const doc = await Model.findById(req.params.id);
 
     if (!doc) {
-      return next(
-        new AppError(404, "fail", "No document found with that id"),
-        req,
-        res,
-        next
-      );
+      return next(new AppError(404, "fail", "No document found with that id"));
     }
 
     res.status(200).json({
