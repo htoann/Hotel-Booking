@@ -2,8 +2,8 @@ import token from "../util/token";
 import UserModel from "../user/model";
 
 export default {
-  signup: (req, res, next) => {
-    const { email, password, firstName, lastName } = req.body;
+  register: (req, res, next) => {
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res
@@ -20,11 +20,7 @@ export default {
           return res.status(422).send({ error: "Email is in use" });
         }
         const user = new UserModel({
-          name: {
-            first: firstName,
-            last: lastName,
-          },
-          email: email,
+          ...req.body,
           password: password,
         });
 
@@ -33,16 +29,17 @@ export default {
             return next(err);
           }
 
+          const { password, ...info } = user._doc;
+
           res.json({
-            success: true,
-            token: token.generateToken(savedUser),
+            user: { ...info, token: token.generateToken(savedUser) },
           });
         });
       }
     );
   },
 
-  signin: (req, res, next) => {
+  login: (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     if (!email || !password) {
