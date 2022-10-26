@@ -1,7 +1,15 @@
+import Header from "../components/layout";
+import Head from "next/head";
+
 export default function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center text-green-500">
-      Hello World
-    </div>
-  );
+    return (
+        <>
+            <Head>
+                <title>Booking</title>
+            </Head>
+            <div className="flex mx-auto">
+                <Header/>
+            </div>
+        </>
+    );
 }
