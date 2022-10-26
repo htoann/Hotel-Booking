@@ -1,6 +1,6 @@
 {
-  "name": "mern",
-  "description": "CRUD in MongoDB, Express, React/Hooks, Node",
+  "name": "booking-hotel",
+  "description": "Booking hotels web with MERN Stack",
   "main": "index.js",
   "scripts": {
     "test": "eslint --fix **/src/",
@@ -14,19 +14,16 @@
     "npm": ">=6.0.0"
   },
   "engineStrict": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amazingandyyy/mern.git"
-  },
   "keywords": [
-    "react"
+    "nodejs",
+    "nextjs"
   ],
-  "author": "Amazingandyyy <amazingandyyy@gmail.com> (Andy Chen)",
+  "author": "Tran Huu Toan, Le Cong Ly",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/amazingandyyy/mern/issues"
+    "url": "https://github.com/htoann/bookinghotel/issues"
   },
-  "homepage": "https://github.com/amazingandyyy/mern#readme",
+  "homepage": "https://github.com/htoann/bookinghotel#readme",
   "devDependencies": {
     "eslint": "^4.14.0",
     "eslint-config-logux": "^17.0.0",
