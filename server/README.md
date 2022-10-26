@@ -24,7 +24,7 @@ $ yarn build  // this will build the server code to es5 js codes and generate a 
 [Create new Issues](https://github.com/amazingandyyy/mern/issues)
 
 ## Author
-[HToan](https://github.com/htoann)
+[Tran Toan](https://github.com/htoann)
 
 ### License
 MIT License
