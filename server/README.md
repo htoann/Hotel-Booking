@@ -1,4 +1,4 @@
-# server-side
+# Booking App Server
 MongoDB, Express, Node
 
 ## Usage
@@ -24,9 +24,8 @@ $ yarn build  // this will build the server code to es5 js codes and generate a 
 [Create new Issues](https://github.com/amazingandyyy/mern/issues)
 
 ## Author
-[Amazingandyyy](amazingandyyy.github.io)
-- Feel free to find me on _[GitHub](https://github.com/amazingandyyy)_ and _[LiveCoding](https://www.livecoding.tv/amazingandyyy/)_
-- or visit my _[page](http://amazingandyyy.github.io/)_
+[HToan](https://github.com/htoann)
 
 ### License
-[MIT](https://github.com/amazingandyyy/eventbrite-api/blob/master/LICENSE)
+MIT License
+Copyright (C) <2022> Tran Huu Toan <huutrantoan@gmail.com>
