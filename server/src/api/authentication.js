@@ -1,15 +1,14 @@
 import token from "../utils/token";
 import User from "../user/userModel";
-import AppError from "../utils/appError";
 
 export default {
   register: (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return next(
-        new AppError(422, "fail", "You must provide email and password.")
-      );
+      return res
+        .status(422)
+        .send({ error: "You must provide email and password." });
     }
     User.findOne(
       {
@@ -18,7 +17,7 @@ export default {
       function (err, existingUser) {
         if (err) return res.status(422).send(err);
         if (existingUser) {
-          return next(new AppError(422, "fail", "User has been created."));
+          return res.status(422).send({ error: "User has been created." });
         }
         const user = new User({
           ...req.body,
@@ -46,9 +45,9 @@ export default {
     const email = req.body.email;
     const password = req.body.password;
     if (!email || !password) {
-      return next(
-        new AppError(422, "fail", "You must provide email and password.")
-      );
+      return res
+        .status(422)
+        .send({ error: "You must provide email and password." });
     }
     User.findOne(
       {
@@ -56,14 +55,12 @@ export default {
       },
       function (err, existingUser) {
         if (err || !existingUser) {
-          return next(new AppError(401, "fail", err || "User Not Found"));
+          return res.status(401).send(err || { error: "User not found" });
         }
         if (existingUser) {
           existingUser.comparedPassword(password, function (err, good) {
             if (err || !good) {
-              return next(
-                new AppError(401, "fail", err || "Wrong username or password.")
-              );
+              return res.status(401).send(err || "Wrong password or email");
             }
 
             const { password, ...info } = existingUser._doc;

@@ -1,12 +1,11 @@
-const AppError = require("./appError");
 const APIFeatures = require("./apiFeatures");
 
-exports.deleteOne = (Model) => async (req, res, next) => {
+exports.deleteOne = (Model, callback) => async (req, res, next) => {
   try {
-    const doc = await Model.findByIdAndDelete(req.params.id);
+    const doc = await Model.findByIdAndDelete(req.params.id, callback);
 
     if (!doc) {
-      return next(new AppError(404, "fail", "No document found with that id"));
+      return res.status(404).send({ error: "No document found with that id" });
     }
 
     res.status(204).json({
@@ -26,7 +25,7 @@ exports.updateOne = (Model) => async (req, res, next) => {
     });
 
     if (!doc) {
-      return next(new AppError(404, "fail", "No document found with that id"));
+      return res.status(404).send({ error: "No document found with that id" });
     }
 
     res.status(200).json({
@@ -38,9 +37,9 @@ exports.updateOne = (Model) => async (req, res, next) => {
   }
 };
 
-exports.createOne = (Model) => async (req, res, next) => {
+exports.createOne = (Model, callback) => async (req, res, next) => {
   try {
-    const doc = await Model.create(req.body);
+    const doc = await Model.create(req.body, callback);
 
     res.status(201).json({
       status: "success",
@@ -51,12 +50,12 @@ exports.createOne = (Model) => async (req, res, next) => {
   }
 };
 
-exports.getOne = (Model) => async (req, res, next) => {
+exports.getOne = (Model, callback) => async (req, res, next) => {
   try {
-    const doc = await Model.findById(req.params.id);
+    const doc = await Model.findById(req.params.id, callback);
 
     if (!doc) {
-      return next(new AppError(404, "fail", "No document found with that id"));
+      return res.status(404).send({ error: "No document found with that id" });
     }
 
     res.status(200).json({
