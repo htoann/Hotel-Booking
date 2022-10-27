@@ -1,36 +1,35 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt-nodejs";
+import autoIncrement from "mongoose-auto-increment";
 
 const UserSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      unique: true,
-    },
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    country: {
-      type: String,
-      //   required: true,
-    },
-    avatar: {
-      type: String,
-    },
-    city: {
-      type: String,
-      //   required: true,
-    },
-    phone: {
-      type: String,
-      //   required: true,
-    },
     password: {
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+    },
+    avatar: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+
+    city: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+
     isAdmin: {
       type: Boolean,
       default: false,
@@ -68,6 +67,15 @@ UserSchema.methods.comparedPassword = function (candidatePassword, cb) {
     cb(null, good);
   });
 };
+
+autoIncrement.initialize(mongoose.connection);
+
+UserSchema.plugin(autoIncrement.plugin, "Hotel", {
+  model: "User",
+  field: "_id",
+  startAt: 1,
+  incrementBy: 1,
+});
 
 // Export the model
 export default mongoose.model("User", UserSchema);
