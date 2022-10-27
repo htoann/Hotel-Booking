@@ -4,7 +4,7 @@ interface Props {
     text: String
     textColor: String
     bgColor: String
-    fullWidth?: String
+    fullWidth?: boolean
     IcAfter?: any
 
 }

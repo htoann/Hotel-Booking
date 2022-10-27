@@ -12,7 +12,7 @@ module.exports = {
             backgroundColor: {
                 primary: "#003580",
                 lightPrimary: "#0071c2",
-                secondary: "#1266DD",
+                secondary: "#febb02",
                 tertiary: "#F73859"
             },
             textColor: {
@@ -20,5 +20,7 @@ module.exports = {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 };

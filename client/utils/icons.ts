@@ -5,6 +5,7 @@ import {VscSignOut} from "react-icons/vsc";
 import {BiBed} from "react-icons/bi";
 import {GiEarthAsiaOceania} from "react-icons/gi";
 import {MdOutlineAttractions, MdOutlineAirplaneTicket} from "react-icons/md";
+import {CiLocationOn} from "react-icons/ci";
 
 
 export {
@@ -19,5 +20,7 @@ export {
     GiEarthAsiaOceania,
     AiOutlineCar,
     MdOutlineAttractions,
-    RiTaxiWifiLine
+    RiTaxiWifiLine,
+
+    CiLocationOn
 };
