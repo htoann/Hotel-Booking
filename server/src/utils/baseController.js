@@ -1,8 +1,8 @@
 const APIFeatures = require("./apiFeatures");
 
-exports.deleteOne = (Model, callback) => async (req, res, next) => {
+exports.deleteOne = (Model) => async (req, res, next) => {
   try {
-    const doc = await Model.findByIdAndDelete(req.params.id, callback);
+    const doc = await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
       return res.status(404).send({ error: "No document found with that id" });
@@ -37,9 +37,9 @@ exports.updateOne = (Model) => async (req, res, next) => {
   }
 };
 
-exports.createOne = (Model, callback) => async (req, res, next) => {
+exports.createOne = (Model) => async (req, res, next) => {
   try {
-    const doc = await Model.create(req.body, callback);
+    const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: "success",
@@ -50,9 +50,9 @@ exports.createOne = (Model, callback) => async (req, res, next) => {
   }
 };
 
-exports.getOne = (Model, callback) => async (req, res, next) => {
+exports.getOne = (Model) => async (req, res, next) => {
   try {
-    const doc = await Model.findById(req.params.id, callback);
+    const doc = await Model.findById(req.params.id);
 
     if (!doc) {
       return res.status(404).send({ error: "No document found with that id" });
