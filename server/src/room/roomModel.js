@@ -26,7 +26,7 @@ const RoomSchema = new mongoose.Schema(
 
 autoIncrement.initialize(mongoose.connection);
 
-RoomSchema.plugin(autoIncrement.plugin, "Hotel", {
+RoomSchema.plugin(autoIncrement.plugin, {
   model: "Room",
   field: "_id",
   startAt: 1,

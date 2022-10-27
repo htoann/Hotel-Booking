@@ -70,7 +70,7 @@ UserSchema.methods.comparedPassword = function (candidatePassword, cb) {
 
 autoIncrement.initialize(mongoose.connection);
 
-UserSchema.plugin(autoIncrement.plugin, "Hotel", {
+UserSchema.plugin(autoIncrement.plugin, {
   model: "User",
   field: "_id",
   startAt: 1,

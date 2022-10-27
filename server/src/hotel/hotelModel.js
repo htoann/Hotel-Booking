@@ -60,8 +60,8 @@ const HotelSchema = new mongoose.Schema({
 
 autoIncrement.initialize(mongoose.connection);
 
-HotelSchema.plugin(autoIncrement.plugin, "Hotel", {
-  model: "adminSchema",
+HotelSchema.plugin(autoIncrement.plugin, {
+  model: "Hotel",
   field: "_id",
   startAt: 1,
   incrementBy: 1,
