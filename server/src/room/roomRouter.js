@@ -1,4 +1,4 @@
-import { admin } from "../api/Middlewares";
+import { admin } from "../api/middlewares";
 import roomController from "./roomController";
 
 const router = require("express").Router();
