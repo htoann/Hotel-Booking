@@ -4,6 +4,7 @@ import User from "../user/userModel";
 export default {
   register: (req, res, next) => {
     const { email, password } = req.body;
+    const username = email.split("@")[0];
 
     if (!email || !password) {
       return res
@@ -22,6 +23,7 @@ export default {
         const user = new User({
           ...req.body,
           password: password,
+          username,
         });
 
         user.save(function (err, savedUser) {
@@ -29,11 +31,10 @@ export default {
             return next(err);
           }
 
-          const username = email.split("@")[0];
-          const { password, ...info } = user._doc;
+          const { password, isAdmin, ...info } = user._doc;
 
           res.json({
-            user: { ...info, username },
+            user: { ...info },
             token: token.generateToken(savedUser),
           });
         });
@@ -44,6 +45,7 @@ export default {
   login: (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+
     if (!email || !password) {
       return res
         .status(422)
@@ -63,7 +65,7 @@ export default {
               return res.status(401).send(err || "Wrong password or email");
             }
 
-            const { password, ...info } = existingUser._doc;
+            const { password, isAdmin, ...info } = existingUser._doc;
 
             res.send({
               user: { ...info },
