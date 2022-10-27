@@ -1,6 +1,7 @@
-import middlewares from "./api/middlewares";
 import authRouter from "./auth/authRouter";
 import userRouter from "./user/userRouter";
+import hotelRouter from "./hotel/hotelRouter";
+import roomRouter from "./room/roomRouter";
 import logger from "./utils/logger";
 
 export default function route(app) {
@@ -8,8 +9,10 @@ export default function route(app) {
     res.json({ source: "https://github.com/htoann/mern" })
   );
 
-  app.use("/", authRouter);
-  app.use("/users", middlewares.auth, userRouter);
+  app.use("/api/auth", authRouter);
+  app.use("/api/users", userRouter);
+  app.use("/api/hotels", hotelRouter);
+  app.use("/api/rooms", roomRouter);
 
   app.use((err, req, res, next) => {
     logger.error(err.message);
