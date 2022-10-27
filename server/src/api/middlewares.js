@@ -40,19 +40,12 @@ export const admin = (req, res, next) => {
       if (err || !user) {
         return res.status(404).send(
           err || {
-            error: "User not found",
-          }
-        );
-      } else if (!user.isAdmin) {
-        return res.status(404).send(
-          err || {
-            error: "You are not allowed",
+            error: "User not found || You are not allowed",
           }
         );
       }
 
       delete user.password;
-      console.log(user);
       req.user = user;
       next();
     });
