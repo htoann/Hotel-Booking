@@ -34,8 +34,10 @@ export default {
           const { password, isAdmin, ...info } = user._doc;
 
           res.json({
-            user: { ...info },
-            token: token.generateToken(savedUser),
+            data: {
+              user: { ...info },
+              token: token.generateToken(savedUser),
+            },
           });
         });
       }
@@ -68,8 +70,10 @@ export default {
             const { password, isAdmin, ...info } = existingUser._doc;
 
             res.send({
-              user: { ...info },
-              token: token.generateToken(existingUser),
+              data: {
+                user: { ...info },
+                token: token.generateToken(existingUser),
+              },
             });
           });
         }
