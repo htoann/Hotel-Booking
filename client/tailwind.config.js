@@ -16,7 +16,8 @@ module.exports = {
                 tertiary: "#F73859"
             },
             textColor: {
-                primary: "#262626"
+                primary: "#262626",
+                secondary: "#0071c2"
             }
         },
     },

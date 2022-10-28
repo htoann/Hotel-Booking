@@ -4,8 +4,15 @@ import {RiSuitcaseLine, RiTaxiWifiLine} from "react-icons/ri";
 import {VscSignOut} from "react-icons/vsc";
 import {BiBed} from "react-icons/bi";
 import {GiEarthAsiaOceania} from "react-icons/gi";
-import {MdOutlineAttractions, MdOutlineAirplaneTicket} from "react-icons/md";
+import {
+    MdOutlineAttractions,
+    MdOutlineAirplaneTicket,
+    MdOutlineDirectionsBike,
+    MdOutlineLocationCity
+} from "react-icons/md";
 import {CiLocationOn} from "react-icons/ci";
+import {TbBeach} from "react-icons/tb";
+import {BsFlower1} from "react-icons/bs";
 
 
 export {
@@ -22,5 +29,11 @@ export {
     MdOutlineAttractions,
     RiTaxiWifiLine,
 
-    CiLocationOn
+    CiLocationOn,
+
+    TbBeach,
+    MdOutlineDirectionsBike,
+    MdOutlineLocationCity,
+    BsFlower1
+
 };
