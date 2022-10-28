@@ -1,4 +1,5 @@
 # Booking App Server
+
 MongoDB, Express, Node
 
 ## Usage
@@ -6,9 +7,12 @@ MongoDB, Express, Node
 ### Prepare JWT secret
 
 run the script at the first level: (You need to add a JWT_SECRET in .env to connect to MongoDB)
+
 ```terminal
 $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 ```
+
+{{API_ENDPOINT}} : https://bookingapihotel.herokuapp.com/api
 
 ### Start
 
@@ -21,11 +25,14 @@ $ yarn build  // this will build the server code to es5 js codes and generate a 
 ```
 
 ## BUGs or comments
+
 [Create new Issues](https://github.com/amazingandyyy/mern/issues)
 
 ## Author
+
 [Tran Toan](https://github.com/htoann)
 
 ### License
+
 MIT License
 Copyright (C) <2022> Tran Huu Toan <huutrantoan@gmail.com>

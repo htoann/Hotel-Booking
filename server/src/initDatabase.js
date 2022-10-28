@@ -7,6 +7,9 @@ export default function initDatabase() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
+    .then(() => {
+      console.log("Connected database");
+    })
     .catch((err) => console.error(err));
 
   mongoose.Promise = global.Promise;
