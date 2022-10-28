@@ -12,7 +12,14 @@ run the script at the first level: (You need to add a JWT_SECRET in .env to conn
 $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 ```
 
+### API
+[Booking.postman.json](https://github.com/htoann/BookingHotel/blob/main/server/Booking.postman.json)
+
+Variable
+```
 {{API_ENDPOINT}} : https://bookingapihotel.herokuapp.com/api
+```
+Example get all hotels : https://bookingapihotel.herokuapp.com/api/hotels
 
 ### Start
 
@@ -35,4 +42,4 @@ $ yarn build  // this will build the server code to es5 js codes and generate a 
 ### License
 
 MIT License
-Copyright (C) <2022> Tran Huu Toan <huutrantoan@gmail.com>
+Copyright (C) 2022 Tran Huu Toan <huutrantoan@gmail.com>
