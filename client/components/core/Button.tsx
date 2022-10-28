@@ -10,17 +10,17 @@ interface Props {
 }
 
 const Button = ({text, textColor, bgColor, IcAfter, fullWidth}: Props) => {
-    return (
-        <button
-            type='button'
-            className={`py-2 px-4 ${textColor} ${bgColor} ${fullWidth && 'w-full'} rounded border border-current 
+  return (
+    <button
+      type='button'
+      className={`py-2 px-4 ${textColor} ${bgColor} ${fullWidth && 'w-full'} rounded border border-current 
             outline-none hover:underline flex items-center justify-center gap-1`}
-        >
-            <span> {text}</span>
-            {IcAfter && <IcAfter/>}
+    >
+      <span> {text}</span>
+      {IcAfter && <IcAfter/>}
 
-        </button>
-    )
+    </button>
+  )
 }
 
 export default memo(Button)
