@@ -3,9 +3,7 @@
   "description": "",
   "scripts": {
     "dev": "babel-watch src/index.js",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
-    "postinstall": "npm run build",
-    "build": "rm -rf ./dist && cross-env NPM_CONFIG_PRODUCTION=false babel -d ./dist ./src -s"
+    "start": "cross-env NODE_ENV=production node dist/index.js"
   },
   "author": "htoann",
   "license": "MIT",
