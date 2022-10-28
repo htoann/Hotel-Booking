@@ -1,27 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}",
+        './pages/**/*.{js,ts,jsx,tsx}',
+        './components/**/*.{js,ts,jsx,tsx}'
     ],
     theme: {
         extend: {
             colors: {
-                primary: "#0071c2"
+                primary: '#0071c2'
             },
             backgroundColor: {
-                primary: "#003580",
-                lightPrimary: "#0071c2",
-                secondary: "#febb02",
-                tertiary: "#F73859"
+                primary: '#003580',
+                lightPrimary: '#0071c2',
+                secondary: '#febb02',
+                tertiary: '#F73859'
             },
             textColor: {
-                primary: "#262626",
-                secondary: "#0071c2"
+                primary: '#262626',
+                secondary: '#0071c2'
             }
-        },
+        }
     },
     plugins: [
-        require('@tailwindcss/forms'),
-    ],
-};
+        require('@tailwindcss/forms')
+    ]
+}
