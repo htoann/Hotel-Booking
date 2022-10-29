@@ -1,19 +1,25 @@
 import React from 'react'
-import {useForm} from '../../hooks/useForm'
-import {Button, Input} from '../core'
-import Head from 'next/head'
-import Link from 'next/link'
+import {Button} from '../core'
 import SocialsAuth from './SocialsAuth'
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+
+import {SignInForm} from '../../interface/auth'
+import {signInSchema} from '../../utils/validationSchema'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
 }
 
 const SignIn = ({setIsSignIn}: Props) => {
-    const {values, handleChange} = useForm({
-        email: '',
-        password: ''
+    const {register, handleSubmit, formState: {errors}} = useForm<SignInForm>({
+        mode: 'onBlur',
+        resolver: yupResolver(signInSchema)
     })
+    const onSubmit = (data: SignInForm) => {
+        console.log(data)
+    }
+
     const handleChangeAuth = () => {
         setIsSignIn(false)
     }
@@ -21,7 +27,6 @@ const SignIn = ({setIsSignIn}: Props) => {
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                 <div className=" rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
-
                     <div className="w-3/5 p-5">
                         <div className="text-left font-bold">
                             L<span className="text-primary">CL</span>
@@ -33,34 +38,61 @@ const SignIn = ({setIsSignIn}: Props) => {
                             <div className="border-2 w-10 border-primary inline-block mb-2"></div>
                             <SocialsAuth/>
                             <p className="text-gray-400">or use your email account</p>
-                            <form
-                                // onSubmit={handleSubmit}
-                                className="w-4/5 mx-auto flex flex-col items-center justify-center"
-                            >
-                                <Input
-                                    label="Email"
-                                    name="email"
-                                    type="email"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                />
-                                <Input
-                                    label="Password"
-                                    name="password"
-                                    type="password"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                />
-                                <div className="flex justify-between w-full mb-5 mt-2">
-                                    <label className="flex items-center text-xs">
-                                        <input type="checkbox" name="remember" className="mr-1"/>
-                                        <p>Remember me</p>
+                            <form className="w-4/5 mx-auto flex flex-col items-center"
+                                onSubmit={handleSubmit(onSubmit)}>
+                                <div className="mb-2.5 w-full">
+                                    <label
+                                        htmlFor="email"
+                                        className={`block font-bold text-sm mb-1 ${
+                                            errors.email ? 'text-red-400' : 'text-primary'
+                                        }`}
+                                    >
+                                        Email
                                     </label>
-                                    <div className="text-xs hover:text-gray-400">
-                                        <Link href="/auth/">Forgot Password?</Link>
-                                    </div>
+                                    <input
+                                        type="text"
+                                        id="email"
+                                        className={`block rounded-xl w-full bg-transparent outline-none border-b-2 py-2 px-4  ${
+                                            errors.email
+                                                ? 'text-red-300 border-red-400'
+                                                : 'text-primary'
+                                        }`}
+                                        {...register('email')}
+                                    />
+                                    {errors.email && (
+                                        <p className="text-red-500 text-sm mt-1">
+                                            A valid email is required.
+                                        </p>
+                                    )}
                                 </div>
-                                <Button text="Sign In" textColor="text-white" bgColor="bg-lightPrimary"/>
+                                <div className="mb-2.5 w-full">
+                                    <label
+                                        htmlFor="password"
+                                        className={`block font-bold text-sm mb-1 ${
+                                            errors.password ? 'text-red-400' : 'text-primary'
+                                        }`}
+                                    >
+                                        Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        className={`block rounded-xl w-full bg-transparent outline-none border-b-2 py-2 px-4  ${
+                                            errors.password
+                                                ? 'text-red-300 border-red-400'
+                                                : 'text-primary'
+                                        }`}
+                                        {...register('password')}
+                                    />
+                                    {errors.password && (
+                                        <p className="text-red-500 text-sm mt-1">
+                                            Your password is required.
+                                        </p>
+                                    )}
+                                </div>
+                                <button type="submit">
+                                    <Button text="Sign In" textColor="text-white" bgColor="bg-primary"/>
+                                </button>
                             </form>
                         </div>
                     </div>
