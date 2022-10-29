@@ -1,5 +1,6 @@
 import token from "../utils/token";
 import User from "../user/userModel";
+import { createError } from "../utils/createMessage";
 
 export default {
   register: (req, res, next) => {
@@ -7,18 +8,16 @@ export default {
     const username = email.split("@")[0];
 
     if (!email || !password) {
-      return res
-        .status(422)
-        .send({ error: "You must provide email and password." });
+      return createError(res, 422, "You must provide email and password.");
     }
     User.findOne(
       {
         email: email,
       },
       function (err, existingUser) {
-        if (err) return res.status(422).send(err);
+        if (err) return next(createError(res, 422, err));
         if (existingUser) {
-          return res.status(422).send({ error: "User has been created." });
+          return createError(res, 422, "User has been created.");
         }
         const user = new User({
           ...req.body,
@@ -28,16 +27,14 @@ export default {
 
         user.save(function (err, savedUser) {
           if (err) {
-            return next(err);
+            return next(createError(res, 500, err));
           }
 
           const { password, isAdmin, ...info } = user._doc;
 
           res.json({
-            data: {
-              user: { ...info },
-              token: token.generateToken(savedUser),
-            },
+            user: { ...info },
+            token: token.generateToken(savedUser),
           });
         });
       }
@@ -49,9 +46,7 @@ export default {
     const password = req.body.password;
 
     if (!email || !password) {
-      return res
-        .status(422)
-        .send({ error: "You must provide email and password." });
+      return createError(res, 422, "You must provide email and password.");
     }
     User.findOne(
       {
@@ -59,21 +54,19 @@ export default {
       },
       function (err, existingUser) {
         if (err || !existingUser) {
-          return res.status(401).send(err || { error: "User not found" });
+          return createError(res, 401, err || "User not found");
         }
         if (existingUser) {
           existingUser.comparedPassword(password, function (err, good) {
             if (err || !good) {
-              return res.status(401).send(err || "Wrong password or email");
+              return createError(res, 401, err || "User not found");
             }
 
             const { password, isAdmin, ...info } = existingUser._doc;
 
             res.send({
-              data: {
-                user: { ...info },
-                token: token.generateToken(existingUser),
-              },
+              user: { ...info },
+              token: token.generateToken(existingUser),
             });
           });
         }

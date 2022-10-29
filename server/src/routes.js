@@ -3,10 +3,11 @@ import userRouter from "./user/userRouter";
 import hotelRouter from "./hotel/hotelRouter";
 import roomRouter from "./room/roomRouter";
 import logger from "./utils/logger";
+import { createError } from "./utils/createMessage";
 
 export default function route(app) {
   app.get("/", (req, res) =>
-    res.json({ source: "https://github.com/htoann/mern" })
+    res.json({ source: "https://github.com/htoann/bookinghotel" })
   );
 
   app.use("/api/auth", authRouter);
@@ -16,10 +17,10 @@ export default function route(app) {
 
   app.use((err, req, res, next) => {
     logger.error(err.message);
-    res.status(422).json(err.message);
+    return next(createError(res, 422, err.message));
   });
 
-  app.use((req, res) => {
-    res.status(404).render("home");
+  app.use("*", (req, res) => {
+    createError(res, 404, "404 Not Found");
   });
 }

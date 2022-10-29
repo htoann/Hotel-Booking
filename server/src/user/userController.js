@@ -8,10 +8,7 @@ export default {
     try {
       const user = req.user;
 
-      res.status(200).json({
-        status: "success",
-        data: user,
-      });
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }

@@ -1,27 +1,28 @@
 const APIFeatures = require("./apiFeatures");
+const { createError } = require("./createMessage");
 
-exports.deleteOne = (Model, username) => async (req, res, next) => {
+exports.deleteOne = (Model, newParams) => async (req, res, next) => {
   try {
     if (req.params.username == "admin") {
-      return res.status(404).send({ error: "Can not delete admin" });
+      return createError(res, 403, "Can not delete admin");
     }
-    const doc = username
+    const doc = newParams
       ? await Model.findOneAndDelete({ username: req.params.username })
       : await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
-      return res.status(404).send({ error: "No document found with that id" });
+      return createError(res, 404, "No document found with that id");
     }
 
-    res.status(200).json("Deleted successfully");
+    return createMessage(res, 200, "Deleted successfully");
   } catch (error) {
     next(error);
   }
 };
 
-exports.updateOne = (Model, username) => async (req, res, next) => {
+exports.updateOne = (Model, newParams) => async (req, res, next) => {
   try {
-    const doc = username
+    const doc = newParams
       ? await Model.findOneAndUpdate(
           { username: req.params.username },
           req.body,
@@ -36,13 +37,10 @@ exports.updateOne = (Model, username) => async (req, res, next) => {
         });
 
     if (!doc) {
-      return res.status(404).send({ error: "No document found with that id" });
+      return createError(res, 404, "No document found with that id");
     }
 
-    res.status(200).json({
-      status: "success",
-      data: doc,
-    });
+    res.status(200).json(doc);
   } catch (error) {
     next(error);
   }
@@ -52,10 +50,7 @@ exports.createOne = (Model) => async (req, res, next) => {
   try {
     const doc = await Model.create(req.body);
 
-    res.status(201).json({
-      status: "success",
-      data: doc,
-    });
+    res.status(201).json(doc);
   } catch (error) {
     next(error);
   }
@@ -67,13 +62,10 @@ exports.getOne = (Model, newParams) => async (req, res, next) => {
       ? await Model.findOne({ username: req.params.username })
       : await Model.findById(req.params.id);
     if (!doc) {
-      return res.status(404).send({ error: "No document found with that id" });
+      return createError(res, 404, "No document found with that id");
     }
 
-    res.status(200).json({
-      status: "success",
-      data: doc,
-    });
+    res.status(200).json(doc);
   } catch (error) {
     next(error);
   }
@@ -85,11 +77,7 @@ exports.getAll = (Model) => async (req, res, next) => {
 
     const doc = await features.query;
 
-    res.status(200).json({
-      status: "success",
-      results: doc.length,
-      data: doc,
-    });
+    res.status(200).json(doc);
   } catch (error) {
     next(error);
   }
