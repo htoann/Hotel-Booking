@@ -1,5 +1,6 @@
 import Room from "./roomModel";
 import Hotel from "../hotel/hotelModel";
+import { createMessage } from "../utils/createMessage";
 const base = require("../utils/baseController");
 
 export default {
@@ -35,7 +36,7 @@ export default {
       } catch (err) {
         next(err);
       }
-      res.status(200).json("Room has been deleted.");
+      return createMessage(res, 200, "Deleted successfully");
     } catch (err) {
       next(err);
     }
