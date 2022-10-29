@@ -114,13 +114,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/users/test5",
+							"raw": "{{API_ENDPOINT}}/users/admin",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"users",
-								"test5"
+								"admin"
 							]
 						}
 					},
@@ -295,7 +295,7 @@
 					"response": []
 				},
 				{
-					"name": "Get An Hotel",
+					"name": "Get A Hotel",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -406,6 +406,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Hotel Room",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/hotels/room/1",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"hotels",
+								"room",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -437,31 +456,31 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/1",
+							"raw": "{{API_ENDPOINT}}/rooms/3",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"1"
+								"3"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get An Room",
+					"name": "Get A Room",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/1",
+							"raw": "{{API_ENDPOINT}}/rooms/2",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -529,13 +548,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/1",
+							"raw": "{{API_ENDPOINT}}/rooms/2",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"1"
+								"2"
 							]
 						}
 					},
