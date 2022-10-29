@@ -15,9 +15,23 @@ import {
     RiTaxiWifiLine
 } from '../../utils/icons'
 import {Button} from '../core'
+import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import {logout} from '../../features/authSlice'
+import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
 
 const Header = () => {
-    const isLogin = false
+    const router = useRouter()
+    const {user} = useAppSelector((state: any) => state.persistedReducer.auth)
+    console.log(user)
+
+    const dispatch = useAppDispatch()
+
+    const handleLogout = () => {
+        dispatch(logout())
+        toast.success('User logged out...')
+        router.push('/auth')
+    }
 
     const accountMenu = [
         {
@@ -38,11 +52,6 @@ const Header = () => {
         {
             icon: <AiOutlineHeart/>,
             name: 'Saved',
-            link: '/'
-        },
-        {
-            icon: <VscSignOut/>,
-            name: 'Sign out',
             link: '/'
         }
     ]
@@ -89,7 +98,7 @@ const Header = () => {
                     <Link href="/">
                         <Button text="List your property" textColor="text-white" bgColor="bg-transparent"/>
                     </Link>
-                    {isLogin
+                    {user
                         ? <>
                             <div
                                 className="group inline-block relative">
@@ -99,11 +108,11 @@ const Header = () => {
                                         className="w-8 h-8 border-2 border-orange-500 rounded-full
                                             flex items-center justify-center
                                             overflow-hidden">
-                                        <HiUser size="xl"/>
+                                        <HiUser size={30}/>
                                     </div>
                                     <span>Your account</span>
                                 </button>
-                                <ul className="w-max absolute right-0 hidden text-primary pt-1 group-hover:block">
+                                <ul className="w-max absolute z-50 right-0 hidden text-primary pt-1 group-hover:block">
                                     {accountMenu.map(item =>
                                         <li key={item.name}
                                             className="bg-white hover:bg-gray-300 block whitespace-no-wrap">
@@ -114,6 +123,14 @@ const Header = () => {
                                             </Link>
                                         </li>
                                     )}
+                                    <li
+                                        className="bg-white hover:bg-gray-300 block whitespace-no-wrap">
+                                        <div onClick={() => handleLogout()}
+                                            className="flex items-center py-2 px-4 gap-x-2.5 cursor-pointer">
+                                            <VscSignOut/>
+                                            <span>Sign out</span>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </>
