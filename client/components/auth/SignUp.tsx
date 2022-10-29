@@ -1,10 +1,16 @@
-import React from 'react'
-import {Button, Input} from '../core'
+import React, {useEffect} from 'react'
+import {Button} from '../core'
 import SocialsAuth from './SocialsAuth'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import {SignUpForm} from '../../interface/auth'
 import {signUpSchema} from '../../utils/validationSchema'
+
+import {useRegisterUserMutation} from '../../services/authApi'
+import {setUser} from '../../features/authSlice'
+import {useAppDispatch} from '../../store/hooks'
+import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
@@ -15,9 +21,40 @@ const SignUp = ({setIsSignIn}: Props) => {
         mode: 'onBlur',
         resolver: yupResolver(signUpSchema)
     })
-    const onSubmit = (data: SignUpForm) => {
-        console.log(data)
+
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+    const [
+        registerUser,
+        {
+            data: registerData,
+            isSuccess: isRegisterSuccess,
+            isError: isRegisterError,
+            error: registerError
+        }
+    ] = useRegisterUserMutation()
+
+    const onSubmit = async (data: SignUpForm) => {
+        await registerUser(data)
     }
+
+    useEffect(() => {
+        if (isRegisterSuccess) {
+            toast.success('User Login Successfully')
+            dispatch(
+                setUser({user: registerData.data.user, token: registerData.data.token})
+            )
+            router.push('/')
+        }
+    }, [isRegisterSuccess])
+
+    useEffect(() => {
+        if (isRegisterError) {
+            toast.error((registerError as any).data.error)
+            console.log(registerError)
+        }
+    }, [isRegisterError])
+
     const handleChangeAuth = () => {
         setIsSignIn(true)
     }

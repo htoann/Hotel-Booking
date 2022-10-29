@@ -1,11 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Button} from '../core'
 import SocialsAuth from './SocialsAuth'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
+import {toast} from 'react-toastify'
 
 import {SignInForm} from '../../interface/auth'
 import {signInSchema} from '../../utils/validationSchema'
+import {useAppDispatch} from '../../store/hooks'
+import {useLoginUserMutation} from '../../services/authApi'
+import {setUser} from '../../features/authSlice'
+import {useRouter} from 'next/router'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
@@ -16,13 +21,39 @@ const SignIn = ({setIsSignIn}: Props) => {
         mode: 'onBlur',
         resolver: yupResolver(signInSchema)
     })
-    const onSubmit = (data: SignInForm) => {
-        console.log(data)
-    }
-
     const handleChangeAuth = () => {
         setIsSignIn(false)
     }
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+    const [
+        loginUser,
+        {
+            data: loginData,
+            isSuccess: isLoginSuccess,
+            isError: isLoginError,
+            error: loginError
+        }
+    ] = useLoginUserMutation()
+
+    const onSubmit = async (data: SignInForm) => {
+        await loginUser(data)
+    }
+    useEffect(() => {
+        if (isLoginSuccess) {
+            toast.success('User Login Successfully')
+            dispatch(
+                setUser({user: loginData.data.user, token: loginData.data.token})
+            )
+            router.push('/')
+        }
+    }, [isLoginSuccess])
+
+    useEffect(() => {
+        if (isLoginError) {
+            toast.error((loginError as any).data)
+        }
+    }, [isLoginError])
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">

@@ -1,4 +1,4 @@
-import {Action, ThunkAction, configureStore} from '@reduxjs/toolkit'
+import {Action, ThunkAction, configureStore, combineReducers} from '@reduxjs/toolkit'
 import {
     persistReducer,
     persistStore,
@@ -10,7 +10,8 @@ import {
     REGISTER
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import rootReducers from './rootReducers'
+import authReducer from '../features/authSlice'
+import {authApi} from '../services/authApi'
 
 const persistConfig = {
     key: 'root',
@@ -18,16 +19,23 @@ const persistConfig = {
     storage
 }
 
+const rootReducers = combineReducers({
+    auth: authReducer
+})
+
 const persistedReducer = persistReducer(persistConfig, rootReducers)
 
 export const store = configureStore({
-    reducer: persistedReducer,
+    reducer: {
+        persistedReducer,
+        [authApi.reducerPath]: authApi.reducer
+    },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
             }
-        })
+        }).concat(authApi.middleware)
 })
 export const persistor = persistStore(store)
 
