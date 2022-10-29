@@ -13,7 +13,7 @@ $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 ```
 
 ### API
-[Booking.postman.json](https://github.com/htoann/BookingHotel/blob/main/server/Booking.postman.json)
+[Booking.postman.json](https://github.com/htoann/BookingHotel/blob/main/server/Booking.postman_collection.json)
 
 Variable
 ```
