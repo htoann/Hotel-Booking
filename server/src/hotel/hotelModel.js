@@ -2,11 +2,23 @@ import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
 
 const HotelSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
   },
   type: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: String,
+    required: true,
+  },
+  descShort: {
     type: String,
     required: true,
   },
@@ -25,26 +37,6 @@ const HotelSchema = new mongoose.Schema({
   photos: {
     type: [String],
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  desc: {
-    type: String,
-    required: true,
-  },
-  descShort: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    min: 0,
-    max: 5,
-  },
-  rooms: {
-    type: [String],
-  },
   cheapestPrice: {
     type: Number,
     required: true,
@@ -53,8 +45,16 @@ const HotelSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+  },
   score: {
     type: Number,
+  },
+  rooms: {
+    type: [String],
   },
 });
 

@@ -22,14 +22,12 @@ const UserSchema = new mongoose.Schema(
     country: {
       type: String,
     },
-
     city: {
       type: String,
     },
     phone: {
       type: String,
     },
-
     isAdmin: {
       type: Boolean,
       default: false,
