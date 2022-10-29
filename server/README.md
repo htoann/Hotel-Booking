@@ -1,4 +1,4 @@
-# Booking App Server
+# Booking Hotel Server
 
 MongoDB, Express, Node
 
