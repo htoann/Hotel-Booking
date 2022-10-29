@@ -1,5 +1,5 @@
-import React from 'react';
-import Button from "../core/Button";
+import React from 'react'
+import Button from '../core/Button'
 
 const Search = () => {
     return (
@@ -38,7 +38,7 @@ const Search = () => {
             </div>
 
         </div>
-    );
-};
+    )
+}
 
-export default Search;
+export default Search

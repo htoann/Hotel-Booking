@@ -1,5 +1,5 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link'
+import React from 'react'
 import {
     HiUser,
     AiOutlineUser,
@@ -13,71 +13,70 @@ import {
     AiOutlineCar,
     MdOutlineAttractions,
     RiTaxiWifiLine
-} from "../../utils/icons";
-import Button from "../core";
-
+} from '../../utils/icons'
+import {Button} from '../core'
 
 const Header = () => {
-    const isLogin = false;
+    const isLogin = false
 
     const accountMenu = [
         {
             icon: <AiOutlineUser/>,
-            name: "Manage account",
-            link: "/"
+            name: 'Manage account',
+            link: '/'
         },
         {
             icon: <RiSuitcaseLine/>,
-            name: "Bookings & Trips",
-            link: "/"
+            name: 'Bookings & Trips',
+            link: '/'
         },
         {
             icon: <AiOutlineWallet/>,
-            name: "Reward & Wallet",
-            link: "/"
+            name: 'Reward & Wallet',
+            link: '/'
         },
         {
             icon: <AiOutlineHeart/>,
-            name: "Saved",
-            link: "/"
+            name: 'Saved',
+            link: '/'
         },
         {
             icon: <VscSignOut/>,
-            name: "Sign out",
-            link: "/"
+            name: 'Sign out',
+            link: '/'
         }
     ]
     const menu = [
         {
             icon: <BiBed/>,
-            name: "Stays",
-            link: "/"
+            name: 'Stays',
+            link: '/'
         },
         {
             icon: <MdOutlineAirplaneTicket/>,
-            name: "Flights",
-            link: "/"
+            name: 'Flights',
+            link: '/'
         },
         {
             icon: <GiEarthAsiaOceania/>,
-            name: "Flight + Hotel",
-            link: "/"
+            name: 'Flight + Hotel',
+            link: '/'
         },
         {
             icon: <AiOutlineCar/>,
-            name: "Car rentals",
-            link: "/"
+            name: 'Car rentals',
+            link: '/'
         },
         {
             icon: <MdOutlineAttractions/>,
-            name: "Attractions",
-            link: "/"
+            name: 'Attractions',
+            link: '/'
         },
         {
             icon: <RiTaxiWifiLine/>,
-            name: "Airport taxis",
-            link: "/"
-        },
+            name: 'Airport taxis',
+            link: '/'
+        }
     ]
 
     return <header className="w-full bg-primary">
@@ -90,8 +89,8 @@ const Header = () => {
                     <Link href="/">
                         <Button text="List your property" textColor="text-white" bgColor="bg-transparent"/>
                     </Link>
-                    {isLogin ?
-                        <>
+                    {isLogin
+                        ? <>
                             <div
                                 className="group inline-block relative">
                                 <button
@@ -109,7 +108,7 @@ const Header = () => {
                                         <li key={item.name}
                                             className="bg-white hover:bg-gray-300 block whitespace-no-wrap">
                                             <Link href={`${item.link}`}
-                                                  className="flex items-center py-2 px-4 gap-x-2.5 ">
+                                                className="flex items-center py-2 px-4 gap-x-2.5 ">
                                                 {item.icon}
                                                 <span>{item.name}</span>
                                             </Link>
@@ -117,12 +116,12 @@ const Header = () => {
                                     )}
                                 </ul>
                             </div>
-                        </> :
-                        <>
-                            <Link href="/">
+                        </>
+                        : <>
+                            <Link href="/auth">
                                 <Button text="Register" textColor="text-primary" bgColor="bg-white"/>
                             </Link>
-                            <Link href="/">
+                            <Link href="/auth#sign-in">
                                 <Button text="Sign In" textColor="text-primary" bgColor="bg-white"/>
                             </Link>
                         </>}
@@ -144,7 +143,7 @@ const Header = () => {
                 </ul>
             </div>
         </nav>
-    </header>;
-};
+    </header>
+}
 
-export default Header;
+export default Header

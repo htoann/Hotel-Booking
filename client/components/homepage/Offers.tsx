@@ -1,66 +1,65 @@
-import React from "react";
-import Button from "../core/Button";
-import Image from "next/image";
-import {Swiper, SwiperSlide} from "swiper/react";
-import "swiper/css";
-import {Autoplay} from "swiper";
-import getFlagEmoji from "../../utils/getFLagEMoji";
-import Link from "next/link";
-
+import React from 'react'
+import Button from '../core/Button'
+import Image from 'next/image'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import 'swiper/css'
+import {Autoplay} from 'swiper'
+import getFlagEmoji from '../../utils/getFLagEMoji'
+import Link from 'next/link'
 
 const Offers = () => {
     const offers = [
         {
-            title: "Save 15% with Late Escape Deals",
-            description: "Check one more destination off your wishlist",
-            button: "Explore deals",
-            image: "1.avif"
+            title: 'Save 15% with Late Escape Deals',
+            description: 'Check one more destination off your wishlist',
+            button: 'Explore deals',
+            image: '1.avif'
         },
         {
-            title: "Escape for a while",
-            description: "Enjoy the freedom of a monthly stay on Booking",
-            button: "Discover monthly stays",
-            image: "2.avif"
+            title: 'Escape for a while',
+            description: 'Enjoy the freedom of a monthly stay on Booking',
+            button: 'Discover monthly stays',
+            image: '2.avif'
         },
         {
-            title: "Easy trip planner",
-            description: "Pick a vibe and explore the top destinations",
-            button: "Discover",
-            image: "3.avif"
-        },
+            title: 'Easy trip planner',
+            description: 'Pick a vibe and explore the top destinations',
+            button: 'Discover',
+            image: '3.avif'
+        }
     ]
 
     const locations = [
         {
-            name: "Sapa",
-            countryCode: "VN",
-            image: "1"
+            name: 'Sapa',
+            countryCode: 'VN',
+            image: '1'
         },
         {
-            name: "Da Nang",
-            countryCode: "VN",
-            image: "1"
+            name: 'Da Nang',
+            countryCode: 'VN',
+            image: '1'
         },
         {
-            name: "Hue",
-            countryCode: "VN",
-            image: "1"
+            name: 'Hue',
+            countryCode: 'VN',
+            image: '1'
         },
         {
-            name: "Bangkok",
-            countryCode: "TH",
-            image: "1"
+            name: 'Bangkok',
+            countryCode: 'TH',
+            image: '1'
         },
         {
-            name: "Sapa",
-            countryCode: "VN",
-            image: "1"
+            name: 'Sapa',
+            countryCode: 'VN',
+            image: '1'
         },
         {
-            name: "Da Nang",
-            countryCode: "VN",
-            image: "1"
-        },
+            name: 'Da Nang',
+            countryCode: 'VN',
+            image: '1'
+        }
     ]
     return (
         <div className="my-20 mx-auto max-w-screen-xl relative">
@@ -81,27 +80,26 @@ const Offers = () => {
                         <SwiperSlide key={offer.title}>
                             <div className="relative w-full rounded-2xl overflow-hidden">
                                 <Image className="absolute -z-10" src={`/assets/images/offer/${offer.image}`}
-                                       alt={offer.title}
-                                       width={1000}
-                                       height={200}
-                                       loading={"lazy"}
+                                    alt={offer.title}
+                                    width={1000}
+                                    height={200}
+                                    loading={'lazy'}
                                 />
                                 <div className="px-5 py-10 text-white">
                                     <h2 className="font-bold mb-2 text-3xl">{offer.title}</h2>
                                     <h2 className="mb-5">{offer.description}</h2>
-                                    <Button text={offer.button} textColor={"text-white"}
-                                            bgColor={"bg-lightPrimary"}/>
+                                    <Button text={offer.button} textColor={'text-white'}
+                                        bgColor={'bg-lightPrimary'}/>
                                 </div>
                             </div>
                         </SwiperSlide>
                     )}
 
-
                 </Swiper>
             </div>
 
             <div className="grid grid-cols-3 gap-5">
-                {/*Fix key index*/}
+                {/* Fix key index */}
                 {locations.map((location, index) =>
                     <Link href="#" key={index}>
                         <div
@@ -117,7 +115,7 @@ const Offers = () => {
             </div>
 
         </div>
-    );
-};
+    )
+}
 
-export default Offers;
+export default Offers
