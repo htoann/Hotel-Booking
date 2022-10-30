@@ -29,20 +29,19 @@ export default {
 
   countByCity: async (req, res, next) => {
     const cities = req.query.city.split(",");
-    const lmao = [];
+    const list = [];
     try {
-      const list = await Promise.all(
-        cities.map((city) => {
-          console.log(Hotel.countDocuments({ city: city }));
-          return lmao.push({
-            city,
+      await Promise.all(
+        cities.map(async (city) => {
+          const count = await Hotel.countDocuments({ city: city });
+          list.push({
+            city: city,
+            count: count,
           });
         })
       );
 
-      console.log(lmao);
-
-      res.status(200).json(lmao);
+      res.status(200).json(list);
     } catch (err) {
       next(err);
     }
@@ -50,11 +49,11 @@ export default {
 
   countByType: async (req, res, next) => {
     try {
-      const hotelCount = await Hotel.countDocuments({ type: "Hotel" });
-      const apartmentCount = await Hotel.countDocuments({ type: "Apartment" });
-      const resortCount = await Hotel.countDocuments({ type: "Resort" });
-      const villaCount = await Hotel.countDocuments({ type: "Villa" });
-      const cabinCount = await Hotel.countDocuments({ type: "Cabin" });
+      const hotelCount = await Hotel.countDocuments({ type: "hotel" });
+      const apartmentCount = await Hotel.countDocuments({ type: "apartment" });
+      const resortCount = await Hotel.countDocuments({ type: "resort" });
+      const villaCount = await Hotel.countDocuments({ type: "villa" });
+      const cabinCount = await Hotel.countDocuments({ type: "cabin" });
 
       res.status(200).json([
         { type: "Hotels", count: hotelCount },
