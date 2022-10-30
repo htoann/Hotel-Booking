@@ -7,7 +7,7 @@ const app = express();
 // App Setup
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://bookingapihotel.herokuapp.com/", "http://localhost:3000"],
   })
 );
 app.use(morgan("dev"));
