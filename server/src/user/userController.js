@@ -2,7 +2,7 @@ import User from "./userModel";
 const base = require("../utils/baseController");
 
 export default {
-  getUser: base.getOne(User, "username"),
+  getUser: base.getOne(User),
 
   getCurrentUser: async (req, res, next) => {
     try {
@@ -16,7 +16,7 @@ export default {
 
   getAllUsers: base.getAll(User),
 
-  updateUser: base.updateOne(User, "username"),
+  updateUser: base.updateOne(User),
 
-  deleteUser: base.deleteOne(User, "username"),
+  deleteUser: base.deleteOne(User),
 };

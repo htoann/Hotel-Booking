@@ -5,18 +5,24 @@ const router = require("express").Router();
 
 router.get("/", admin, userController.getAllUsers);
 
-router.get("/me", auth, userController.getCurrentUser);
+// router.get("/me", auth, userController.getCurrentUser);
+
+// router
+//   .route("/:username", auth)
+//   .get(userController.getUser)
+//   .put(userController.updateUser)
+//   .delete(userController.deleteUser);
 
 router
-  .route("/:username", auth)
-  .get(userController.getUser)
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+  .route("/me")
+  .get(auth, userController.getCurrentUser)
+  .put(auth, userController.updateUser)
+  .delete(auth, userController.deleteUser);
 
 router
-  .route("/:id", auth)
-  .get(userController.getUser)
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+  .route("/:id")
+  .get(admin, userController.getUser)
+  .put(admin, userController.updateUser)
+  .delete(admin, userController.deleteUser);
 
 export default router;
