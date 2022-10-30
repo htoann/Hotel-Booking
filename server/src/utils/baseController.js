@@ -1,5 +1,5 @@
 const APIFeatures = require("./apiFeatures");
-const { createError } = require("./createMessage");
+const { createError, createMessage } = require("./createMessage");
 
 exports.deleteOne = (Model, newParams) => async (req, res, next) => {
   try {
