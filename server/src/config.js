@@ -4,7 +4,7 @@ import path from "path";
 if (process.env.NODE_ENV !== "production") {
   try {
     dotenv.config({
-      path: path.resolve(__dirname, ".env"),
+      path: path.resolve(__dirname, "../.env"),
       silent: true,
     });
   } catch (e) {
