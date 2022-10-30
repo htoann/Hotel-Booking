@@ -11,6 +11,8 @@ router.post("/:hotelid", admin, roomController.createRoom);
 
 router.put("/:id", admin, roomController.updateRoom);
 
+router.put("/availability/:id", admin, roomController.updateRoomAvailability);
+
 router.delete("/:id/:hotelid", admin, roomController.deleteRoom);
 
 export default router;

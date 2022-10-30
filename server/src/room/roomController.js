@@ -25,6 +25,23 @@ export default {
 
   updateRoom: base.updateOne(Room),
 
+  updateRoomAvailability: async (req, res, next) => {
+    try {
+      await Room.updateOne(
+        { "roomNumbers._id": req.params.id },
+        {
+          $push: {
+            "roomNumbers.$.unavailableDates": req.body.dates,
+          },
+        }
+      );
+
+      return createMessage(res, 200, "Updated successfully");
+    } catch (err) {
+      next(err);
+    }
+  },
+
   deleteRoom: async (req, res, next) => {
     const hotelId = req.params.hotelid;
     try {
