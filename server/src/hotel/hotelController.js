@@ -1,4 +1,5 @@
 import Room from "../room/roomModel";
+import APIFeatures from "../utils/apiFeatures";
 import Hotel from "./hotelModel";
 const base = require("../utils/baseController");
 
@@ -11,7 +12,30 @@ export default {
 
   getHotel: base.getOne(Hotel),
 
-  getAllHotels: base.getAll(Hotel),
+  getAllHotels: async (req, res, next) => {
+    const { min, max, ...ortherQuery } = req.query;
+
+    try {
+      const features = new APIFeatures(
+        Hotel.find({
+          ...ortherQuery,
+          cheapestPrice: {
+            $gt: min || 1,
+            $lt: max || 999999,
+          },
+        }),
+        req.query
+      )
+        .sort()
+        .paginate();
+
+      const doc = await features.query;
+
+      res.status(200).json(doc);
+    } catch (error) {
+      next(error);
+    }
+  },
 
   getHotelRooms: async (req, res, next) => {
     try {
