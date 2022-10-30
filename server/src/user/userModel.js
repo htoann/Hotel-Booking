@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt-nodejs";
-import autoIncrement from "mongoose-auto-increment";
 
 const UserSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -66,14 +69,14 @@ UserSchema.methods.comparedPassword = function (candidatePassword, cb) {
   });
 };
 
-autoIncrement.initialize(mongoose.connection);
+// autoIncrement.initialize(mongoose.connection);
 
-UserSchema.plugin(autoIncrement.plugin, {
-  model: "User",
-  field: "_id",
-  startAt: 1,
-  incrementBy: 1,
-});
+// UserSchema.plugin(autoIncrement.plugin, {
+//   model: "User",
+//   field: "_id",
+//   startAt: 1,
+//   incrementBy: 1,
+// });
 
 // Export the model
 export default mongoose.model("User", UserSchema);

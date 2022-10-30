@@ -17,7 +17,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"bearer_token\",jsonData.data.token);"
+									"postman.setEnvironmentVariable(\"bearer_token\",jsonData.token);"
 								],
 								"type": "text/javascript"
 							}
@@ -28,7 +28,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -56,7 +56,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"bearer_token\",jsonData.data.token);"
+									"postman.setEnvironmentVariable(\"bearer_token\",jsonData.token);"
 								],
 								"type": "text/javascript"
 							}
@@ -114,13 +114,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/users/admin",
+							"raw": "{{API_ENDPOINT}}/users/635d6c677a560ad51fb80606",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"users",
-								"admin"
+								"635d6c677a560ad51fb80606"
 							]
 						}
 					},
@@ -204,13 +204,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/users/admin",
+							"raw": "{{API_ENDPOINT}}/users/635d79f9c907c683d6af7be1",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"users",
-								"admin"
+								"635d79f9c907c683d6af7be1"
 							]
 						}
 					},
@@ -233,7 +233,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"isAdmin\": true\r\n}",
+							"raw": "{\r\n    \"isAdmin\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,13 +241,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/users/admin",
+							"raw": "{{API_ENDPOINT}}/users/635d6c677a560ad51fb80606",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"users",
-								"admin"
+								"635d6c677a560ad51fb80606"
 							]
 						}
 					},
@@ -275,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"name\": \"Hotel Hoi An\",\r\n        \"type\": \"hotel\",\r\n        \"city\": \"Hoi An\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\",\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"rating\": 4,\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2\r\n    },\r\n    {\r\n        \"name\": \"Resort Phu Quoc\",\r\n        \"type\": \"resort\",\r\n        \"city\": \"Phu Quoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\"\r\n        ],\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"name\": \"Hotel Hoi An\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hoian\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\"\r\n        ],\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Resort Phu Quoc\",\r\n        \"type\": \"resorts\",\r\n        \"city\": \"phuquoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\"\r\n        ],\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Resort Phu Quoc\",\r\n        \"type\": \"resorts\",\r\n        \"city\": \"phuquoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\"\r\n        ],\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Hotel Hoi An\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hoian\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\"\r\n        ],\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"title\": \"Myrtle Beach Villas II - 301B\",\r\n        \"name\": \"Villas New York\",\r\n        \"type\": \"villas\",\r\n        \"desc\": \"Located 1.8 km from Myrtle Beach Boardwalk in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi. Some of the units feature cable TV, a fully equipped kitchen with a dishwasher, and a private bathroom with a hot tub and a hairdryer. If you would like to discover the area, cycling is possible nearby. Myrtle Beach Convention Center is 4.3 km from the vacation home, while The Market Common is 6.6 km away. The nearest airport is Myrtle Beach International Airport, 5 km from Myrtle Beach Villas II - 301B.\",\r\n        \"descShort\": \"Located a 13-minute walk from Myrtle Beach in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi.\",\r\n        \"city\": \"newyork\",\r\n        \"address\": \"Myrtle Beach, 29577, United States of America\",\r\n        \"distance\": \"10\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 111807,\r\n        \"featured\": true,\r\n        \"rating\": 4.8,\r\n        \"score\": 9.2,\r\n        \"rooms\": [],\r\n        \"__v\": 0\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -300,14 +300,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/search/1",
+							"raw": "{{API_ENDPOINT}}/hotels/search/635de66555ca85165b99f4e8",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"hotels",
 								"search",
-								"1"
+								"635de66555ca85165b99f4e8"
 							]
 						}
 					},
@@ -343,34 +343,6 @@
 					"response": []
 				},
 				{
-					"name": "Delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/1",
-							"host": [
-								"{{API_ENDPOINT}}"
-							],
-							"path": [
-								"hotels",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update",
 					"request": {
 						"auth": {
@@ -395,13 +367,113 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/1",
+							"raw": "{{API_ENDPOINT}}/hotels/635de66555ca85165b99f4e8",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"hotels",
-								"1"
+								"635de66555ca85165b99f4e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count By City",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/hotels/countbycity?city=phuquoc,hoian,newyork",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"hotels",
+								"countbycity"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "phuquoc,hoian,newyork"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count By Type",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/hotels/countbytype?type=hotels",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"hotels",
+								"countbytype"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "hotels"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/hotels/635de66555ca85165b99f4e8",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"hotels",
+								"635de66555ca85165b99f4e8"
 							]
 						}
 					},
@@ -413,14 +485,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/room/1",
+							"raw": "{{API_ENDPOINT}}/hotels/room/635de66555ca85165b99f4e8",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"hotels",
 								"room",
-								"1"
+								"635de66555ca85165b99f4e8"
 							]
 						}
 					},
@@ -448,7 +520,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"title\": \"Superior King Room with Balcony and Garden View\",\r\n        \"price\": 1890,\r\n        \"maxPeople\": 2,\r\n        \"desc\": \"This double room has a balcony, tile/marble floor and cable TV.\",\r\n        \"roomNumbers\": [\r\n            {\r\n                \"number\": 101\r\n            },\r\n            {\r\n                \"number\": 102\r\n            }\r\n        ]\r\n    }",
+							"raw": " {\r\n        \"title\": \"Superior King Room with Balcony\",\r\n        \"price\": 1890,\r\n        \"maxPeople\": 2,\r\n        \"desc\": \"This double room has a balcony, tile/marble floor and cable TV.\",\r\n        \"roomNumbers\": [\r\n            {\r\n                \"number\": 101\r\n            },\r\n            {\r\n                \"number\": 102\r\n            }\r\n        ]\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -456,13 +528,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/3",
+							"raw": "{{API_ENDPOINT}}/rooms/635de66555ca85165b99f4ea",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"3"
+								"635de66555ca85165b99f4ea"
 							]
 						}
 					},
@@ -474,13 +546,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/2",
+							"raw": "{{API_ENDPOINT}}/rooms/635de8c955ca85165b99f566",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"2"
+								"635de8c955ca85165b99f566"
 							]
 						}
 					},
@@ -519,14 +591,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/1/2",
+							"raw": "{{API_ENDPOINT}}/rooms/635de80755ca85165b99f517/635de66555ca85165b99f4e8",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"1",
-								"2"
+								"635de80755ca85165b99f517",
+								"635de66555ca85165b99f4e8"
 							]
 						}
 					},
@@ -548,13 +620,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/2",
+							"raw": "{{API_ENDPOINT}}/rooms/635de80755ca85165b99f517",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"2"
+								"635de80755ca85165b99f517"
 							]
 						}
 					},

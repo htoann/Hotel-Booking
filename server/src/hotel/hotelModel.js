@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
 
 const HotelSchema = new mongoose.Schema({
   title: {
@@ -12,6 +11,7 @@ const HotelSchema = new mongoose.Schema({
   },
   type: {
     type: String,
+    enum: ["hotels", "apartments", "resorts", "villas", "cabins"],
     required: true,
   },
   desc: {
@@ -52,19 +52,21 @@ const HotelSchema = new mongoose.Schema({
   },
   score: {
     type: Number,
+    min: 0,
+    max: 10,
   },
   rooms: {
     type: [String],
   },
 });
 
-autoIncrement.initialize(mongoose.connection);
+// autoIncrement.initialize(mongoose.connection);
 
-HotelSchema.plugin(autoIncrement.plugin, {
-  model: "Hotel",
-  field: "_id",
-  startAt: 1,
-  incrementBy: 1,
-});
+// HotelSchema.plugin(autoIncrement.plugin, {
+//   model: "Hotel",
+//   field: "_id",
+//   startAt: 1,
+//   incrementBy: 1,
+// });
 
 export default mongoose.model("Hotel", HotelSchema);

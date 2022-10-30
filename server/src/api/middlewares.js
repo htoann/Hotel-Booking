@@ -40,6 +40,8 @@ export const admin = (req, res, next) => {
     User.findById(payload.sub).exec((err, user) => {
       if (err || !user) {
         return createError(res, 404, err || "You are not allowed");
+      } else if (!user.isAdmin) {
+        return createError(res, 404, err || "You are not allowed");
       }
 
       delete user.password;

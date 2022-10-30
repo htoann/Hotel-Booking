@@ -4,11 +4,15 @@ import { createError } from "../utils/createMessage";
 
 export default {
   register: (req, res, next) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const username = email.split("@")[0];
 
-    if (!email || !password) {
-      return createError(res, 422, "You must provide email and password.");
+    if (!name || !email || !password) {
+      return createError(
+        res,
+        422,
+        "You must provide name, email and password."
+      );
     }
     User.findOne(
       {
@@ -59,7 +63,7 @@ export default {
         if (existingUser) {
           existingUser.comparedPassword(password, function (err, good) {
             if (err || !good) {
-              return createError(res, 401, err || "User not found");
+              return createError(res, 401, err || "Wrong password or email");
             }
 
             const { password, isAdmin, ...info } = existingUser._doc;
