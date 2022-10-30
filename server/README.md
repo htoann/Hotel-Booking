@@ -25,10 +25,10 @@ Example get all hotels : https://bookingapihotel.herokuapp.com/api/hotels
 
 ```terminal
 $ cd server   // go to server folder
-$ yarn        // npm install packages
-$ yarn dev    // run it locally
+$ npm        // npm install packages
+$ npm run dev    // run it locally
 // http://localhost:8000 be available
-$ yarn build  // this will build the server code to es5 js codes and generate a dist file
+$ npm run build  // this will build the server code to es5 js codes and generate a dist file
 ```
 
 ## BUGs or comments
