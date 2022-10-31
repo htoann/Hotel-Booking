@@ -1,7 +1,7 @@
 import Header from '../components/layout'
 import Head from 'next/head'
-import {Offers, Search, TripType} from '../components/homepage'
-import {Hotel} from '../components/hotel'
+import {Offers, Search} from '../components/homepage'
+import {HotelType} from '../components/hotel'
 
 export default function Home () {
     return (
@@ -14,8 +14,7 @@ export default function Home () {
                 <Search/>
                 <div className="mx-auto container overflow-hidden">
                     <Offers/>
-                    <TripType/>
-                    <Hotel/>
+                    <HotelType/>
                 </div>
             </div>
         </>

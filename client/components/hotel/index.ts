@@ -1,3 +1,3 @@
-import Hotel from './Hotel'
+import HotelType from './HotelType'
 
-export {Hotel}
+export {HotelType}
