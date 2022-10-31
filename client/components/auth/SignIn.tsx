@@ -43,7 +43,7 @@ const SignIn = ({setIsSignIn}: Props) => {
         if (isLoginSuccess) {
             toast.success('User Login Successfully')
             dispatch(
-                setUser({user: loginData.data.user, token: loginData.data.token})
+                setUser({user: loginData.user, token: loginData.token})
             )
             router.push('/')
         }
@@ -51,7 +51,7 @@ const SignIn = ({setIsSignIn}: Props) => {
 
     useEffect(() => {
         if (isLoginError) {
-            toast.error((loginError as any).data)
+            toast.error((loginError as any)?.data?.message ? (loginError as any).data.message : 'Some thing went error')
         }
     }, [isLoginError])
     return (

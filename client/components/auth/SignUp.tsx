@@ -42,7 +42,7 @@ const SignUp = ({setIsSignIn}: Props) => {
         if (isRegisterSuccess) {
             toast.success('User Login Successfully')
             dispatch(
-                setUser({user: registerData.data.user, token: registerData.data.token})
+                setUser({user: registerData.user, token: registerData.token})
             )
             router.push('/')
         }
@@ -50,8 +50,7 @@ const SignUp = ({setIsSignIn}: Props) => {
 
     useEffect(() => {
         if (isRegisterError) {
-            toast.error((registerError as any).data.error)
-            console.log(registerError)
+            toast.error((registerError as any)?.data?.message ? (registerError as any).data.message : 'Some thing went error')
         }
     }, [isRegisterError])
 
