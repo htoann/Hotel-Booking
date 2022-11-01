@@ -275,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"name\": \"Hotel Hoi An\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hoian\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\"\r\n        ],\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Resort Phu Quoc\",\r\n        \"type\": \"resorts\",\r\n        \"city\": \"phuquoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\"\r\n        ],\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Resort Phu Quoc\",\r\n        \"type\": \"resorts\",\r\n        \"city\": \"phuquoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\"\r\n        ],\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"name\": \"Hotel Hoi An\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hoian\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\"\r\n        ],\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2,\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"title\": \"Myrtle Beach Villas II - 301B\",\r\n        \"name\": \"Villas New York\",\r\n        \"type\": \"villas\",\r\n        \"desc\": \"Located 1.8 km from Myrtle Beach Boardwalk in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi. Some of the units feature cable TV, a fully equipped kitchen with a dishwasher, and a private bathroom with a hot tub and a hairdryer. If you would like to discover the area, cycling is possible nearby. Myrtle Beach Convention Center is 4.3 km from the vacation home, while The Market Common is 6.6 km away. The nearest airport is Myrtle Beach International Airport, 5 km from Myrtle Beach Villas II - 301B.\",\r\n        \"descShort\": \"Located a 13-minute walk from Myrtle Beach in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi.\",\r\n        \"city\": \"newyork\",\r\n        \"address\": \"Myrtle Beach, 29577, United States of America\",\r\n        \"distance\": \"10\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 111807,\r\n        \"featured\": true,\r\n        \"rating\": 4.8,\r\n        \"score\": 9.2,\r\n        \"rooms\": [],\r\n        \"__v\": 0\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"title\": \"Golden Sun Villa Hotel\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hanoi\",\r\n        \"address\": \"68 Hang Trong - Hoan Kiem, Hoan Kiem, Hanoi, Vietnam\",\r\n        \"distance\": \"10\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667293975/400244075_izycxs.jpg\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059000/342713045_skpicr.webp\"\r\n        ],\r\n        \"desc\": \"You're eligible for a Genius discount at Golden Sun Villa Hotel! To save at this property, all you have to do is sign in. Just 75 m from Hoan Kiem Lake in Hanoi’s Old Quarter, Golden Sun Villa Hotel offers spacious and air-conditioned rooms and suites with free Wi-Fi. A restaurant and 24-hour front desk is available. Golden Sun Villa Hotel is 801 m from Dong Xuan Market and 0.9 mi to Ho Chi Minh Mausoleum, Ho Chi Minh Museum and One Pillar Pagoda. West Lake is 1.2 mi from the hotel. All rooms and suites feature a flat-screen cable TV, safe, mini-bar and electric kettle. They include a seating area and private bathroom with shower, hairdryer and free toiletries All guests enjoy a free welcome drink upon check-in at the hotel. Other facilities include a tour desk, luggage storage and free parking nearby. Breakfast is served at Corner Bar & Restaurant. This is our guests' favorite part of Hanoi, according to independent reviews.\",\r\n        \"descShort\": \"Just 246 feet from Hoan Kiem Lake in Hanoi’s Old Quarter, Golden Sun Villa Hotel offers spacious and air-conditioned rooms and suites with free Wi-Fi. A restaurant and 24-hour front desk is available....\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1999000,\r\n        \"featured\": false,\r\n        \"score\": 9\r\n    },\r\n    {\r\n        \"title\": \"Mövenpick Resort Waverly Phu Quoc\",\r\n        \"type\": \"resorts\",\r\n        \"city\": \"phuquoc\",\r\n        \"address\": \"Ong Lang Hamlet Cua Duong Village Phu Quoc District, Ong Lang, 92000 Phu Quoc, Vietnam\",\r\n        \"distance\": \"5\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666869706/259394005_eku9al.jpg\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\"\r\n        ],\r\n        \"desc\": \"Located in Phú Quốc, a 4-minute walk from Ong Lang Beach, Mövenpick Resort Waverly Phu Quoc has accommodations with a restaurant, free private parking, free bikes and an outdoor swimming pool. Among the various facilities of this property are a fitness center, a bar and a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. Free WiFi is accessible to all guests, while certain rooms contain a patio. The resort offers a buffet or American breakfast. Mövenpick Resort Waverly Phu Quoc has a sun terrace. The area is popular for cycling, and car rental is available at the accommodation. Vinpearl Land Phu Quoc is 11.6 km from Mövenpick Resort Waverly Phu Quoc, while Corona Casino is 11.7 km from the property. The nearest airport is Phu Quoc International, 17.7 km from the resort, and the property offers a free airport shuttle service.\",\r\n        \"descShort\": \"Superior King Room with Balcony and Garden View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 1890,\r\n        \"featured\": false,\r\n        \"score\": 8.6\r\n    },\r\n    {\r\n        \"title\": \"Eco Lux Riverside Hotel & Spa\",\r\n        \"type\": \"hotels\",\r\n        \"city\": \"hoian\",\r\n        \"address\": \"316 Hung Vuong street, Thanh Ha, Hoian, Thanh Ha, Hoi An, Vietnam\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1666870144/234141857_oft318.jpg\"\r\n        ],\r\n        \"desc\": \"Located in Hoi An, 2.4 km from Japanese Covered Bridge, Eco Lux Riverside Hotel & Spa has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. Each room at the 4-star hotel has garden views, and guests can enjoy access to a bar and to a garden. The property provides a 24-hour front desk, room service and currency exchange for guests. At the hotel the rooms have air conditioning, a seating area, a flat-screen TV with satellite channels, a safety deposit box and a private bathroom with a shower, bathrobes and slippers. Every room is equipped with an electric tea pot, while some rooms also feature a balcony and others also feature pool views. At Eco Lux Riverside Hotel & Spa rooms have bed linen and towels. A buffet breakfast is available each morning at the accommodation. Eco Lux Riverside Hotel & Spa has a grill. The area is popular for cycling, and car rental is available at the hotel. Hoi An Historic Museum is 2.7 km from Eco Lux Riverside Hotel & Spa, while Assembly Hall of Chaozhou Chinese Congregation is 3.2 km from the property. The nearest airport is Da Nang International, 27.4 km from the accommodation, and the property offers a paid airport shuttle service. Couples in particular like the location – they rated it 8.5 for a two-person trip. Eco Lux Riverside Hotel & Spa has been welcoming Booking.com guests since 15 Sep 2019 Distance in property description is calculated using © OpenStreetMap\",\r\n        \"descShort\": \"Superior Double or Twin Room with City View\",\r\n        \"rating\": 4,\r\n        \"rooms\": [],\r\n        \"cheapestPrice\": 693,\r\n        \"featured\": true,\r\n        \"score\": 9.2\r\n    },\r\n    {\r\n        \"title\": \"Myrtle Beach Villas II - 301B\",\r\n        \"type\": \"villas\",\r\n        \"desc\": \"Located 1.8 km from Myrtle Beach Boardwalk in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi. Some of the units feature cable TV, a fully equipped kitchen with a dishwasher, and a private bathroom with a hot tub and a hairdryer. If you would like to discover the area, cycling is possible nearby. Myrtle Beach Convention Center is 4.3 km from the vacation home, while The Market Common is 6.6 km away. The nearest airport is Myrtle Beach International Airport, 5 km from Myrtle Beach Villas II - 301B.\",\r\n        \"descShort\": \"Located a 13-minute walk from Myrtle Beach in Myrtle Beach, Myrtle Beach Villas II - 301B provides accommodations with air conditioning and free WiFi.\",\r\n        \"city\": \"newyork\",\r\n        \"address\": \"Myrtle Beach, 29577, United States of America\",\r\n        \"distance\": \"10\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 111807,\r\n        \"featured\": true,\r\n        \"rating\": 4.8,\r\n        \"score\": 9.2,\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \"Raon Dalat\",\r\n        \"type\": \"hotels\",\r\n        \"desc\": \"Located in Da Lat, 1.9 km from Dalat Palace Golf Club, Raon Dalat provides accommodations with a shared lounge, free private parking, a garden and a terrace. This 3-star hotel offers room service and a concierge service. The property has a 24-hour front desk, airport transportation, a shared kitchen and free WiFi throughout the property. At the hotel, every room includes a desk. Rooms come complete with a private bathroom equipped with a bidet and slippers, while some units at Raon Dalat also provide guests with a seating area. All guest rooms feature a shared bathroom, a hairdryer and bed linen. The area is popular for hiking and cycling, and car rental is available at the accommodation. Dalat Flower Gardens is 2.4 km from Raon Dalat, while Xuan Huong Lake is 4.2 km away. The nearest airport is Lien Khuong Airport, 32.2 km from the hotel.\",\r\n        \"descShort\": \"Located in Da Lat, 1.2 miles from Dalat Palace Golf Club, Raon Dalat provides accommodations with a shared lounge, free private parking, a garden and a terrace.\",\r\n        \"city\": \"dalat\",\r\n        \"address\": \"46 Tran Khanh Du, Ward 8, Da Lat, Vietnam\",\r\n        \"distance\": \"3\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059000/342713045_skpicr.webp\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667058792/test_h8wwca.webp\"\r\n        ],\r\n        \"cheapestPrice\": 998,\r\n        \"featured\": false,\r\n        \"rating\": 4.4,\r\n        \"score\": 9,\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \"Prostyle Hotel Ho Chi Minh プロスタイルホテルホーチミン\",\r\n        \"type\": \"hotels\",\r\n        \"desc\": \"Conveniently located in Ho Chi Minh city center, Prostyle Hotel Ho Chi Minh provides contemporary accommodations in District 1. Featuring an on-site restaurant, the hotel also has a sauna room and business center. Saigon Opera House, City Hall and Vincom Center B shopping mall are within 3-minute walk from the property. Noter Dame Cathedral, Ho Chi Minh City Museum and Reunification Palace are within 10-minute walk. Tan Son Nhat International Airport is 24-minute drive from Prostyle Hotel Ho Chi Minh. Featuring free WiFi access, all rooms are furnished with air conditioning, a seating area with desk and personal safe. A satellite TV and mini-bar are provided. Private bathroom in each room has a bathtub or shower, hairdryer and free toiletries. Extras include bathrobes and slippers for your convenience. The hotel operates a 24-hour front desk where bilingual staff can assist with currency exchange, luggage storage and express check-in or check-out. Car rental, airport transfers, shuttle services and day trips can be arranged at the tour desk. Free private parking is possible on site. Boasting stylish decor, the in-house restaurant serves an array of Vietnamese and international dishes, while the bar has a wide ranges of drinks and beverages. This is our guests' favorite part of Ho Chi Minh City, according to independent reviews.\",\r\n        \"descShort\": \"Conveniently located in Ho Chi Minh city center, Prostyle Hotel Ho Chi Minh provides contemporary accommodations in District 1.\",\r\n        \"city\": \"hochiminh\",\r\n        \"address\": \"26 Thi Sach, District 1, Ho Chi Minh City, Vietnam\",\r\n        \"distance\": \"8\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667058792/test_h8wwca.webp\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059000/342713045_skpicr.webp\"\r\n        ],\r\n        \"cheapestPrice\": 790,\r\n        \"featured\": false,\r\n        \"rating\": 4.2,\r\n        \"score\": 8,\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \"Louis Mo Apartment\",\r\n        \"descShort\": \"Offering city views, Louis Mo Apartment in Danang has accommodations, free bikes, an outdoor swimming pool, a fitness center, a bar and a shared lounge.\",\r\n        \"type\": \"apartments\",\r\n        \"desc\": \"Offering city views, Louis Mo Apartment in Danang has accommodations, free bikes, an outdoor swimming pool, a fitness center, a bar and a shared lounge. Complimentary WiFi is available throughout the property. All units here are air-conditioned and feature a flat-screen TV, a living room with a sofa, a well-equipped kitchen with a dining area, and a private bathroom with shower, slippers and a hairdryer. Some units feature a seating area and/or a patio. The apartment provides a laundry service, as well as business facilities like fax and photocopying. A sun terrace is available for guests to use at Louis Mo Apartment. My Khe Beach is a 5-minute walk from the accommodation, while Bac My An Beach is 1.1 km from the property. The nearest airport is Da Nang International Airport, 6 km from Louis Mo Apartment.\",\r\n        \"city\": \"danang\",\r\n        \"address\": \"20 An Thượng 28, Danang, Vietnam\",\r\n        \"distance\": \"3\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667295365/351302984_pohevy.jpg\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059000/342713045_skpicr.webp\"\r\n        ],\r\n        \"cheapestPrice\": 1120,\r\n        \"featured\": true,\r\n        \"rating\": 4.6,\r\n        \"score\": 9.1,\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \"Pao's Sapa Leisure Hotel\",\r\n        \"descShort\": \"Located in Sapa, 3.8 miles from Fansipan Legend Cable Car Station, Pao's Sapa Leisure Hotel provides accommodations with a restaurant, free private parking, a fitness center and a bar.\",\r\n        \"type\": \"hotels\",\r\n        \"score\": 8.9,\r\n        \"address\": \"Muong Hoa Street, Sapa Town, Sapa District, Lao Cai Province, Sapa, Vietnam\",\r\n        \"desc\": \"Located in Sapa, 6.1 km from Fansipan Legend Cable Car Station, Pao's Sapa Leisure Hotel provides accommodations with a restaurant, free private parking, a fitness center and a bar. With free WiFi, this 5-star hotel offers a kids' club and a shared lounge. The property has a 24-hour front desk, room service and currency exchange for guests. Each room is equipped with air conditioning, a safety deposit box and a flat-screen TV, and certain rooms at the hotel have a balcony. Pao's Sapa Leisure Hotel offers a continental or buffet breakfast. The accommodation offers 5-star accommodations with an indoor pool and terrace. You can play pool at Pao's Sapa Leisure Hotel, and the area is popular for cycling. Popular points of interest near the hotel include Sa Pa Lake, Sa Pa Stone Church and Sa Pa Bus Station. The nearest airport is Dien Bien Phu Airport, 268.8 km from Pao's Sapa Leisure Hotel.\",\r\n        \"city\": \"sapa\",\r\n        \"distance\": \"11\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667295685/324251873_mfbcvz.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 849,\r\n        \"featured\": true,\r\n        \"rating\": 4.5,\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \"Navada Beach Hotel\",\r\n        \"descShort\": \"Located in Nha Trang, a few steps from Hon Chong Beach, Navada Beach Hotel has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center.\",\r\n        \"type\": \"hotels\",\r\n        \"score\": 8.8,\r\n        \"address\": \"09-10 Phạm Văn Đồng, Vĩnh Hải, Thành phố Nha Trang, Khánh Hòa, 650000 Nha Trang, Vietnam\",\r\n        \"desc\": \"Located in Nha Trang, a few steps from Hon Chong Beach, Navada Beach Hotel has accommodations with a restaurant, free private parking, an outdoor swimming pool and a fitness center. With free WiFi, this 4-star hotel has a bar and a shared lounge. The property provides a 24-hour front desk, room service and currency exchange for guests. The hotel will provide guests with air-conditioned rooms with a desk, an electric tea pot, a fridge, a minibar, a safety deposit box, a flat-screen TV and a private bathroom with a bidet. At Navada Beach Hotel rooms come with bed linen and towels. The accommodation offers a continental or buffet breakfast. Navada Beach Hotel has a terrace. Popular points of interest near the hotel include Ba Lang Beach, Hon Chong and Po Nagar Cham Towers. The nearest airport is Cam Ranh International, 40.2 km from Navada Beach Hotel, and the property offers a paid airport shuttle service.\",\r\n        \"city\": \"nhatrang\",\r\n        \"distance\": \"3\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667058888/286495131_ahvgug.webp\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667295685/324251873_mfbcvz.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 911,\r\n        \"featured\": false,\r\n        \"rating\": \"4.2\",\r\n        \"rooms\": []\r\n    },\r\n    {\r\n        \"title\": \" Melia Vinpearl Hue\",\r\n        \"descShort\": \"Featuring a fitness center, bar and views of city, Melia Vinpearl Hue is located in Hue, a 9-minute walk from Trang Tien Bridge.\",\r\n        \"type\": \"hotels\",\r\n        \"score\": \"9.1\",\r\n        \"address\": \"09-10 Phạm Văn Đồng, Vĩnh Hải, Thành phố Nha Trang, Khánh Hòa, 650000 Nha Trang, Vietnam\",\r\n        \"desc\": \"Featuring a fitness center, bar and views of city, Melia Vinpearl Hue is located in Hue, a 9-minute walk from Trang Tien Bridge. Among the facilities of this property are a restaurant, a 24-hour front desk and room service, along with free WiFi throughout the property. The property has a concierge service, and currency exchange for guests. The rooms are equipped with air conditioning and a flat-screen TV, and some rooms at the hotel have a safety deposit box. All rooms will provide guests with a fridge. A continental breakfast is available every morning at Melia Vinpearl Hue. Popular points of interest near the accommodation include Dong Ba Market, Museum of Royal Antiquities and An Dinh Palace. The nearest airport is Phu Bai International, 15 km from Melia Vinpearl Hue, and the property offers a paid airport shuttle service. This is our guests' favorite part of Hue, according to independent reviews.\",\r\n        \"city\": \"hue\",\r\n        \"distance\": \"2\",\r\n        \"photos\": [\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667059191/320632480_e8ot0i.jpg\",\r\n            \"https://res.cloudinary.com/dncxndync/image/upload/v1667295685/324251873_mfbcvz.jpg\"\r\n        ],\r\n        \"cheapestPrice\": 681,\r\n        \"featured\": true,\r\n        \"rating\": 4.7,\r\n        \"rooms\": []\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -300,14 +300,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/search/635de66555ca85165b99f4e8",
+							"raw": "{{API_ENDPOINT}}/hotels/search/6360ed35641f3df2dce2bc72",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"hotels",
 								"search",
-								"635de66555ca85165b99f4e8"
+								"6360ed35641f3df2dce2bc72"
 							]
 						}
 					},
@@ -343,6 +343,53 @@
 					"response": []
 				},
 				{
+					"name": "Get Hotels Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/hotels?city=hoian&limit=5&min=2&max=1000",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"hotels"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "hoian"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "min",
+									"value": "2"
+								},
+								{
+									"key": "max",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update",
 					"request": {
 						"auth": {
@@ -367,13 +414,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/hotels/635de66555ca85165b99f4e8",
+							"raw": "{{API_ENDPOINT}}/hotels/6360ed35641f3df2dce2bc74",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"hotels",
-								"635de66555ca85165b99f4e8"
+								"6360ed35641f3df2dce2bc74"
 							]
 						}
 					},
@@ -381,21 +428,9 @@
 				},
 				{
 					"name": "Count By City",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{API_ENDPOINT}}/hotels/countbycity?city=phuquoc,hoian,newyork",
 							"host": [
@@ -520,7 +555,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"title\": \"Superior King Room with Balcony\",\r\n        \"price\": 1890,\r\n        \"maxPeople\": 2,\r\n        \"desc\": \"This double room has a balcony, tile/marble floor and cable TV.\",\r\n        \"roomNumbers\": [\r\n            {\r\n                \"number\": 101\r\n            },\r\n            {\r\n                \"number\": 102\r\n            }\r\n        ]\r\n    }",
+							"raw": "  {\r\n        \"title\": \"Deluxe Room\",\r\n        \"price\": 1101,\r\n        \"maxPeople\": 2,\r\n        \"desc\": \"1 king bed or 2 twin beds\",\r\n        \"roomNumbers\": [\r\n            {\r\n                \"number\": 505\r\n            },\r\n            {\r\n                \"number\": 506\r\n            }\r\n        ]\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -528,13 +563,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/635de66555ca85165b99f4ea",
+							"raw": "{{API_ENDPOINT}}/rooms/6360ed35641f3df2dce2bc74",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"635de66555ca85165b99f4ea"
+								"6360ed35641f3df2dce2bc74"
 							]
 						}
 					},
@@ -546,13 +581,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_ENDPOINT}}/rooms/635de8c955ca85165b99f566",
+							"raw": "{{API_ENDPOINT}}/rooms/6360f02864ec9fc1b2c275d9",
 							"host": [
 								"{{API_ENDPOINT}}"
 							],
 							"path": [
 								"rooms",
-								"635de8c955ca85165b99f566"
+								"6360f02864ec9fc1b2c275d9"
 							]
 						}
 					},
@@ -627,6 +662,44 @@
 							"path": [
 								"rooms",
 								"635de80755ca85165b99f517"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Availability Room Number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dates\": [\"2022-10-30T02:57:11.714Z\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/rooms/availability/635de8c955ca85165b99f567",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"rooms",
+								"availability",
+								"635de8c955ca85165b99f567"
 							]
 						}
 					},
