@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react'
 import Types from './Types'
 import Hotels from './Hotels'
 import {useAppDispatch} from '../../store/hooks'
-import {useFetchAllHotelsQuery} from '../../services/hotelApi'
+import {useGetHotelsQuery} from '../../services/hotelApi'
 import {setHotels} from '../../features/hotelSlice'
 
 const HotelType = () => {
     const dispatch = useAppDispatch()
-    const {data: hotels, isLoading, isSuccess, isError, error} = useFetchAllHotelsQuery()
+    const {data: hotels, isLoading, isSuccess, isError, error} = useGetHotelsQuery()
     const [type, setType] = useState('all')
     useEffect(() => {
         if (isSuccess) {

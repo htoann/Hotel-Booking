@@ -1,7 +1,6 @@
 export interface IHotel {
     _id: string;
     title: string;
-    name: string;
     type: string;
     desc: string;
     descShort: string;
@@ -15,4 +14,5 @@ export interface IHotel {
     score: number;
     rooms: string[];
     __v: number;
+    name: string;
 }

@@ -11,10 +11,13 @@ export const hotelApi = createApi({
         baseUrl: apiUrl
     }),
     endpoints: (builder) => ({
-        fetchAllHotels: builder.query<HotelsResponse, void>({
+        getHotels: builder.query<HotelsResponse, void>({
             query: () => `/hotels`
+        }),
+        getHotel: builder.query<IHotel, string>({
+            query: (id) => `/hotels/search/${id}`
         })
     })
 })
 
-export const {useFetchAllHotelsQuery} = hotelApi
+export const {useGetHotelsQuery, useGetHotelQuery} = hotelApi
