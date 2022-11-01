@@ -23,7 +23,6 @@ import {useRouter} from 'next/router'
 const Header = () => {
     const router = useRouter()
     const {user} = useAppSelector((state: any) => state.persistedReducer.auth)
-    console.log(user)
 
     const dispatch = useAppDispatch()
 
