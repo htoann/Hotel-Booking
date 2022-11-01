@@ -1,5 +1,6 @@
 import Room from "../room/roomModel";
 import APIFeatures from "../utils/apiFeatures";
+import { createError } from "../utils/createMessage";
 import Hotel from "./hotelModel";
 const base = require("../utils/baseController");
 
@@ -47,7 +48,7 @@ export default {
       );
       res.status(200).json(list);
     } catch (err) {
-      next(err);
+      return createError(res, 404, "No document found with that id");
     }
   },
 

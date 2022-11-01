@@ -15,7 +15,7 @@ export default {
           $push: { rooms: savedRoom._id },
         });
       } catch (err) {
-        next(err);
+        return createError(res, 404, "No document found with that id");
       }
       res.status(200).json(savedRoom);
     } catch (err) {
@@ -38,7 +38,7 @@ export default {
 
       return createMessage(res, 200, "Updated successfully");
     } catch (err) {
-      next(err);
+      return createError(res, 404, "No document found with that id");
     }
   },
 
@@ -51,11 +51,11 @@ export default {
           $pull: { rooms: req.params.id },
         });
       } catch (err) {
-        next(err);
+        return createError(res, 404, "No document found with that id");
       }
       return createMessage(res, 200, "Deleted successfully");
     } catch (err) {
-      next(err);
+      return createError(res, 404, "No document found with that id");
     }
   },
 
