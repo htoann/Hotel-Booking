@@ -6,7 +6,12 @@ import Head from 'next/head'
 import {
     MdLocationOn,
     AiFillHeart,
-    FaParking
+    FaParking,
+    AiOutlineWifi,
+    MdFamilyRestroom,
+    MdAirportShuttle,
+    MdSmokeFree,
+    Ri24HoursFill
 } from '../../utils/icons'
 import {Button} from '../../components/core'
 
@@ -44,7 +49,7 @@ const HotelDetailPage = () => {
                                 <h1 className="mb-2 text-xl font-bold">{hotel.title}</h1>
                             </div>
                             <div>
-                                <div className="text-secondary flex gap-x-1 items-center">
+                                <div className="text-secondary flex gap-x-1.5 items-center">
                                     <MdLocationOn/>
                                     <h2 className="text-primary">{hotel.address}</h2>
                                     <p className="text-secondary cursor-pointer">Great location - Show Map</p>
@@ -53,8 +58,41 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="w-4/5">
-                            <p className="p-5">{hotel.desc}</p>
+                        <div className="w-4/5 p-5">
+                            <p>{hotel.desc}</p>
+                            <p>Couples in particular like the location – they rated it
+                                <span className="font-bold">{` ${hotel.score} `}</span>
+                                for a two-person trip.
+                            </p>
+                            <div className="mt-2">
+                                <h2 className="font-bold text-lg">Most popular facilities</h2>
+                                <ul className="flex gap-x-2.5">
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <AiOutlineWifi/>
+                                        <p className="text-primary text-base">Free WiFi</p>
+                                    </li>
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <FaParking/>
+                                        <p className="text-primary text-base">Free parking</p>
+                                    </li>
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <MdFamilyRestroom/>
+                                        <p className="text-primary text-base">Family rooms</p>
+                                    </li>
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <MdAirportShuttle/>
+                                        <p className="text-primary text-base">Airport shuttle</p>
+                                    </li>
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <MdSmokeFree/>
+                                        <p className="text-primary text-base">Non-smoking rooms</p>
+                                    </li>
+                                    <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
+                                        <Ri24HoursFill/>
+                                        <p className="text-primary text-base">24-hour front desk</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div className="w-1/5">
                             <div className="text-black flex flex-col gap-y-2.5 p-2">
@@ -70,6 +108,9 @@ const HotelDetailPage = () => {
                                 <Button text="Reserve" textColor="text-white" bgColor="bg-primary" fullWidth={true}/>
                             </div>
                         </div>
+                    </div>
+                    <div className="mt-5 border-t border-current">
+
                     </div>
                 </div>
             </>
