@@ -53,7 +53,9 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="w-4/5"></div>
+                        <div className="w-4/5">
+                            <p className="p-5">{hotel.desc}</p>
+                        </div>
                         <div className="w-1/5">
                             <div className="text-black flex flex-col gap-y-2.5 p-2">
                                 <h1 className="font-bold">Property Highlights</h1>
