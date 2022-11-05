@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment, useState} from 'react'
 import {useRouter} from 'next/router'
 import {useGetHotelQuery} from '../../services/hotelApi'
 import ErrorPage from 'next/error'
@@ -14,12 +14,15 @@ import {
     Ri24HoursFill
 } from '../../utils/icons'
 import {Button} from '../../components/core'
+import {Dialog, Transition} from '@headlessui/react'
+import {MapContainer} from '../../components/map'
 
 const HotelDetailPage = () => {
+    let [showMap, setShowMap] = useState(false)
+
     const router = useRouter()
     const id = router.query?.id as string
     const {data: hotel, isLoading, error} = useGetHotelQuery(id)
-
     if (error) {
         // @ts-ignore
         const status = error.status || 404
@@ -52,7 +55,8 @@ const HotelDetailPage = () => {
                                 <div className="text-secondary flex gap-x-1.5 items-center">
                                     <MdLocationOn/>
                                     <h2 className="text-primary">{hotel.address}</h2>
-                                    <p className="text-secondary cursor-pointer">Great location - Show Map</p>
+                                    <p className="text-secondary cursor-pointer" onClick={() => setShowMap(true)}>Great
+                                        location - Show Map</p>
                                 </div>
                             </div>
                         </div>
@@ -110,9 +114,47 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="mt-5 border-t border-current">
-
+                        <div className="mt-2.5">
+                            <h1 className="font-bold text-2xl">Availability</h1>
+                        </div>
                     </div>
                 </div>
+                <Transition appear show={showMap} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" onClose={() => setShowMap(false)}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black bg-opacity-25"/>
+                        </Transition.Child>
+
+                        <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <Dialog.Panel
+                                        className="w-max transform overflow-hidden rounded-2xl bg-white shadow-xl transition-all">
+                                        <div>
+                                            <MapContainer/>
+                                        </div>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition>
             </>
         )
     }
