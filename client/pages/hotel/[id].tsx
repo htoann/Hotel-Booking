@@ -16,6 +16,7 @@ import {
 import {Button} from '../../components/core'
 import {Dialog, Transition} from '@headlessui/react'
 import {MapContainer} from '../../components/map'
+import {ImageGallery} from '../../components/hotel'
 
 const HotelDetailPage = () => {
     let [showMap, setShowMap] = useState(false)
@@ -58,6 +59,9 @@ const HotelDetailPage = () => {
                                     <p className="text-secondary cursor-pointer" onClick={() => setShowMap(true)}>Great
                                         location - Show Map</p>
                                 </div>
+                            </div>
+                            <div>
+                                <ImageGallery photos={['1']}/>
                             </div>
                         </div>
                     </div>
