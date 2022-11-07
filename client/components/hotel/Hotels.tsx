@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import Card from './Card'
+import HotelPreview from './HotelPreview'
 
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
@@ -31,7 +31,7 @@ const Hotels = ({type}: Props) => {
     return (
         <Swiper
             spaceBetween={30}
-            slidesPerView={6}
+            slidesPerView={5}
             // loop={true}
             navigation={true}
             modules={[Navigation]}
@@ -39,10 +39,11 @@ const Hotels = ({type}: Props) => {
         >
             {hotelsType?.map((hotel) => (
                 <SwiperSlide key={hotel._id}>
-                    <Card
+                    <HotelPreview
+                        id={hotel._id}
                         image={hotel.photos[0]}
                         name={hotel.name}
-                        descShort={hotel.descShort}
+                        title={hotel.title}
                     />
                 </SwiperSlide>
             ))}

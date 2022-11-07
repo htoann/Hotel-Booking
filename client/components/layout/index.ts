@@ -1,3 +1,5 @@
 import Header from './Header'
+import Layout from './Layout'
+import Loader from './Loader'
 
-export default Header
+export {Header, Layout, Loader}
