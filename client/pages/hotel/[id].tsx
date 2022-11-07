@@ -17,6 +17,7 @@ import {Button, SearchVertical} from '../../components/core'
 import {Dialog, Transition} from '@headlessui/react'
 import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
+import {Loader} from '../../components/layout'
 
 const HotelDetailPage = () => {
     let [showMap, setShowMap] = useState(false)
@@ -29,7 +30,7 @@ const HotelDetailPage = () => {
         const status = error.status || 404
         return <ErrorPage statusCode={status}/>
     }
-    if (isLoading) return <div>Loading</div>
+    if (isLoading) return <div className="w-screen mt-20 flex items-center justify-center"><Loader/></div>
     if (hotel) {
         return (
             <>
