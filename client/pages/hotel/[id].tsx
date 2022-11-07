@@ -56,7 +56,7 @@ const HotelDetailPage = () => {
                             <div>
                                 <div className="text-secondary flex gap-x-1.5 items-center">
                                     <MdLocationOn/>
-                                    <h2 className="text-primary">{hotel.address}</h2>
+                                    <h2 className="text-primary">{hotel.address.name}</h2>
                                     <p className="text-secondary cursor-pointer" onClick={() => setShowMap(true)}>Great
                                         location - Show Map</p>
                                 </div>
@@ -152,7 +152,7 @@ const HotelDetailPage = () => {
                                     <Dialog.Panel
                                         className="w-max transform overflow-hidden rounded-2xl bg-white shadow-xl transition-all">
                                         <div>
-                                            <MapContainer/>
+                                            <MapContainer hotel={hotel}/>
                                         </div>
                                     </Dialog.Panel>
                                 </Transition.Child>
