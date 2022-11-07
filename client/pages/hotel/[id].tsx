@@ -61,7 +61,7 @@ const HotelDetailPage = () => {
                                 </div>
                             </div>
                             <div>
-                                <ImageGallery photos={['1']}/>
+                                <ImageGallery photos={hotel.photos}/>
                             </div>
                         </div>
                     </div>

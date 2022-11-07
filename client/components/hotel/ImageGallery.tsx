@@ -1,44 +1,84 @@
-import React, {useState, useEffect} from 'react'
-
-import SlideItem from './SlideItem'
+import React, {useState, useEffect, Fragment} from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import {Controller, Lazy, Navigation, Pagination} from 'swiper'
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
+import {Navigation} from 'swiper'
+import Image from 'next/image'
+import {Dialog, Transition} from '@headlessui/react'
 
-const images = [
-    {
-        src: 'https://picsum.photos/320/240?v1'
-    },
-    {
-        src: 'https://picsum.photos/320/240?v2'
-    },
-    {
-        src: 'https://picsum.photos/320/240?v3'
-    },
-    {
-        src: 'https://picsum.photos/320/240?v4'
-    }
-]
+interface Props {
+    photos: string[]
+}
 
-const ImageGallery = () => {
-    const [swiper, updateSwiper] = useState<any>(null)
-
-    const [swiperThumbs, updateSwiperThumbs] = useState<any>(null)
-
-    // Bind swiper and swiper thumbs
-    useEffect(() => {
-        if (swiper && swiperThumbs) {
-            swiper.controller.control = swiperThumbs
-            swiperThumbs.controller.control = swiper
-        }
-    }, [swiper, swiperThumbs])
-
+const ImageGallery = ({photos}: Props) => {
+    let [showImage, setShowImage] = useState(false)
+    let [imageFocus, setImageFocus] = useState(photos[0])
     return (
-        <div>
-            <Swiper>
-                <SwiperSlide>Slide 1</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-            </Swiper>
-        </div>
+        <>
+            <div className="h-96">
+                <Swiper
+                    spaceBetween={10}
+                    slidesPerView={2.1}
+                    navigation={true}
+                    modules={[Navigation]}
+                    className="h-full"
+                >
+                    {
+                        photos.map(image =>
+                            <SwiperSlide key={image} onClick={() => {
+                                setShowImage(true)
+                                setImageFocus(image)
+                            }}>
+                                <Image className="w-full h-full object-cover" src={image} alt={'image'} width={1000}
+                                    height={1000}/>
+                            </SwiperSlide>
+                        )
+                    }
+                </Swiper>
+            </div>
+            <Transition appear show={showImage} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={() => setShowImage(false)}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25"/>
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel
+                                    className="w-max transform overflow-hidden rounded-2xl bg-white shadow-xl transition-all">
+                                    <div>
+                                        <Image className="w-full h-5/6 object-cover" src={imageFocus}
+                                            alt={'image'}
+                                            width={1000}
+                                            height={900}/>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition>
+        </>
+
     )
 }
 
