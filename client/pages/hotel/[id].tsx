@@ -13,7 +13,7 @@ import {
     MdSmokeFree,
     Ri24HoursFill
 } from '../../utils/icons'
-import {Button} from '../../components/core'
+import {Button, SearchVertical} from '../../components/core'
 import {Dialog, Transition} from '@headlessui/react'
 import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
@@ -38,8 +38,8 @@ const HotelDetailPage = () => {
                 </Head>
                 <div className="mt-2 mx-auto max-w-screen-xl overflow-hidden ">
                     <div className="flex">
-                        <div className="w-1/5 p-5 bg-sky-400">
-                            Search
+                        <div className="w-1/5">
+                            <SearchVertical/>
                         </div>
                         <div className="w-4/5 p-5">
                             <div>
