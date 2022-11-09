@@ -11,7 +11,7 @@ export const roomApi = createApi({
         baseUrl: apiUrl
     }),
     endpoints: (builder) => ({
-        getHotelRooms: builder.query<IRoom, string>({
+        getHotelRooms: builder.query<IRoom[], string>({
             query: (id) => `/hotels/room/${id}`
         })
     })
