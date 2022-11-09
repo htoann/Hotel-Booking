@@ -18,6 +18,7 @@ import {Dialog, Transition} from '@headlessui/react'
 import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
 import {Loader} from '../../components/layout'
+import {RoomHotel} from '../../components/room'
 
 const HotelDetailPage = () => {
     let [showMap, setShowMap] = useState(false)
@@ -121,6 +122,7 @@ const HotelDetailPage = () => {
                     <div className="mt-5 border-t border-current">
                         <div className="mt-2.5">
                             <h1 className="font-bold text-2xl">Availability</h1>
+                            <RoomHotel hotelId={hotel._id}/>
                         </div>
                     </div>
                 </div>

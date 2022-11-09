@@ -12,8 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 import authReducer from '../features/authSlice'
 import hotelReducer from '../features/hotelSlice'
-import {authApi} from '../services/authApi'
-import {hotelApi} from '../services/hotelApi'
+import {authApi, hotelApi, roomApi} from '../services'
 
 const persistConfig = {
     key: 'root',
@@ -32,14 +31,15 @@ export const store = configureStore({
     reducer: {
         persistedReducer,
         [authApi.reducerPath]: authApi.reducer,
-        [hotelApi.reducerPath]: hotelApi.reducer
+        [hotelApi.reducerPath]: hotelApi.reducer,
+        [roomApi.reducerPath]: roomApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
             }
-        }).concat(authApi.middleware, hotelApi.middleware)
+        }).concat(authApi.middleware, hotelApi.middleware, roomApi.middleware)
 })
 export const persistor = persistStore(store)
 

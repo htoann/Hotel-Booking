@@ -17,7 +17,7 @@ import {
 import {CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
 import {BsFlower1} from 'react-icons/bs'
-import {FaFacebookF, FaGoogle, FaParking} from 'react-icons/fa'
+import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
 
 export {
     HiUser,
@@ -53,5 +53,6 @@ export {
     MdFamilyRestroom,
     MdAirportShuttle,
     MdSmokeFree,
-    Ri24HoursFill
+    Ri24HoursFill,
+    FaUser
 }
