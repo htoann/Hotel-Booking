@@ -11,12 +11,12 @@ exports.deleteOne = (Model, newParams) => async (req, res, next) => {
       : await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
-      return createError(res, 404, "No document found with that id");
+      return createError(res, 404, error || "No document found with that id");
     }
 
     return createMessage(res, 200, "Deleted successfully");
   } catch (error) {
-    return createError(res, 404, "No document found with that id");
+    return createError(res, 404, error || "No document found with that id");
   }
 };
 
@@ -37,12 +37,12 @@ exports.updateOne = (Model, newParams) => async (req, res, next) => {
         });
 
     if (!doc) {
-      return createError(res, 404, "No document found with that id");
+      return createError(res, 404, error || "No document found with that id");
     }
 
     res.status(200).json(doc);
   } catch (error) {
-    return createError(res, 404, "No document found with that id");
+    return createError(res, 404, error || "No document found with that id");
   }
 };
 
@@ -52,7 +52,7 @@ exports.createOne = (Model) => async (req, res, next) => {
 
     res.status(201).json(doc);
   } catch (error) {
-    return createError(res, 404, "No document found with that id");
+    return createError(res, 404, error || "No document found with that id");
   }
 };
 
@@ -62,12 +62,12 @@ exports.getOne = (Model, newParams) => async (req, res, next) => {
       ? await Model.findOne({ username: req.params.username })
       : await Model.findById(req.params.id);
     if (!doc) {
-      return createError(res, 404, "No document found with that id");
+      return createError(res, 404, error || "No document found with that id");
     }
 
     res.status(200).json(doc);
   } catch (error) {
-    return createError(res, 404, "No document found with that id");
+    return createError(res, 404, error || "No document found with that id");
   }
 };
 
