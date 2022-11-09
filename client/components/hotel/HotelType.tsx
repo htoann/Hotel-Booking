@@ -7,7 +7,7 @@ import {setHotels} from '../../features/hotelSlice'
 
 const HotelType = () => {
     const dispatch = useAppDispatch()
-    const {data: hotels, isLoading, isSuccess, isError, error} = useGetHotelsQuery()
+    const {data: hotels, isLoading, isSuccess} = useGetHotelsQuery({})
     const [type, setType] = useState('all')
     useEffect(() => {
         if (isSuccess) {
