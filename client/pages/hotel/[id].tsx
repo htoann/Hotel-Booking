@@ -120,7 +120,7 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="mt-5 border-t border-current">
-                        <div className="mt-2.5">
+                        <div className="my-2.5 w-full">
                             <h1 className="font-bold text-2xl">Availability</h1>
                             <RoomHotel hotelId={hotel._id}/>
                         </div>
