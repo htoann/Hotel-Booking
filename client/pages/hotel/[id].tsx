@@ -19,6 +19,7 @@ import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
 import {Loader} from '../../components/layout'
 import {RoomHotel} from '../../components/room'
+import StarRating from '../../components/core/StarRating'
 
 const HotelDetailPage = () => {
     let [showMap, setShowMap] = useState(false)
@@ -36,26 +37,23 @@ const HotelDetailPage = () => {
         return (
             <>
                 <Head>
-                    <title>Booking</title>
+                    <title>{hotel.name}</title>
                 </Head>
-                <div className="mt-2 mx-auto max-w-screen-xl overflow-hidden ">
-                    <div className="flex">
+                <div className="my-4 mx-auto max-w-screen-xl overflow-hidden ">
+                    <div className="flex pt-2">
                         <div className="w-1/5">
                             <SearchVertical/>
                         </div>
-                        <div className="w-4/5 p-5">
+                        <div className="w-4/5 pl-5">
                             <div>
                                 <div className="flex gap-x-2">
                                     <p className='first-letter:uppercase text-sm text-white bg-gray-500 w-max px-1.5 py-0.5 rounded'>{hotel.type}</p>
-                                    <div className="text-yellow-400">
-                                        {hotel.rating}
-                                        <span className="star">&#9733;</span>
-                                    </div>
+                                    <StarRating data={hotel.rating } />
                                 </div>
-                                <h1 className="mb-2 text-xl font-bold">{hotel.title}</h1>
+                                <h1 className="my-2 text-xl font-bold">{hotel.title}</h1>
                             </div>
                             <div>
-                                <div className="text-secondary flex gap-x-1.5 items-center">
+                                <div className="text-secondary flex gap-x-1.5 items-center mb-4">
                                     <MdLocationOn/>
                                     <h2 className="text-primary">{hotel.address.name}</h2>
                                     <p className="text-secondary cursor-pointer" onClick={() => setShowMap(true)}>Great
@@ -68,7 +66,7 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="w-4/5 p-5">
+                        <div className="w-4/5 py-5">
                             <p>{hotel.desc}</p>
                             <p>Couples in particular like the location – they rated it
                                 <span className="font-bold">{` ${hotel.score} `}</span>
@@ -76,7 +74,7 @@ const HotelDetailPage = () => {
                             </p>
                             <div className="mt-2">
                                 <h2 className="font-bold text-lg">Most popular facilities</h2>
-                                <ul className="flex gap-x-2.5">
+                                <ul className="flex gap-x-2.5 mt-4">
                                     <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
                                         <AiOutlineWifi/>
                                         <p className="text-primary text-base">Free WiFi</p>
