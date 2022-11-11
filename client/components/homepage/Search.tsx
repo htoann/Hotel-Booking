@@ -19,7 +19,7 @@ const Search = () => {
             Search deals on hotels, homes, and much more...
           </h3>
         </div>
-        <div className="absolute z-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute z-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
           <div className="w-max mx-auto bg-secondary flex items-end justify-center gap-x-2.5 p-2">
             <label className="">
               <span className="text-black">Location</span>

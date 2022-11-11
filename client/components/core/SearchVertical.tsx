@@ -3,10 +3,13 @@ import React from "react";
 import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { validateInputCity } from "../../utils/validateInputCity";
+import { useRouter } from "next/router";
 
 const SearchVertical = () => {
+  const router = useRouter();
   const { register, watch } = useForm();
-  const city = watch("city");
+  const city =
+    watch("city") || (router?.query?.slug ? router?.query?.slug[0] : "");
   const min = watch("min");
   const max = watch("max");
 
@@ -24,11 +27,12 @@ const SearchVertical = () => {
             className="form-input block w-full "
             {...register("city")}
             placeholder="Where are you going?"
+            defaultValue={city}
           />
         </label>
         <label className="w-full">
           <span>Check In</span>
-          <input type="date" className="form-input block w-full"/>
+          <input type="date" className="form-input block w-full" />
         </label>
         <label className="w-full">
           <span>Check Out</span>
@@ -56,9 +60,7 @@ const SearchVertical = () => {
         </label>
         <Link
           href={query}
-          className={
-            !watch("city") ? "pointer-events-none cursor-not-allowed" : ""
-          }
+          className={!city ? "pointer-events-none cursor-not-allowed" : ""}
         >
           <div className="w-full">
             <Button
