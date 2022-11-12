@@ -136,7 +136,7 @@ const RoomHotel = ({hotelId}: Props) => {
                                 </td>
                                 <td className="border border-primary text-sm font-light p-1.5 whitespace-nowrap">
                                     <div className="flex items-center justify-center ">
-                                        {[...Array(room.maxPeople)].map((index) =>
+                                        {[...Array(room.maxPeople)].map((_, index) =>
                                             <FaUser key={index}/>)}
                                     </div>
                                 </td>

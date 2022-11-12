@@ -16,7 +16,7 @@ import {
 } from 'react-icons/md'
 import {CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
-import {BsFlower1} from 'react-icons/bs'
+import {BsFillShareFill, BsFlower1} from 'react-icons/bs'
 import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
 
 export {
@@ -54,5 +54,6 @@ export {
     MdAirportShuttle,
     MdSmokeFree,
     Ri24HoursFill,
-    FaUser
+    FaUser,
+    BsFillShareFill
 }
