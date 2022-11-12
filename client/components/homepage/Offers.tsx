@@ -32,33 +32,39 @@ const Offers = () => {
     const locations = [
         {
             name: 'Sapa',
+            city: 'sapa',
             countryCode: 'VN',
-            image: '1'
+            image: 'https://images.unsplash.com/photo-1584003654022-074f97adc1d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
         },
         {
             name: 'Da Nang',
+            city: 'danang',
             countryCode: 'VN',
-            image: '1'
+            image: 'https://images.unsplash.com/photo-1620976128192-7181e9f91342?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
+        },
+        {
+            name: 'Nha Trang',
+            city: 'nhatrang',
+            countryCode: 'VN',
+            image: 'https://images.unsplash.com/photo-1642864319140-f2f3c418c707?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=766&q=80'
+        },
+        {
+            name: 'Da Lat',
+            city: 'dalat',
+            countryCode: 'VN',
+            image: 'https://images.unsplash.com/photo-1620814153812-38115a7f0fbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
         },
         {
             name: 'Hue',
+            city: 'hue',
             countryCode: 'VN',
-            image: '1'
+            image: 'https://images.unsplash.com/photo-1568775791746-bcc117bcb312?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
         },
         {
-            name: 'Bangkok',
-            countryCode: 'TH',
-            image: '1'
-        },
-        {
-            name: 'Sapa',
+            name: 'Phu Quoc',
+            city: 'phuquoc',
             countryCode: 'VN',
-            image: '1'
-        },
-        {
-            name: 'Da Nang',
-            countryCode: 'VN',
-            image: '1'
+            image: 'https://images.unsplash.com/photo-1587730675685-f71bccb607d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
         }
     ]
     return (
@@ -101,11 +107,15 @@ const Offers = () => {
             <div className="grid grid-cols-3 gap-5">
                 {/* Fix key index */}
                 {locations.map((location, index) =>
-                    <Link href="#" key={index}>
+                    <Link href={`/search/${location.city}`} key={index}>
                         <div
-                            className="relative block overflow-hidden rounded-xl bg-[url(https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1592&q=80)] bg-cover bg-center bg-no-repeat"
+                            className={`relative block overflow-hidden rounded-xl `}
                         >
-                            <div className="relative bg-black bg-opacity-40 p-8 pt-40 text-white">
+                            <Image className="absolute w-full h-full object-cover" src={location.image}
+                                alt={location.name}
+                                width={200}
+                                height={100}/>
+                            <div className="relative p-8 pt-40 text-white hover:bg-black hover:bg-opacity-40">
                                 <h3 className="text-2xl font-bold">{location.name}</h3>
                                 <p className="text-xl">{getFlagEmoji(location.countryCode)}</p>
                             </div>
