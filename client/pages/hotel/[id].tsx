@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import {useGetHotelQuery} from '../../services/hotelApi'
 import ErrorPage from 'next/error'
@@ -11,7 +11,7 @@ import {
     MdFamilyRestroom,
     MdAirportShuttle,
     MdSmokeFree,
-    Ri24HoursFill
+    Ri24HoursFill, AiOutlineHeart, BsFillShareFill
 } from '../../utils/icons'
 import {Button, SearchVertical} from '../../components/core'
 import {Dialog, Transition} from '@headlessui/react'
@@ -19,11 +19,20 @@ import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
 import {Loader} from '../../components/layout'
 import {RoomHotel} from '../../components/room'
+import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import {addHotelToWishList, removeHotelFromWishList} from '../../features/appSlice'
 import StarRating from '../../components/core/StarRating'
 
 const HotelDetailPage = () => {
-    let [showMap, setShowMap] = useState(false)
+    const dispatch = useAppDispatch()
+    const {wishList} = useAppSelector((state) => state.persistedReducer.app)
+    const [isInWishList, setIsInWishList] = useState(false)
 
+    useEffect(() => {
+        setIsInWishList(wishList.includes(id))
+    }, [])
+
+    let [showMap, setShowMap] = useState(false)
     const router = useRouter()
     const id = router.query?.id as string
     const {data: hotel, isLoading, error} = useGetHotelQuery(id)
@@ -34,6 +43,15 @@ const HotelDetailPage = () => {
     }
     if (isLoading) return <div className="w-screen mt-20 flex items-center justify-center"><Loader/></div>
     if (hotel) {
+        const wishListHandle = () => {
+            if (!isInWishList) {
+                setIsInWishList(true)
+                dispatch(addHotelToWishList(hotel._id))
+            } else {
+                setIsInWishList(false)
+                dispatch(removeHotelFromWishList((hotel._id)))
+            }
+        }
         return (
             <>
                 <Head>
@@ -46,10 +64,31 @@ const HotelDetailPage = () => {
                         </div>
                         <div className="w-4/5 pl-5">
                             <div>
-                                <div className="flex gap-x-2">
-                                    <p className='first-letter:uppercase text-sm text-white bg-gray-500 w-max px-1.5 py-0.5 rounded'>{hotel.type}</p>
-                                    <StarRating data={hotel.rating } />
+                                <div className="flex justify-between">
+
+                                    <div className="flex gap-x-2">
+                                        <p className='first-letter:uppercase text-sm text-white bg-gray-500 w-max px-1.5 py-0.5 rounded'>{hotel.type}</p>
+                                        <StarRating data={hotel.rating } />
+                                    </div>
+                                    <div className="text-secondary flex items-center gap-x-2.5">
+                                        <div onClick={wishListHandle}
+                                            className="text-2xl cursor-pointer"
+                                        >
+                                            {!isInWishList
+                                                ? <AiOutlineHeart/>
+                                                : <AiFillHeart className="text-red-500"/>}
+                                        </div>
+                                        <div
+                                            className="text-xl cursor-pointer"
+                                        >
+                                            <BsFillShareFill/>
+                                        </div>
+                                        <div>
+                                            <Button text="Reserve" textColor="text-white" bgColor="bg-primary"/>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <h1 className="my-2 text-xl font-bold">{hotel.title}</h1>
                             </div>
                             <div>
@@ -118,7 +157,7 @@ const HotelDetailPage = () => {
                         </div>
                     </div>
                     <div className="mt-5 border-t border-current">
-                        <div className="mt-2.5">
+                        <div className="my-2.5 w-full">
                             <h1 className="font-bold text-2xl">Availability</h1>
                             <RoomHotel hotelId={hotel._id}/>
                         </div>
