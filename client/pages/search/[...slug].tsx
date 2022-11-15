@@ -31,12 +31,13 @@ const SearchPage = () => {
 
   const [hotelsType, setHotelsType] = useState(hotels || undefined);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="w-screen mt-20 flex items-center justify-center">
         <Loader />
       </div>
     );
+  }
 
   return (
     <div className="relative flex mx-auto max-w-screen-xl gap-5 py-5">
