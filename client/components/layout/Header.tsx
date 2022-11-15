@@ -91,7 +91,7 @@ const Header = () => {
         <nav className=" px-4 lg:px-6 py-2.5">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <Link href="/">
-                    <span className="self-center text-xl font-semibold whitespace-nowrap text-white">Booking</span>
+                    <span className="self-center text-3xl font-semibold whitespace-nowrap text-white">Booking</span>
                 </Link>
                 <div className="flex flex-end items-center gap-4">
                     <Link href="/">

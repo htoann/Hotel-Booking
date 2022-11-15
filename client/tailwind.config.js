@@ -17,11 +17,10 @@ module.exports = {
             },
             textColor: {
                 primary: '#262626',
-                secondary: '#0071c2'
+                secondary: '#0071c2',
+                tertiary: '#febb02'
             }
         }
     },
-    plugins: [
-        require('@tailwindcss/forms')
-    ]
+    plugins: [require('@tailwindcss/forms')]
 }
