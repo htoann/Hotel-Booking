@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { SearchVertical } from "../../components/core";
@@ -9,11 +10,11 @@ import { useGetHotelsQuery } from "../../services/hotelApi";
 const SearchPage = () => {
   // lay city la bat buoc, limit, min, max tu URL la optional
   const router = useRouter();
+  const queryUrl = router?.query;
 
-  const minSlug = router?.query?.min;
-  const maxSlug = router?.query?.max;
-
-  const citySlug = router?.query?.slug ? router?.query?.slug[0] : "";
+  const citySlug = queryUrl?.slug ? queryUrl?.slug[0] : "";
+  const minSlug = queryUrl?.min;
+  const maxSlug = queryUrl?.max;
 
   const [city, setCity] = useState(citySlug);
 
@@ -39,6 +40,9 @@ const SearchPage = () => {
 
   return (
     <div className="relative flex mx-auto max-w-screen-xl gap-5 py-5">
+      <Head>
+        <title>Search city: {citySlug}</title>
+      </Head>
       <div className="w-128 h-min">
         <SearchVertical />
         <FilterHotels hotels={hotels} setHotelsType={setHotelsType} />

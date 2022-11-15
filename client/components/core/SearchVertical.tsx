@@ -3,12 +3,21 @@ import React from "react";
 import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { validateInputCity } from "../../utils/validateInputCity";
+import { useRouter } from "next/router";
 
 const SearchVertical = () => {
   const { register, watch } = useForm();
-  const city = watch("city");
-  const min = watch("min");
-  const max = watch("max");
+
+  const router = useRouter();
+  const queryUrl = router?.query;
+
+  const citySlug = queryUrl?.slug ? queryUrl?.slug[0] : "";
+  const minSlug = queryUrl?.min;
+  const maxSlug = queryUrl?.max;
+
+  const city = watch("city") || citySlug;
+  const min = watch("min") || minSlug;
+  const max = watch("max") || maxSlug;
 
   let query = `/search/${validateInputCity(city)}`;
   if (min) query += `?min=${min}`;
@@ -24,6 +33,7 @@ const SearchVertical = () => {
             className="form-input block w-full "
             {...register("city")}
             placeholder="Where are you going?"
+            defaultValue={city}
           />
         </label>
         <label className="w-full">
@@ -44,6 +54,7 @@ const SearchVertical = () => {
             type="number"
             className="form-input block w-full"
             {...register("min")}
+            defaultValue={min}
           />
         </label>
         <label className="w-full">
@@ -52,6 +63,7 @@ const SearchVertical = () => {
             type="number"
             className="form-input block w-full"
             {...register("max")}
+             defaultValue={max}
           />
         </label>
         <Link

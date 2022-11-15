@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IHotel } from "../../models";
 import { useAppSelector } from "../../store/hooks";
-import { useForm } from "react-hook-form";
 
 interface Props {
   hotels?: IHotel[];
@@ -9,7 +8,6 @@ interface Props {
 }
 
 const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
-  // const { register, handleSubmit } = useForm();
   const { hotels: hotelsRedux } = useAppSelector(
     (state) => state.persistedReducer.hotel
   );
@@ -22,17 +20,24 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
 
   useEffect(() => {
     const getHotelsFilter = () => {
-      if (type !== "all" || rating !== "all") {
-        const hotelsFilter =
-          (type !== "all" && hotels?.filter((el) => el.type === type)) ||
-          (rating !== "all" &&
-            hotels?.filter((el) => Math.round(el.rating) === +rating)) ||
-          undefined;
-        setHotelsType(hotelsFilter);
+      if (type !== "all") {
+        if (rating !== "all") {
+          const hotelsFilter =
+            hotels?.filter((el) => el.type === type
+              && Math.round(el.rating) === +rating)
+
+          setHotelsType(hotelsFilter);
+        } else {
+          const hotelsFilter =
+            hotels?.filter((el) => el.type === type)
+
+          setHotelsType(hotelsFilter);
+        }
       } else {
         setHotelsType(hotels);
       }
     };
+
     getHotelsFilter();
   }, [hotels, type, rating]);
 
@@ -55,7 +60,6 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
             type="radio"
             name="type"
             className="w-4 h-4"
-            // {...register("type")}
             value="all"
             onChange={handleChangeType}
           />
@@ -70,7 +74,6 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
               type="radio"
               name="type"
               className="w-4 h-4"
-              // {...register("type")}
               value={type}
               onChange={handleChangeType}
             />
@@ -93,13 +96,9 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
             name="rating"
             className="w-4 h-4"
             onChange={handleChangeRating}
-            // {...register("rating")}
             value="all"
           />
-          <label
-            htmlFor="all"
-            className="ml-2 text-sm font-medium capitalize"
-          >
+          <label htmlFor="all" className="ml-2 text-sm font-medium capitalize">
             All
           </label>
         </div>
@@ -111,7 +110,6 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
               name="rating"
               className="w-4 h-4"
               onChange={handleChangeRating}
-              // {...register("rating")}
               value={index + 1}
             />
             <label
