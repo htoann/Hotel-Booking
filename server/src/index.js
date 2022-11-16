@@ -12,6 +12,9 @@ const app = express();
 app.use(
   cors({
     origin: ["https://bookinghotels.vercel.app", "http://localhost:3000"],
+    methods: "GET, POST, PUT, DELETE, PATCH",
+    credentials: true,
+    maxAge: 3600,
   })
 );
 app.use(morgan("dev"));
