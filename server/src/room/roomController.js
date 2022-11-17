@@ -16,7 +16,11 @@ export default {
                     $push: {rooms: savedRoom._id},
                 });
             } catch (err) {
-                return createError(res, 404, "No document found with that id");
+                return createError(
+                  res,
+                  404,
+                  err || "No document found with that id"
+                );
             }
             res.status(200).json(savedRoom);
         } catch (err) {
@@ -39,7 +43,7 @@ export default {
 
             return createMessage(res, 200, "Updated successfully");
         } catch (err) {
-            return createError(res, 404, "No document found with that id");
+            return createError(res, 404, err || "No document found with that id");
         }
     },
 
@@ -49,14 +53,14 @@ export default {
             await Room.findByIdAndDelete(req.params.id);
             try {
                 await Hotel.findByIdAndUpdate(hotelId, {
-                    $pull: {rooms: req.params.id},
+                    $pull: { rooms: req.params.id },
                 });
             } catch (err) {
                 return createError(res, 404, "No document found with that id");
             }
             return createMessage(res, 200, "Deleted successfully");
         } catch (err) {
-            return createError(res, 404, "No document found with that id");
+            return createError(res, 404, err || "No document found with that id");
         }
     },
 

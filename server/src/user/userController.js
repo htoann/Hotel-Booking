@@ -1,3 +1,4 @@
+import { createError, createMessage } from "../utils/createMessage";
 import User from "./userModel";
 const base = require("../utils/baseController");
 
@@ -19,4 +20,35 @@ export default {
   updateUser: base.updateOne(User),
 
   deleteUser: base.deleteOne(User),
+
+  addWishlist: async (req, res) => {
+    try {
+      await User.updateOne(
+        { _id: req.user.id },
+        {
+          $push: {
+            wishlist: req.body.id,
+          },
+        }
+      );
+
+      return createMessage(res, 200, "Saved to wish list");
+    } catch (err) {
+      return createError(res, 404, err || "No document found with that id");
+    }
+  },
+
+  deleteWishlist: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: { wishlist: req.body.id },
+        }
+      );
+      return createMessage(res, 200, "Removed from wish list");
+    } catch (err) {
+      return createError(res, 404, err || "No document found with that id");
+    }
+  },
 };
