@@ -105,6 +105,6 @@ remember to update the file of [client/webpack.prod.js](https://github.com/amazi
 [Create new Issues](https://github.com/htoann/bookinghotel/issues) (preferred)
 
 ## Author
-Client: [Le Cong Ly](https://github.com/lecongly)
+[Le Cong Ly](https://github.com/lecongly)
 
-API: [Tran Huu Toan](https://github.com/htoann)
+[Tran Huu Toan](https://github.com/htoann)
