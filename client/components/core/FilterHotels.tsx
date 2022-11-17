@@ -22,17 +22,22 @@ const FilterHotels: React.FC<Props> = ({ hotels, setHotelsType }) => {
     const getHotelsFilter = () => {
       if (type !== "all") {
         if (rating !== "all") {
-          const hotelsFilter =
-            hotels?.filter((el) => el.type === type
-              && Math.round(el.rating) === +rating)
+          const hotelsFilter = hotels?.filter(
+            (el) => el.type === type && Math.round(el.rating) === +rating
+          );
 
           setHotelsType(hotelsFilter);
         } else {
-          const hotelsFilter =
-            hotels?.filter((el) => el.type === type)
+          const hotelsFilter = hotels?.filter((el) => el.type === type);
 
           setHotelsType(hotelsFilter);
         }
+      } else if (rating !== "all") {
+        const hotelsFilter = hotels?.filter(
+          (el) => Math.round(el.rating) === +rating
+        );
+
+        setHotelsType(hotelsFilter);
       } else {
         setHotelsType(hotels);
       }
