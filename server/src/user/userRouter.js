@@ -13,6 +13,9 @@ router.get("/", admin, userController.getAllUsers);
 //   .put(userController.updateUser)
 //   .delete(userController.deleteUser);
 
+router.post("/wishlist", auth, userController.addWishlist);
+router.delete("/wishlist", auth, userController.deleteWishlist);
+
 router
   .route("/me")
   .get(auth, userController.getCurrentUser)

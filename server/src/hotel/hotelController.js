@@ -48,7 +48,7 @@ export default {
       );
       res.status(200).json(list);
     } catch (err) {
-      return createError(res, 404, "No document found with that id");
+      return createError(res, 404, err || "No document found with that id");
     }
   },
 
