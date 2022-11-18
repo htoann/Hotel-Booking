@@ -51,7 +51,7 @@ const Header = () => {
         {
             icon: <AiOutlineHeart/>,
             name: 'Saved',
-            link: '/'
+            link: '/wishlist'
         }
     ]
     const menu = [
