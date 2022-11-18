@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     wishlist: {
-      type: [Object],
+      type: [String],
     },
   },
   { timestamps: true }

@@ -27,7 +27,7 @@ export default {
         { _id: req.user.id },
         {
           $addToSet: {
-            wishlist: req.body,
+            wishlist: req.body.id,
           },
         }
       );
@@ -43,7 +43,7 @@ export default {
       await User.findByIdAndUpdate(
         { _id: req.user.id },
         {
-          $pull: { wishlist: req.body },
+          $pull: { wishlist: req.body.id },
         }
       );
       return createMessage(res, 200, "Removed from wish list");

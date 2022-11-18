@@ -24,13 +24,13 @@ export const userApi = createApi({
         }),
 
         addWishList: builder.mutation({
-            query: (body: IHotel) => {
+            query: (body: string) => {
               return { url: "/users/wishlist", method: "post", body };
             },
         }),
 
         deleteWishList: builder.mutation({
-            query: (body: IHotel) => {
+            query: (body: string) => {
                 return { url: "/users/wishlist", method: "delete", body };
             },
         }),
