@@ -34,7 +34,7 @@ export default {
             return next(createError(res, 500, err));
           }
 
-          const { password, isAdmin, ...info } = user._doc;
+          const { password, ...info } = user._doc;
 
           res.json({
             user: { ...info },
@@ -66,7 +66,7 @@ export default {
               return createError(res, 401, err || "Wrong password or email");
             }
 
-            const { password, isAdmin, ...info } = existingUser._doc;
+            const { password, ...info } = existingUser._doc;
 
             res.send({
               user: { ...info },
