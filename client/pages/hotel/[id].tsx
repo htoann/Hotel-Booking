@@ -46,11 +46,6 @@ const HotelDetailPage = () => {
   const router = useRouter();
   const id = router.query?.id as string;
   const { data: hotel, isLoading, error } = useGetHotelQuery(id);
-  if (error) {
-    // @ts-ignore
-    const status = error.status || 404;
-    return <ErrorPage statusCode={status} />;
-  }
 
   const [addWishList, { isSuccess: isAddWishListSuccess }] =
     useAddWishListMutation();
@@ -75,16 +70,22 @@ const HotelDetailPage = () => {
       </div>
     );
 
+  if (error) {
+    // @ts-ignore
+    const status = error.status || 404;
+    return <ErrorPage statusCode={status} />;
+  }
+
   if (hotel) {
     const wishListHandle = () => {
       if (!isInWishList) {
         setIsInWishList(true);
         dispatch(addHotelToWishList(hotel._id));
-        addWishList(hotel._id);
+        addWishList(hotel);
       } else {
         setIsInWishList(false);
         dispatch(removeHotelFromWishList(hotel._id));
-        deleteWishList(hotel._id);
+        deleteWishList(hotel);
       }
     };
     return (
