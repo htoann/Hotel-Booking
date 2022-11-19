@@ -46,7 +46,7 @@ const SignIn = ({setIsSignIn}: Props) => {
             dispatch(
                 setUser({user: loginData.user, token: loginData.token})
             )
-            dispatch(setHotelWishList(loginData.user.wishlist));
+            dispatch(setHotelWishList(loginData.user.wishlist))
             router.push('/')
         }
     }, [isLoginSuccess])

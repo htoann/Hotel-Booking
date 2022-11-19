@@ -11,7 +11,7 @@
     "deploy:preview": "vercel",
     "export": "next build && next export",
     "lint": "next lint",
-    "lint-fix": "eslint ./components/** ./pages/** -c .eslintrc.json --fix --ext .js,.jsx,.ts,.tsx,.scss,.mdx"
+    "lint-fix": "eslint ./components/** ./pages/** ./services/** ./features/** -c .eslintrc.json --fix --ext .js,.jsx,.ts,.tsx,.scss,.mdx"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.4",

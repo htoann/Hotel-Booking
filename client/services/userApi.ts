@@ -1,40 +1,40 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IHotel, IUser } from "../models";
-import { RootState } from "../store/store";
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import {IUser} from '../models'
+import {RootState} from '../store/store'
 
-import { apiUrl } from "../utils/config";
+import {apiUrl} from '../utils/config'
 
 export const userApi = createApi({
-    reducerPath: "userApi",
+    reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({
         baseUrl: apiUrl,
-        prepareHeaders: (headers, { getState, endpoint }) => {
-            const user = (getState() as RootState).persistedReducer.auth;
+        prepareHeaders: (headers, {getState, endpoint}) => {
+            const user = (getState() as RootState).persistedReducer.auth
 
-            if (user && endpoint !== "refresh") {
-                headers.set("Authorization", `Bearer ${user.token}`);
+            if (user && endpoint !== 'refresh') {
+                headers.set('Authorization', `Bearer ${user.token}`)
             }
-            return headers;
-        },
+            return headers
+        }
     }),
 
     endpoints: (builder) => ({
         getUser: builder.query<IUser, void>({
-            query: () => "/users/me",
+            query: () => '/users/me'
         }),
 
         addWishList: builder.mutation({
             query: (body: object) => {
-              return { url: "/users/wishlist", method: "post", body };
-            },
+                return {url: '/users/wishlist', method: 'post', body}
+            }
         }),
 
         deleteWishList: builder.mutation({
             query: (body: object) => {
-                return { url: "/users/wishlist", method: "delete", body };
-            },
-        }),
-    }),
-});
+                return {url: '/users/wishlist', method: 'delete', body}
+            }
+        })
+    })
+})
 
-export const { useGetUserQuery, useAddWishListMutation, useDeleteWishListMutation } = userApi;
+export const {useGetUserQuery, useAddWishListMutation, useDeleteWishListMutation} = userApi

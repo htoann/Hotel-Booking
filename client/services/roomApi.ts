@@ -3,8 +3,6 @@ import {IRoom} from '../models'
 
 import {apiUrl} from '../utils/config'
 
-type HotelRoomsResponse = IRoom[]
-
 export const roomApi = createApi({
     reducerPath: 'roomApi',
     baseQuery: fetchBaseQuery({
