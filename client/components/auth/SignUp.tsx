@@ -11,6 +11,7 @@ import {setUser} from '../../features/authSlice'
 import {useAppDispatch} from '../../store/hooks'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
+import { setHotelWishList } from '../../features/appSlice'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
@@ -44,6 +45,7 @@ const SignUp = ({setIsSignIn}: Props) => {
             dispatch(
                 setUser({user: registerData.user, token: registerData.token})
             )
+            dispatch(setHotelWishList(registerData.user.wishlist));
             router.push('/')
         }
     }, [isRegisterSuccess])

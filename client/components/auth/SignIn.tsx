@@ -11,6 +11,7 @@ import {useAppDispatch} from '../../store/hooks'
 import {useLoginUserMutation} from '../../services/authApi'
 import {setUser} from '../../features/authSlice'
 import {useRouter} from 'next/router'
+import { setHotelWishList } from '../../features/appSlice'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
@@ -45,6 +46,7 @@ const SignIn = ({setIsSignIn}: Props) => {
             dispatch(
                 setUser({user: loginData.user, token: loginData.token})
             )
+            dispatch(setHotelWishList(loginData.user.wishlist));
             router.push('/')
         }
     }, [isLoginSuccess])
