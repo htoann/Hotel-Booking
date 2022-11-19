@@ -32,6 +32,7 @@ import {
     useAddWishListMutation,
     useDeleteWishListMutation
 } from '../../services/userApi'
+import {IHotel} from '../../models'
 
 const HotelDetailPage = () => {
     const router = useRouter()
@@ -39,11 +40,13 @@ const HotelDetailPage = () => {
 
     const dispatch = useAppDispatch()
     const {wishList} = useAppSelector((state) => state.persistedReducer.app)
+    const {user} = useAppSelector((state) => state.persistedReducer.auth)
+
     const [isInWishList, setIsInWishList] = useState(false)
 
     useEffect(() => {
-        setIsInWishList(wishList.includes(id))
-    }, [id, wishList])
+        setIsInWishList(wishList.includes(hotel as IHotel))
+    }, [wishList])
 
     let [showMap, setShowMap] = useState(false)
 
@@ -51,19 +54,8 @@ const HotelDetailPage = () => {
 
     const [addWishList, {isSuccess: isAddWishListSuccess}] =
         useAddWishListMutation()
-
     const [deleteWishList, {isSuccess: isDeleteWishListSuccess}] =
         useDeleteWishListMutation()
-
-    useEffect(() => {
-        if (isAddWishListSuccess) {
-            toast.success('Saved to wishlist')
-        }
-
-        if (isDeleteWishListSuccess) {
-            toast.success('Deleted from wishlist')
-        }
-    }, [isAddWishListSuccess, isDeleteWishListSuccess])
 
     if (isLoading) {
         return (
@@ -83,12 +75,18 @@ const HotelDetailPage = () => {
         const wishListHandle = () => {
             if (!isInWishList) {
                 setIsInWishList(true)
-                dispatch(addHotelToWishList(hotel._id))
-                addWishList(hotel)
+                if (user) {
+                    addWishList(hotel)
+                }
+                dispatch(addHotelToWishList(hotel))
+                toast.success('Saved to wishlist')
             } else {
                 setIsInWishList(false)
-                dispatch(removeHotelFromWishList(hotel._id))
-                deleteWishList(hotel)
+                if (user) {
+                    deleteWishList(hotel)
+                }
+                dispatch(removeHotelFromWishList(hotel))
+                toast.success('Deleted from wishlist')
             }
         }
         return (
