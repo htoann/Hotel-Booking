@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {useGetHotelRoomsQuery} from '../../services/roomApi'
 import {FaUser} from '../../utils/icons'
 import {Loader} from '../layout'
