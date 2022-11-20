@@ -45,7 +45,7 @@ const HotelDetailPage = () => {
 
     useEffect(() => {
         setIsInWishList(wishList.includes(id))
-    }, [wishList])
+    }, [wishList, id])
 
     let [showMap, setShowMap] = useState(false)
 
