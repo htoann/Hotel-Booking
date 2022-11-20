@@ -4,8 +4,10 @@ import HotelPreview from '../../components/hotel/HotelPreview'
 import {useAppSelector} from '../../store/hooks'
 
 const Index = () => {
+    const {hotels} = useAppSelector((state) => state.persistedReducer.hotel)
     const {wishList} = useAppSelector((state) => state.persistedReducer.app)
-    const {user} = useAppSelector((state) => state.persistedReducer.auth)
+
+    const wishListHotels = hotels?.filter((hotel) => wishList.includes(hotel._id))
 
     return (
         <>
@@ -14,13 +16,13 @@ const Index = () => {
             </Head>
             <div
                 className={
-                    wishList.length > 0
+                    wishListHotels && wishListHotels.length > 0
                         ? `grid grid-cols-1 gap-4 md:grid-cols-2 p-2 mt-8 lg:grid-cols-3 justify-center mx-auto max-w-screen-xl overflow-hidden`
                         : `w-screen mt-20 flex items-center justify-center`
                 }
             >
-                {wishList.length > 0 ? (
-                    wishList.map((hotel) => (
+                {wishListHotels && wishListHotels.length > 0 ? (
+                    wishListHotels?.map((hotel) => (
                         <div key={hotel._id}>
                             <HotelPreview
                                 id={hotel._id}
