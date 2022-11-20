@@ -32,7 +32,6 @@ import {
     useAddWishListMutation,
     useDeleteWishListMutation
 } from '../../services/userApi'
-import {IHotel} from '../../models'
 
 const HotelDetailPage = () => {
     const router = useRouter()
@@ -45,16 +44,16 @@ const HotelDetailPage = () => {
     const [isInWishList, setIsInWishList] = useState(false)
 
     useEffect(() => {
-        setIsInWishList(wishList.includes(hotel as IHotel))
+        setIsInWishList(wishList.includes(id))
     }, [wishList])
 
     let [showMap, setShowMap] = useState(false)
 
     const {data: hotel, isLoading, error} = useGetHotelQuery(id)
 
-    const [addWishList, {isSuccess: isAddWishListSuccess}] =
+    const [addWishList] =
         useAddWishListMutation()
-    const [deleteWishList, {isSuccess: isDeleteWishListSuccess}] =
+    const [deleteWishList] =
         useDeleteWishListMutation()
 
     if (isLoading) {
@@ -76,16 +75,16 @@ const HotelDetailPage = () => {
             if (!isInWishList) {
                 setIsInWishList(true)
                 if (user) {
-                    addWishList(hotel)
+                    addWishList({id})
                 }
-                dispatch(addHotelToWishList(hotel))
+                dispatch(addHotelToWishList(id))
                 toast.success('Saved to wishlist')
             } else {
                 setIsInWishList(false)
                 if (user) {
-                    deleteWishList(hotel)
+                    deleteWishList({id})
                 }
-                dispatch(removeHotelFromWishList(hotel))
+                dispatch(removeHotelFromWishList(id))
                 toast.success('Deleted from wishlist')
             }
         }

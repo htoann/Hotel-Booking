@@ -1,8 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {IHotel} from '../models'
 
 export interface AppState {
-    wishList: IHotel[];
+    wishList: string[];
 }
 
 const initialState: AppState = {
@@ -13,18 +12,18 @@ export const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        setHotelWishList: (state, action: PayloadAction<IHotel[]>) => {
+        setHotelWishList: (state, action: PayloadAction<string[]>) => {
             state.wishList = action.payload
         },
-        addHotelToWishList: (state, action: PayloadAction<IHotel>) => {
-            const check = state.wishList?.every((hotel) => {
-                return hotel._id !== action.payload._id
+        addHotelToWishList: (state, action: PayloadAction<string>) => {
+            const check = state.wishList?.every((id) => {
+                return id !== action.payload
             })
             if (check) {
                 state.wishList.push(action.payload)
             }
         },
-        removeHotelFromWishList: (state, action: PayloadAction<IHotel>) => {
+        removeHotelFromWishList: (state, action: PayloadAction<string>) => {
             const index = state.wishList.indexOf(action.payload)
             if (index > -1) {
                 state.wishList.splice(index, 1)
