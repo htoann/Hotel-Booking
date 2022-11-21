@@ -1,6 +1,6 @@
 import {HiUser} from 'react-icons/hi'
 import {AiOutlineUser, AiOutlineWallet, AiOutlineHeart, AiOutlineCar, AiFillHeart, AiOutlineWifi} from 'react-icons/ai'
-import {Ri24HoursFill, RiSuitcaseLine, RiTaxiWifiLine} from 'react-icons/ri'
+import {Ri24HoursFill, RiSuitcaseLine, RiTaxiWifiLine, RiUserSettingsLine} from 'react-icons/ri'
 import {VscSignOut} from 'react-icons/vsc'
 import {BiBed, BiHide, BiShowAlt} from 'react-icons/bi'
 import {GiEarthAsiaOceania} from 'react-icons/gi'
@@ -16,7 +16,7 @@ import {
 } from 'react-icons/md'
 import {CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
-import {BsFillShareFill, BsFlower1} from 'react-icons/bs'
+import {BsFillShareFill, BsFlower1, BsShieldLock} from 'react-icons/bs'
 import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
 
 export {
@@ -55,5 +55,8 @@ export {
     MdSmokeFree,
     Ri24HoursFill,
     FaUser,
-    BsFillShareFill
+    BsFillShareFill,
+
+    RiUserSettingsLine,
+    BsShieldLock
 }
