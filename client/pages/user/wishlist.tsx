@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import React from 'react'
-import HotelPreview from '../../components/hotel/HotelPreview'
+import {HotelPreview} from '../../components/hotel'
 import {useAppSelector} from '../../store/hooks'
 
-const Index = () => {
+const WishListPage = () => {
     const {hotels} = useAppSelector((state) => state.persistedReducer.hotel)
     const {wishList} = useAppSelector((state) => state.persistedReducer.app)
 
@@ -42,4 +42,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default WishListPage
