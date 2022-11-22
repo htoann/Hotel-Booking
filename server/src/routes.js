@@ -2,6 +2,7 @@ import authRouter from "./auth/authRouter";
 import userRouter from "./user/userRouter";
 import hotelRouter from "./hotel/hotelRouter";
 import roomRouter from "./room/roomRouter";
+import bookingRouter from "./booking/bookingRouter";
 import logger from "./utils/logger";
 import { createError } from "./utils/createMessage";
 
@@ -14,6 +15,7 @@ export default function route(app) {
   app.use("/api/users", userRouter);
   app.use("/api/hotels", hotelRouter);
   app.use("/api/rooms", roomRouter);
+  app.use("/api/booking", bookingRouter);
 
   app.use((err, req, res, next) => {
     logger.error(err.message);

@@ -11,7 +11,7 @@ export const userApi = createApi({
         prepareHeaders: (headers, {getState, endpoint}) => {
             const user = (getState() as RootState).persistedReducer.auth
 
-            if (user && endpoint !== 'refresh') {
+            if (user && user.token && endpoint !== 'refresh') {
                 headers.set('Authorization', `Bearer ${user.token}`)
             }
             return headers
