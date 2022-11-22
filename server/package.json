@@ -18,6 +18,7 @@
     "express": "^4.16.2",
     "jwt-simple": "^0.5.6",
     "loglevel-colored-level-prefix": "^1.0.0",
+    "moment": "^2.29.4",
     "mongoose": "^6.6.2",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.9.1"
