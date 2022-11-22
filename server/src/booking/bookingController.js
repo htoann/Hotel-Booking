@@ -2,7 +2,7 @@ import { createError } from "../utils/createMessage";
 import Booking from "./bookingModel";
 
 export default {
-  booking: async (req, res, next) => {
+  booking: async (req, res) => {
     try {
       const booking = await Booking.create({ user: req.user, ...req.body });
 
