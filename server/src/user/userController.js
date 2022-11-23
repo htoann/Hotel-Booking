@@ -1,11 +1,16 @@
 import { createError, createMessage } from "../utils/createMessage";
 import User from "./userModel";
 import bcrypt from "bcrypt-nodejs";
+import Hotel from "../hotel/hotelModel";
+import Room from "../room/roomModel";
 
 const base = require("../utils/baseController");
 
 export default {
   getUser: async (req, res) => {
+    if (req.params.id !== req.user.id) {
+      return createError(res, 403, "You are not allow");
+    }
     try {
       const user = await User.findById(req.params.id);
 
@@ -13,19 +18,7 @@ export default {
 
       res.status(200).json({ ...info });
     } catch (err) {
-      return createError(res, 404, err || "No document found with that id");
-    }
-  },
-
-  getCurrentUser: async (req, res, next) => {
-    try {
-      const user = req.user;
-
-      const { password, ...info } = user._doc;
-
-      res.status(200).json({ ...info });
-    } catch (error) {
-      next(error);
+      return createError(res, 404, err || "No user found with that id");
     }
   },
 
@@ -33,11 +26,7 @@ export default {
 
   updateUser: base.updateOne(User),
 
-  updateMe: base.updateOne(User, "reqUser"),
-
   deleteUser: base.deleteOne(User),
-
-  deleteMe: base.deleteOne(User, "reqUser"),
 
   addWishlist: async (req, res) => {
     try {
@@ -49,7 +38,7 @@ export default {
 
       return createMessage(res, 200, "Saved to wish list");
     } catch (err) {
-      return createError(res, 404, err || "No document found with that id");
+      return createError(res, 404, err || "No user found with that id");
     }
   },
 
@@ -63,7 +52,7 @@ export default {
       );
       return createMessage(res, 200, "Removed from wish list");
     } catch (err) {
-      return createError(res, 404, err || "No document found with that id");
+      return createError(res, 404, err || "No user found with that id");
     }
   },
 
@@ -93,7 +82,52 @@ export default {
       return createMessage(res, 200, "Update user successfully");
     } catch (err) {
       console.log(err);
-      return createError(res, 404, err || "No document found with that id");
+      return createError(res, 404, err || "Something went wrong");
+    }
+  },
+
+  createHotel: async (req, res) => {
+    console.log(req);
+    try {
+      const hotel = await Hotel.create({ user: req.user, ...req.body });
+      res.status(201).json(hotel);
+    } catch (error) {
+      return createError(res, 404, error || "Something went wrong");
+    }
+  },
+
+  createRoom: async (req, res, next) => {
+    const newRoom = new Room(req.body);
+
+    try {
+      const savedRoom = await newRoom.save();
+      try {
+        await Hotel.findOneAndUpdate(
+          { user: req.user.id },
+          {
+            $push: { rooms: savedRoom._id },
+          }
+        );
+      } catch (err) {
+        return createError(res, 404, err || "No room found with that id");
+      }
+      res.status(200).json(savedRoom);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  deleteHotel: async (req, res) => {
+    try {
+      const doc = await Hotel.findOneAndDelete({ user: req.user.id });
+
+      if (!doc) {
+        return createError(res, 404, "You are not allow");
+      }
+
+      return createMessage(res, 200, "Deleted successfully");
+    } catch (error) {
+      return createError(res, 404, error || "No hotel found with that id");
     }
   },
 };

@@ -1,11 +1,14 @@
 const APIFeatures = require("./apiFeatures");
 const { createError, createMessage } = require("./createMessage");
 
-exports.deleteOne = (Model, reqUser, newParams) => async (req, res, next) => {
+exports.deleteOne = (Model, reqUser, newParams) => async (req, res) => {
+  if (req.params.username == "admin") {
+    return createError(res, 403, "Can not delete admin");
+  }
+  if (req.params.id !== req.user.id) {
+    return createError(res, 403, "You are not allow");
+  }
   try {
-    if (req.params.username == "admin") {
-      return createError(res, 403, "Can not delete admin");
-    }
     const doc = newParams
       ? await Model.findOneAndDelete({ username: req.params.username })
       : await Model.findByIdAndDelete(reqUser ? req.user.id : req.params.id);
@@ -20,7 +23,10 @@ exports.deleteOne = (Model, reqUser, newParams) => async (req, res, next) => {
   }
 };
 
-exports.updateOne = (Model, reqUser, newParams) => async (req, res, next) => {
+exports.updateOne = (Model, reqUser, newParams) => async (req, res) => {
+  if (req.params.id !== req.user.id) {
+    return createError(res, 403, "You are not allow");
+  }
   try {
     const doc = newParams
       ? await Model.findOneAndUpdate(
@@ -50,7 +56,7 @@ exports.updateOne = (Model, reqUser, newParams) => async (req, res, next) => {
   }
 };
 
-exports.createOne = (Model) => async (req, res, next) => {
+exports.createOne = (Model) => async (req, res) => {
   try {
     const doc = await Model.create(req.body);
 
@@ -60,7 +66,7 @@ exports.createOne = (Model) => async (req, res, next) => {
   }
 };
 
-exports.getOne = (Model, newParams) => async (req, res, next) => {
+exports.getOne = (Model, newParams) => async (req, res) => {
   try {
     const doc = newParams
       ? await Model.findOne({ username: req.params.username })

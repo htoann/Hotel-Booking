@@ -46,7 +46,7 @@ export const admin = (req, res, next) => {
         if (err || !user) {
           return createError(res, 404, err || "User not found");
         }
-        if (user.isAdmin == false) {
+        if (user.isAdmin === false) {
           return createError(res, 404, err || "You are not allowed");
         }
         delete user.password;
