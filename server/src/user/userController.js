@@ -67,27 +67,30 @@ export default {
     }
   },
 
-  resetPassword: async (req, res, next) => {
+  resetPassword: async (req, res) => {
+    const { password, newPassword } = req.body;
+
     try {
-      var passwordHash = "";
-      bcrypt.hash(req.body.newPassword, 10, null, function (err, hash) {
-        if (err) {
-          console.log(err);
+      if (password === newPassword) {
+        return createError(res, 400, "Password and new password are the same");
+      }
+
+      const isValidPassword = bcrypt.compareSync(password, req.user.password);
+      if (!isValidPassword) {
+        return createError(res, 400, "Please enter correct password");
+      }
+
+      const salt = bcrypt.genSaltSync(10);
+      const newPasswordHash = bcrypt.hashSync(newPassword, salt);
+
+      await User.findByIdAndUpdate(
+        { _id: req.user.id },
+        {
+          password: newPasswordHash,
         }
+      );
 
-        passwordHash = hash;
-        next();
-      });
-
-      console.log(passwordHash);
-
-      // const lmao = await User.findByIdAndUpdate(
-      //   { _id: req.user.id },
-      //   {
-      //     password: passwordHash,
-      //   }
-      // );
-      // res.json(lmao);
+      return createMessage(res, 200, "Update user successfully");
     } catch (err) {
       console.log(err);
       return createError(res, 404, err || "No document found with that id");
