@@ -15,12 +15,13 @@ router.get("/", admin, userController.getAllUsers);
 
 router.post("/wishlist", auth, userController.addWishlist);
 router.delete("/wishlist", auth, userController.deleteWishlist);
+router.put("/reset", auth, userController.resetPassword);
 
 router
   .route("/me")
   .get(auth, userController.getCurrentUser)
   .put(auth, userController.updateUser)
-  .delete(auth, userController.deleteUser);
+  .delete(auth, userController.deleteMe);
 
 router
   .route("/:id")

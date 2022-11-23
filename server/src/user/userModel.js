@@ -31,6 +31,13 @@ const UserSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
+    birthday: {
+      type: String,
+    },
+    gender: {
+      type: Boolean,
+      // True is male, false is female
+    },
     isAdmin: {
       type: Boolean,
       default: false,
