@@ -3,22 +3,17 @@ import { createError } from "../utils/createMessage";
 import token from "../utils/token";
 
 export const auth = (req, res, next) => {
-  let try_token;
   if (
-    req.header("Authorization") &&
-    req.header("Authorization").startsWith("Bearer")
-  ) {
-    try_token = req.header("Authorization").split(" ")[1];
-  }
-
-  if (!try_token) {
+    !req.header("Authorization") &&
+    !req.header("Authorization").startsWith("Bearer")
+  )
     return createError(
       res,
       401,
       "Please make sure your request has an Authorization header."
     );
-  }
 
+  let try_token = req.header("Authorization").split(" ")[1];
   token.verifyToken(try_token, (err, payload) => {
     if (err) return createError(res, 401, "User has been created.");
     User.findById(payload.sub).exec((err, user) => {
@@ -33,22 +28,17 @@ export const auth = (req, res, next) => {
 };
 
 export const admin = (req, res, next) => {
-  let try_token;
   if (
-    req.header("Authorization") &&
-    req.header("Authorization").startsWith("Bearer")
-  ) {
-    try_token = req.header("Authorization").split(" ")[1];
-  }
-
-  if (!try_token) {
+    !req.header("Authorization") &&
+    !req.header("Authorization").startsWith("Bearer")
+  )
     return createError(
       res,
       401,
       "Please make sure your request has an Authorization header."
     );
-  }
 
+  let try_token = req.header("Authorization").split(" ")[1];
   token.verifyToken(try_token, (err, payload) => {
     if (err) return createError(res, 401, "User has been created.");
     User.findById(payload.sub).exec((err, user) => {
