@@ -20,7 +20,7 @@ router.put("/reset", auth, userController.resetPassword);
 router
   .route("/me")
   .get(auth, userController.getCurrentUser)
-  .put(auth, userController.updateUser)
+  .put(auth, userController.updateMe)
   .delete(auth, userController.deleteMe);
 
 router
