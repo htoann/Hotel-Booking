@@ -12,7 +12,7 @@ interface Props {
 
 const HotelPreview = ({id, image, name, title, large}: Props) => {
     return (
-        <Link href={`hotel/${id}`}>
+        <Link href={`/hotel/${id}`}>
             <div className="w-full h-full flex flex-col gap-y-2 transition-all hover:scale-105 p-2">
                 <Image
                     className={

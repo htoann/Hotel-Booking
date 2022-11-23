@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      minLength: 6
     },
     username: {
       type: String,
@@ -30,6 +31,12 @@ const UserSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
+    },
+    birthday: {
+      type: String,
+    },
+    gender: {
+      type: Boolean, // True is male, false is female
     },
     isAdmin: {
       type: Boolean,
@@ -63,12 +70,12 @@ UserSchema.pre("save", function (next) {
 });
 
 // Make use of methods for comparedPassword
-UserSchema.methods.comparedPassword = function (candidatePassword, cb) {
+UserSchema.methods.comparedPassword = function (candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, function (err, good) {
     if (err) {
-      return cb(err);
+      return callback(err);
     }
-    cb(null, good);
+    callback(null, good);
   });
 };
 
