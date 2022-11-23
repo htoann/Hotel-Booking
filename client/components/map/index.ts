@@ -1,3 +1,4 @@
+import AddLocation from './AddLocation'
 import MapContainer from './MapContainer'
 
-export {MapContainer}
+export {MapContainer, AddLocation}
