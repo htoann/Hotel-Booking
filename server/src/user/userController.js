@@ -2,7 +2,7 @@ import { createError, createMessage } from "../utils/createMessage";
 import User from "./userModel";
 import bcrypt from "bcrypt-nodejs";
 import Hotel from "../hotel/hotelModel";
-import Room from "../room/roomModel";
+// import Room from "../room/roomModel";
 
 const base = require("../utils/baseController");
 
@@ -87,7 +87,6 @@ export default {
   },
 
   createHotel: async (req, res) => {
-    console.log(req);
     try {
       const hotel = await Hotel.create({ user: req.user, ...req.body });
       res.status(201).json(hotel);
@@ -97,21 +96,21 @@ export default {
   },
 
   createRoom: async (req, res, next) => {
-    const newRoom = new Room(req.body);
+    // const newRoom = new Room(req.body);
 
     try {
-      const savedRoom = await newRoom.save();
-      try {
-        await Hotel.findOneAndUpdate(
-          { user: req.user.id },
-          {
-            $push: { rooms: savedRoom._id },
-          }
-        );
-      } catch (err) {
-        return createError(res, 404, err || "No room found with that id");
-      }
-      res.status(200).json(savedRoom);
+      // const savedRoom = await newRoom.save();
+      // try {
+      //   await Hotel.findOneAndUpdate(
+      //     { user: req.user.id },
+      //     {
+      //       $push: { rooms: savedRoom._id },
+      //     }
+      //   );
+      // } catch (err) {
+      //   return createError(res, 404, err || "No document found with that id");
+      // }
+      // res.status(200).json(savedRoom);
     } catch (err) {
       next(err);
     }
