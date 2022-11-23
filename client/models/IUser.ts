@@ -1,8 +1,11 @@
 export interface IUser {
-  email: string;
-  username: string;
-  createdAt: Date;
-  updatedAt: Date;
-  wishlist: Array<string>;
-  __v: number;
+    _id: string;
+    name: string;
+    email: string;
+    username: string;
+    isAdmin: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    __v: number;
+    wishlist: string[];
 }

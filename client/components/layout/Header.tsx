@@ -38,7 +38,7 @@ const Header = () => {
         {
             icon: <AiOutlineUser/>,
             name: 'Manage account',
-            link: '/'
+            link: '/user'
         },
         {
             icon: <RiSuitcaseLine/>,
@@ -53,7 +53,7 @@ const Header = () => {
         {
             icon: <AiOutlineHeart/>,
             name: 'Saved',
-            link: '/wishlist'
+            link: '/user/wishlist'
         }
     ]
     const menu = [
