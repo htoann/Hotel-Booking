@@ -96,7 +96,7 @@ const Header = () => {
                     <span className="self-center text-3xl font-semibold whitespace-nowrap text-white">Booking</span>
                 </Link>
                 <div className="flex flex-end items-center gap-4">
-                    <Link href="/">
+                    <Link href="/user/join">
                         <Button text="List your property" textColor="text-white" bgColor="bg-transparent"/>
                     </Link>
                     {user

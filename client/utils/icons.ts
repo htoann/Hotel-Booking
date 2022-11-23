@@ -16,6 +16,7 @@ import {
 } from 'react-icons/md'
 import {CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
+import {FiTrash} from 'react-icons/fi'
 import {BsFillShareFill, BsFlower1, BsShieldLock} from 'react-icons/bs'
 import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
 
@@ -58,5 +59,6 @@ export {
     BsFillShareFill,
 
     RiUserSettingsLine,
-    BsShieldLock
+    BsShieldLock,
+    FiTrash
 }
