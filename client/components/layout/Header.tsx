@@ -113,7 +113,7 @@ const Header = () => {
                                     </div>
                                     <span>Your account</span>
                                 </button>
-                                <ul className="w-max absolute z-50 right-0 hidden text-primary pt-1 group-hover:block">
+                                <ul className="w-max absolute z-50 right-0 hidden text-primary pt-2 group-hover:block">
                                     {accountMenu.map(item =>
                                         <li key={item.name}
                                             className="bg-white hover:bg-gray-300 block whitespace-no-wrap">
