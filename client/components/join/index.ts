@@ -1,6 +1,6 @@
-import ImagesInput from './ImagesInput'
-import Information from './Information'
-import MapInput from './MapInput'
-import Type from './Type'
+import ImagesForm from './ImagesForm'
+import HotelInfoForm from './HotelInfoForm'
+import AddressForm from './AddressForm'
+import TypeForm from './TypeForm'
 
-export {Type, Information, MapInput, ImagesInput}
+export {TypeForm, HotelInfoForm, AddressForm, ImagesForm}

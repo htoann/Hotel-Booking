@@ -3,11 +3,12 @@ import {useControl} from 'react-map-gl'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import {mapboxAccessToken} from '../../utils/config'
 import React from 'react'
-import {LocationState} from '../join/MapInput'
+import {AddressFormProps} from '../join/AddressForm'
 
-const Geocoder = ({setLocation}: {
-    setLocation: React.Dispatch<React.SetStateAction<LocationState>>
-}) => {
+const Geocoder = ({
+    address,
+    updateFields
+}: AddressFormProps) => {
     const ctrl = new MapBoxGeocoder({
         accessToken: mapboxAccessToken,
         marker: false,
@@ -16,8 +17,13 @@ const Geocoder = ({setLocation}: {
     useControl(() => ctrl)
     ctrl.on('result', (e) => {
         const coords = e.result.geometry.coordinates
-        console.log(e)
-        setLocation({lng: coords[0], lat: coords[1]})
+        updateFields({
+            address: {
+                ...address,
+                lng: coords[0],
+                lat: coords[1]
+            }
+        })
     })
     return null
 }

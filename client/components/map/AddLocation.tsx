@@ -7,13 +7,13 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import React, {useEffect, useRef, useState} from 'react'
 import Geocoder from './Geocoder'
 import {mapboxAccessToken} from '../../utils/config'
-import {LocationState} from '../join/MapInput'
+import {AddressFormProps} from '../join/AddressForm'
 
 const AddLocation = ({
-    location,
-    setLocation
-}: { location: LocationState, setLocation: React.Dispatch<React.SetStateAction<LocationState>> }) => {
-    const {lat, lng} = location
+    address,
+    updateFields
+}: AddressFormProps) => {
+    const {lat, lng} = address
 
     return (
         <div>
@@ -22,7 +22,7 @@ const AddLocation = ({
                 initialViewState={{
                     longitude: lng,
                     latitude: lat,
-                    zoom: 6
+                    zoom: 10
                 }}
                 style={{height: '50vh'}}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
@@ -32,9 +32,12 @@ const AddLocation = ({
                     longitude={lng}
                     draggable
                     onDragEnd={(e) =>
-                        setLocation({
-                            lng: e.lngLat.lng,
-                            lat: e.lngLat.lat
+                        updateFields({
+                            address: {
+                                ...address,
+                                lng: e.lngLat.lng,
+                                lat: e.lngLat.lat
+                            }
                         })
                     }
                 />}
@@ -43,14 +46,17 @@ const AddLocation = ({
                     position="top-left"
                     trackUserLocation
                     onGeolocate={(e) => {
-                        setLocation({
-                            lng: e.coords.longitude,
-                            lat: e.coords.latitude
+                        updateFields({
+                            address: {
+                                ...address,
+                                lng: e.coords.longitude,
+                                lat: e.coords.latitude
+                            }
                         })
                     }
                     }
                 />
-                <Geocoder setLocation={setLocation}/>
+                <Geocoder address={address} updateFields={updateFields}/>
             </ReactMapGL>
         </div>
     )

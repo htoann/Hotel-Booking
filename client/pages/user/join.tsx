@@ -1,82 +1,97 @@
-import React, {useState} from 'react'
-import {ImagesInput, Information, MapInput, Type} from '../../components/join'
+import React, {FormEvent, useEffect, useState} from 'react'
 import {Button} from '../../components/core'
+import {useMultistepForm} from '../../hooks/useMultiStepForm'
+import {AddressForm, HotelInfoForm, ImagesForm, TypeForm} from '../../components/join'
+import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
 
-const stepPages = [
-    <Type key={0}/>, <Information key={1}/>, <MapInput key={2}/>, <ImagesInput key={3}/>
-]
-
-interface stepsInterface {
-    isValid: boolean | undefined;
-    label: string;
+export interface HotelForm {
+    title: string;
+    type: string;
+    desc: string;
+    descShort: string;
+    city: string;
+    address: {
+        name: string;
+        lat?: number;
+        lng?: number;
+    };
+    distance: string;
+    photos: string[];
+    cheapestPrice: number;
+    featured: boolean;
+    name: string;
 }
 
 const Join = () => {
-    const [step, setStep] = useState<number>(0)
-    const [formState, setFormState] = React.useState<Object>({})
-    const [steps, setSteps] = React.useState<Array<stepsInterface>>([
-        {label: 'Type', isValid: undefined},
-        {label: 'Information', isValid: undefined},
-        {label: 'MapInput', isValid: undefined},
-        {label: 'ImagesInput', isValid: undefined}
-    ])
-
-    const currentPage = stepPages[step]
-    const lastStepIndex = steps.length - 1
-    const isLastStep = lastStepIndex === step
-
-    const onStepSubmit = React.useCallback(
-        (event: any) => {
-            // const {isValid, values} = event
-
-            // const currentSteps = steps.map(
-            //     (currentStep: stepsInterface, index: number) => ({
-            //         ...currentStep,
-            //         isValid: index === step ? isValid : currentStep.isValid
-            //     })
-            // )
-            //
-            // setSteps(currentSteps)
-            //
-            // if (!isValid) {
-            //     return
-            // }
-
-            setStep(() => Math.min(step + 1, lastStepIndex))
-            // setFormState(values)
-
-            if (isLastStep) {
-                alert(JSON.stringify('oke'))
-            }
+    const INITIAL_DATA: HotelForm = {
+        title: '',
+        type: '',
+        desc: '',
+        descShort: '',
+        city: '',
+        address: {
+            name: ''
         },
-        [steps, isLastStep, step, lastStepIndex]
-    )
+        distance: '',
+        photos: [],
+        cheapestPrice: 0,
+        featured: false,
+        name: ''
+    }
+    const router = useRouter()
+    const [data, setData] = useState(INITIAL_DATA)
 
-    const onPrevClick = React.useCallback(
-        (event: any) => {
-            event.preventDefault()
-            setStep(() => Math.max(step - 1, 0))
-        },
-        [step, setStep]
-    )
+    function updateFields (fields: Partial<HotelForm>) {
+        setData(prev => {
+            return {...prev, ...fields}
+        })
+    }
+
+    const {steps, currentStepIndex, step, isFirstStep, isLastStep, back, next} =
+        useMultistepForm([
+            <TypeForm key={0} {...data} updateFields={updateFields}/>,
+            <HotelInfoForm key={1} {...data} updateFields={updateFields}/>,
+            <AddressForm key={2} {...data} updateFields={updateFields}/>,
+            <ImagesForm key={3}{...data} updateFields={updateFields}/>
+        ])
+
+    function onSubmit (e: FormEvent) {
+        e.preventDefault()
+        if (!isLastStep) return next()
+        console.log(data)
+        toast.success('Join to success')
+        router.push('/')
+    }
+
+    // useEffect(() => {
+    //     console.log(data)
+    // }, [data])
+
     return (
-        <div className="container mx-auto">
-            {currentPage}
-            <div className="flex justify-around gap-x-2.5">
-                {
-                    step !== 0 ? (
-                        <div onClick={onPrevClick}>
-                            <Button text="Previous" textColor="text-white" bgColor="bg-primary"/>
-                        </div>
-
-                    ) : <div></div>
-                }
-                <div
-                    className=""
-                    onClick={onStepSubmit}>
-                    <Button text={isLastStep ? 'Submit' : 'Next'} textColor="text-white" bgColor="bg-primary"/>
+        <div
+            className="container mx-auto relative"
+        >
+            <form onSubmit={onSubmit}>
+                <div style={{position: 'absolute', top: '.5rem', right: '.5rem'}}>
+                    {currentStepIndex + 1} / {steps.length}
                 </div>
-            </div>
+                {step}
+                <div
+                    className="mt-2.5 flex justify-end gap-2.5"
+
+                >
+                    {!isFirstStep && (
+                        <div onClick={back}>
+                            <Button text="Back" textColor="text-white" bgColor="bg-primary"/>
+                        </div>
+                    )}
+                    <button
+                        type="submit">
+                        <Button text={isLastStep ? 'Submit' : 'Next'} textColor="text-white" bgColor="bg-primary"/>
+                    </button>
+                </div>
+            </form>
         </div>
     )
 }

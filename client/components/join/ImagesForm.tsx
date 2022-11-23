@@ -1,9 +1,23 @@
+// Wait API upload image
+
 import React, {useState} from 'react'
 import {FiTrash} from '../../utils/icons'
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
-const ImagesInput = () => {
+type ImagesData = {
+    photos: string[]
+}
+export type ImagesFormProps = ImagesData & {
+    updateFields: (fields: Partial<ImagesData>) => void
+}
+
+const ImagesForm = (
+    {
+        photos,
+        updateFields
+    }: ImagesFormProps
+) => {
     const [files, setFiles] = useState<any>({})
     const handleNewFileUpload = (e: any) => {
         const {files: newFiles} = e.target
@@ -123,4 +137,4 @@ const ImagesInput = () => {
     )
 }
 
-export default ImagesInput
+export default ImagesForm

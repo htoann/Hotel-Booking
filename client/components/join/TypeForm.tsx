@@ -1,7 +1,20 @@
 import {useEffect, useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 
-const plans = [
+type TypeData = {
+    type: string
+}
+
+type TypeFormProps = TypeData & {
+    updateFields: (fields: Partial<TypeData>) => void
+}
+
+interface Type {
+    type?: string
+    description?: string
+}
+
+const plans: Type[] = [
     {
         type: 'resort',
         description: 'Furnished and self-catering accommodations where guests rent the entire place.'
@@ -20,11 +33,16 @@ const plans = [
     }
 ]
 
-export default function Type () {
-    const [selected, setSelected] = useState({})
+export default function TypeForm ({
+    type,
+    updateFields
+}: TypeFormProps) {
+    const [selected, setSelected] = useState<Type>({type: type})
+
     useEffect(() => {
-        console.log(selected)
+        updateFields({type: selected.type})
     }, [selected])
+
     return (
         <div>
             <h1 className="font-bold text-2xl mt-2.5">Choose type</h1>
@@ -39,14 +57,12 @@ export default function Type () {
                                     value={plan}
                                     className={({active, checked}) =>
                                         `${
-                                            active
+                                            active || selected.type === plan.type
                                                 ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
                                                 : ''
                                         }
-                  ${
-                                checked ? 'bg-lightPrimary text-white' : 'bg-white'
-                                }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                                        ${checked || selected.type === plan.type ? 'bg-lightPrimary text-white' : 'bg-white'}
+                                        relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                     }
                                 >
                                     {({active, checked}) => (
@@ -57,7 +73,7 @@ export default function Type () {
                                                         <RadioGroup.Label
                                                             as="p"
                                                             className={`font-medium first-letter:uppercase  ${
-                                                                checked ? 'text-white' : 'text-gray-900'
+                                                                checked || selected.type === plan.type ? 'text-white' : 'text-gray-900'
                                                             }`}
                                                         >
                                                             {plan.type}
@@ -65,7 +81,7 @@ export default function Type () {
                                                         <RadioGroup.Description
                                                             as="span"
                                                             className={`inline ${
-                                                                checked ? 'text-sky-100' : 'text-gray-500'
+                                                                checked || selected.type === plan.type ? 'text-sky-100' : 'text-gray-500'
                                                             }`}
                                                         >
                                                             <span>
@@ -74,11 +90,11 @@ export default function Type () {
                                                         </RadioGroup.Description>
                                                     </div>
                                                 </div>
-                                                {checked && (
+                                                {checked || selected.type === plan.type ? (
                                                     <div className="shrink-0 text-white">
                                                         <CheckIcon className="h-6 w-6"/>
                                                     </div>
-                                                )}
+                                                ) : <></>}
                                             </div>
                                         </>
                                     )}
