@@ -5,8 +5,6 @@ const router = require("express").Router();
 
 router.get("/", admin, userController.getAllUsers);
 
-// router.get("/me", auth, userController.getCurrentUser);
-
 // router
 //   .route("/:username", auth)
 //   .get(userController.getUser)
@@ -15,7 +13,12 @@ router.get("/", admin, userController.getAllUsers);
 
 router.post("/wishlist", auth, userController.addWishlist);
 router.delete("/wishlist", auth, userController.deleteWishlist);
+
 router.put("/reset", auth, userController.resetPassword);
+
+router.post("/hotel/create", auth, userController.createHotel);
+router.post("/room/create", auth, userController.createRoom);
+router.delete("/hotel/:id", auth, userController.deleteHotel);
 
 router
   .route("/me")
