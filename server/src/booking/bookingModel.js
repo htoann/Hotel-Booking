@@ -28,8 +28,8 @@ BookingSchema.pre("save", function (next) {
     newCheckOut
   ) => {
     if (
-      (newCheckIn >= existingCheckIn && newCheckIn < existingCheckOut) ||
-      (existingCheckIn >= newCheckIn && existingCheckIn < newCheckOut)
+      (newCheckIn >= existingCheckIn && newCheckIn <= existingCheckOut) ||
+      (existingCheckIn >= newCheckIn && existingCheckIn <= newCheckOut)
     ) {
       return next(
         `Room was booked from ${moment(existingCheckIn).format(
