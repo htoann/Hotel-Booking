@@ -32,6 +32,14 @@ export const userApi = createApi({
                 }
             }
         }),
+        deleteUser: builder.mutation({
+            query (id) {
+                return {
+                    url: `/users/${id}`,
+                    method: 'DELETE'
+                }
+            }
+        }),
         addWishList: builder.mutation({
             query: (body: {
                 id: string;
@@ -39,7 +47,6 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'post', body}
             }
         }),
-
         deleteWishList: builder.mutation({
             query: (body: {
                 id: string;
@@ -50,4 +57,10 @@ export const userApi = createApi({
     })
 })
 
-export const {useGetUserQuery, useUpdateUserMutation, useAddWishListMutation, useDeleteWishListMutation} = userApi
+export const {
+    useGetUserQuery,
+    useUpdateUserMutation,
+    useDeleteUserMutation,
+    useAddWishListMutation,
+    useDeleteWishListMutation
+} = userApi

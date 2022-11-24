@@ -1,6 +1,30 @@
 import React from 'react'
+import {useDeleteUserMutation} from '../../services/userApi'
+import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import {logout, setUser} from '../../features/authSlice'
+import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
 
 const Security = () => {
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+    const {user, token} = useAppSelector((state) => state.persistedReducer.auth)
+
+    const [deleteUser, {isLoading: isDeleting}] = useDeleteUserMutation()
+
+    const handleDeleteMyAccount = () => {
+        deleteUser(user?._id as string).unwrap()
+            .then((result) => {
+                console.log(result)
+                toast.success(result.message || 'Delete success')
+                dispatch(logout())
+                router.push('/')
+            })
+            .catch((error) => {
+                console.log(error)
+                toast.error(error.data.message || 'Delete fail. Something went wrong')
+            })
+    }
     return (
         <div>
             <div>
@@ -74,8 +98,12 @@ const Security = () => {
                                     We&apos;ll use it to fix problems and improve our services.</span>
                                 <input type="text" className=" mb-2.5"/>
                             </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
-                                Delete account
+                            <button
+                                className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md"
+                                onClick={handleDeleteMyAccount}
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? 'Deleting...' : 'Delete account'}
                             </button>
                         </nav>
                     </details>
