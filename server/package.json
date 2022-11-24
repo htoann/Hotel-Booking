@@ -20,7 +20,8 @@
     "loglevel-colored-level-prefix": "^1.0.0",
     "moment": "^2.29.4",
     "mongoose": "^6.6.2",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

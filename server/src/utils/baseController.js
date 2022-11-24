@@ -6,7 +6,7 @@ exports.deleteOne = (Model, reqUser, newParams) => async (req, res) => {
     return createError(res, 403, "Can not delete admin");
   }
   if (req.params.id !== req.user.id) {
-    return createError(res, 403, "You are not allow");
+    return createError(res, 403, "You are not allowed");
   }
   try {
     const doc = newParams
@@ -25,7 +25,10 @@ exports.deleteOne = (Model, reqUser, newParams) => async (req, res) => {
 
 exports.updateOne = (Model, reqUser, newParams) => async (req, res) => {
   if (req.params.id !== req.user.id) {
-    return createError(res, 403, "You are not allow");
+    return createError(res, 403, "You are not allowed");
+  }
+  if (req.body.isAdmin) {
+    return createError(res, 403, "You are not allowed to update roles");
   }
   try {
     const doc = newParams

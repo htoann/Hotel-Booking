@@ -79,7 +79,7 @@ export default {
         }
       );
 
-      return createMessage(res, 200, "Update user successfully");
+      return createMessage(res, 200, "Change password successfully");
     } catch (err) {
       console.log(err);
       return createError(res, 404, err || "Something went wrong");
