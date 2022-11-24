@@ -1,4 +1,4 @@
-import { admin, auth } from "../api/middlewares";
+import { auth } from "../api/middlewares";
 import bookingController from "./bookingController";
 
 const router = require("express").Router();
