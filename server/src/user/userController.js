@@ -1,8 +1,6 @@
 import { createError, createMessage } from "../utils/createMessage";
 import User from "./userModel";
 import bcrypt from "bcrypt-nodejs";
-import Hotel from "../hotel/hotelModel";
-// import Room from "../room/roomModel";
 
 const base = require("../utils/baseController");
 
@@ -11,6 +9,7 @@ export default {
     if (req.params.id !== req.user.id) {
       return createError(res, 403, "You are not allow");
     }
+
     try {
       const user = await User.findById(req.params.id);
 
@@ -24,13 +23,54 @@ export default {
 
   getAllUsers: base.getAll(User),
 
-  updateUser: base.updateOne(User),
+  updateUser: async (req, res) => {
+    if (req.body.isAdmin) {
+      return createError(res, 404, "You can't update the role");
+    }
+    if (req.params.id !== req.user.id) {
+      return createError(res, 403, "You are not allow");
+    }
 
-  deleteUser: base.deleteOne(User),
+    try {
+      const doc = await User.findByIdAndUpdate(req.user.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+
+      if (!doc) {
+        return createError(res, 404, "No document found with that id");
+      }
+
+      res.status(200).json(doc);
+    } catch (error) {
+      return createError(res, 404, error || "No document found with that id");
+    }
+  },
+
+  deleteUser: async (req, res) => {
+    if (req.body.isAdmin) {
+      return createError(res, 404, "You can't update the role");
+    }
+    if (req.params.id !== req.user.id) {
+      return createError(res, 403, "You are not allow");
+    }
+
+    try {
+      const doc = await User.findByIdAndDelete(req.params.id);
+
+      if (!doc) {
+        return createError(res, 404, "No document found with that id");
+      }
+
+      return createMessage(res, 200, "Deleted successfully");
+    } catch (error) {
+      return createError(res, 404, error || "No document found with that id");
+    }
+  },
 
   addWishlist: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user.id, {
         $addToSet: {
           wishlist: req.body.id,
         },
@@ -44,12 +84,9 @@ export default {
 
   deleteWishlist: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(
-        { _id: req.user.id },
-        {
-          $pull: { wishlist: req.body.id },
-        }
-      );
+      await User.findByIdAndUpdate(req.user.id, {
+        $pull: { wishlist: req.body.id },
+      });
       return createMessage(res, 200, "Removed from wish list");
     } catch (err) {
       return createError(res, 404, err || "No user found with that id");
@@ -72,61 +109,14 @@ export default {
       const salt = bcrypt.genSaltSync(10);
       const newPasswordHash = bcrypt.hashSync(newPassword, salt);
 
-      await User.findByIdAndUpdate(
-        { _id: req.user.id },
-        {
-          password: newPasswordHash,
-        }
-      );
+      await User.findByIdAndUpdate(req.user.id, {
+        password: newPasswordHash,
+      });
 
       return createMessage(res, 200, "Change password successfully");
     } catch (err) {
       console.log(err);
       return createError(res, 404, err || "Something went wrong");
-    }
-  },
-
-  createHotel: async (req, res) => {
-    try {
-      const hotel = await Hotel.create({ user: req.user, ...req.body });
-      res.status(201).json(hotel);
-    } catch (error) {
-      return createError(res, 404, error || "Something went wrong");
-    }
-  },
-
-  createRoom: async (req, res, next) => {
-    // const newRoom = new Room(req.body);
-
-    try {
-      // const savedRoom = await newRoom.save();
-      // try {
-      //   await Hotel.findOneAndUpdate(
-      //     { user: req.user.id },
-      //     {
-      //       $push: { rooms: savedRoom._id },
-      //     }
-      //   );
-      // } catch (err) {
-      //   return createError(res, 404, err || "No document found with that id");
-      // }
-      // res.status(200).json(savedRoom);
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  deleteHotel: async (req, res) => {
-    try {
-      const doc = await Hotel.findOneAndDelete({ user: req.user.id });
-
-      if (!doc) {
-        return createError(res, 404, "You are not allow");
-      }
-
-      return createMessage(res, 200, "Deleted successfully");
-    } catch (error) {
-      return createError(res, 404, error || "No hotel found with that id");
     }
   },
 };

@@ -10,10 +10,6 @@ router.delete("/wishlist", auth, userController.deleteWishlist);
 
 router.put("/reset", auth, userController.resetPassword);
 
-router.post("/hotel/create", auth, userController.createHotel);
-router.post("/room/create", auth, userController.createRoom);
-router.delete("/hotel/:id", auth, userController.deleteHotel);
-
 router
   .route("/:id")
   .get(auth, userController.getUser)
