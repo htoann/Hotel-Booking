@@ -70,7 +70,7 @@ const Join = () => {
 
     return (
         <div
-            className="container mx-auto relative"
+            className="container mx-auto relative p-2.5"
         >
             <form onSubmit={onSubmit}>
                 <div style={{position: 'absolute', top: '.5rem', right: '.5rem'}}>

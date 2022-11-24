@@ -32,11 +32,12 @@ const AddressForm = ({
             })
     }
     return (
-        <div className="flex gap-x-10">
-            <form className="w-1/3 my-2.5 flex flex-col gap-x-2.5"
+        <div className="mt-5 flex gap-x-10">
+            <form className="w-1/3 flex flex-col gap-x-2.5"
             >
                 <label htmlFor="address">Address</label>
                 <input
+                    className="rounded"
                     type="text"
                     id="address"
                     placeholder={`Your hotels`}
