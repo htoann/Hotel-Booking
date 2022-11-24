@@ -32,6 +32,15 @@ export const userApi = createApi({
                 }
             }
         }),
+        changePassword: builder.mutation<{ message: string }, any>({
+            query (body) {
+                return {
+                    url: `/users/reset`,
+                    method: 'PUT',
+                    body
+                }
+            }
+        }),
         deleteUser: builder.mutation({
             query (id) {
                 return {
@@ -60,6 +69,7 @@ export const userApi = createApi({
 export const {
     useGetUserQuery,
     useUpdateUserMutation,
+    useChangePasswordMutation,
     useDeleteUserMutation,
     useAddWishListMutation,
     useDeleteWishListMutation
