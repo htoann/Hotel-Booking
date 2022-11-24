@@ -28,8 +28,9 @@ export default {
           return result;
         }
       );
+
       const url = result.secure_url;
-      return res.json({ url });
+      return res.json({ url: url });
     } catch (err) {
       console.log(err);
       return createError(res, 500, err);
@@ -46,7 +47,7 @@ export default {
         urls.push(newPath);
       }
 
-      return res.json({ photos: urls.map((url) => url) });
+      return res.json({ url: urls });
     } catch (err) {
       console.log(err);
       return createError(res, 500, err);
@@ -63,7 +64,7 @@ const removeTmp = (path) => {
 const cloudinaryImageUploadMethod = async (file, config) => {
   return new Promise((resolve) => {
     cloudinary.uploader.upload(file.tempFilePath, config, (err, res) => {
-      if (err) return res.status(500).send("upload image error");
+      if (err) return createError(res, 500, "Upload image error");
       resolve(res.secure_url);
     });
   });

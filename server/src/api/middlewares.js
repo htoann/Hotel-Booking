@@ -62,19 +62,18 @@ export const uploadAvatar = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0)
       return createError(res, 400, "No files were uploaded.");
+    const file = req.files.photos;
+    if (file.length > 0) {
+      return createError(res, 400, "Please select only 1 image");
+    }
+    if (file.size > 1024 * 1024) {
+      removeTmp(file.tempFilePath);
+      return createError(res, 400, "Size too large.");
+    } // 1mb
 
-    if (req.files.photos.length > 1) {
-      req.files.map((file) => {
-        if (file.size > 1024 * 1024) {
-          removeTmp(file.tempFilePath);
-          return createError(res, 400, "Size too large.");
-        } // 1mb
-
-        if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
-          removeTmp(file.tempFilePath);
-          return createError(res, 400, "File format is incorrect.");
-        }
-      });
+    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+      removeTmp(file.tempFilePath);
+      return createError(res, 400, "File format is incorrect.");
     }
     next();
   } catch (err) {
@@ -87,9 +86,10 @@ export const uploadPhotos = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0)
       return createError(res, 400, "No files were uploaded.");
+    const files = req.files.photos;
 
-    if (req.files.photos.length > 1) {
-      req.files.photos.map((file) => {
+    if (files.length > 1) {
+      files.map((file) => {
         if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
           return createError(res, 400, "File format is incorrect.");
         }
@@ -97,7 +97,6 @@ export const uploadPhotos = async (req, res, next) => {
     } else {
       return createError(res, 400, "Please select at least 2 photos");
     }
-
     next();
   } catch (err) {
     console.log(err);

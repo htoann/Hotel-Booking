@@ -6,11 +6,9 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
-import multer from "multer";
 
 import fileUpload from "express-fileupload";
 
-const forms = multer();
 const app = express();
 
 app.use(
@@ -32,7 +30,6 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(forms.array());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 initDatabase();
