@@ -23,8 +23,7 @@ const Security = () => {
                 router.push('/')
             })
             .catch((error) => {
-                console.log(error)
-                toast.error(error.data.message || 'Delete fail. Something went wrong')
+                toast.error(error.data?.message || 'Something went wrong')
             })
     }
 
@@ -55,7 +54,7 @@ const Security = () => {
             setValue('newPassword', '')
             passwordRef.current?.click()
         } catch (error: any) {
-            toast.error(error.data.message || 'Something went wrong')
+            toast.error(error.data?.message || 'Something went wrong')
         }
     }
     )
