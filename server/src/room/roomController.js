@@ -26,7 +26,7 @@ export default {
 
   updateRoom: base.updateOne(Room),
 
-  deleteRoom: async (req, res, next) => {
+  deleteRoom: async (req, res) => {
     const hotelId = req.params.hotelid;
     try {
       await Room.findByIdAndDelete(req.params.id);

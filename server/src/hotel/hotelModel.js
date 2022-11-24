@@ -59,6 +59,7 @@ const HotelSchema = new mongoose.Schema(
     rooms: {
       type: [String],
     },
+    user: { type: mongoose.Schema.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
