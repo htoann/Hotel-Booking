@@ -6,10 +6,10 @@ Find your next stay
 </p>
 
 <p align="center">
-   <a href="https://github.com/amazingandyyy/mern/blob/master/LICENSE">
+   <a href="https://github.com/htoann/Booking-Hotel/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-green.svg" />
    </a>
-   <a href="https://circleci.com/gh/amazingandyyy/mern">
+   <a href="https://github.com/htoann/Booking-Hotel">
       <img src="https://circleci.com/gh/amazingandyyy/mern.svg?style=svg" />
    </a>
 </p>
@@ -18,7 +18,7 @@ Find your next stay
 
 ## Clone or download
 ```terminal
-$ git clone https://github.com/amazingandyyy/mern.git
+$ git clone https://github.com/htoann/Booking-Hotel.git
 $ yarn # or npm i
 ```
 
@@ -43,7 +43,7 @@ client/
 
 Notice, you need client and server runs concurrently in different terminal session, in order to make them talk to each other
 
-## Client-side usage(PORT: 3000)
+## Client side usage (PORT: 3000)
 ```terminal
 $ cd client          // go to client folder
 $ yarn # or npm i    // npm install packages
@@ -53,7 +53,7 @@ $ npm run build // this will compile the react code using webpack and generate a
 $ npm run start // this will run the files in docs, this behavior is exactly the same how gh-pages will run your static site
 ```
 
-## Server-side usage(PORT: 8000)
+## Server side usage (PORT: 8000)
 
 ### Prepare your secret
 
@@ -63,8 +63,7 @@ run the script at the first level:
 
 ```terminal
 // in the root level
-$ cd server
-$ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
+$ echo "JWT_SECRET = YOUR_JWT_SECRET" >> .env
 ```
 
 ### Start
@@ -91,7 +90,7 @@ $ npm run deploy:heroku
 
 ### After creating heroku
 
-remember to update the file of [client/webpack.prod.js](https://github.com/amazingandyyy/mern/blob/master/client/webpack.prod.js)
+remember to update the file of client/webpack.prod.js
 ```javascript
  'API_URI': JSON.stringify('https://your-super-amazing-heroku-app.herokuapp.com')
 ```
