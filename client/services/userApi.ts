@@ -19,10 +19,36 @@ export const userApi = createApi({
     }),
 
     endpoints: (builder) => ({
-        getUser: builder.query<IUser, void>({
-            query: () => '/users/me'
+        getUser: builder.query<IUser, string>({
+            query: (id) => `/users/${id}`
         }),
-
+        updateUser: builder.mutation<IUser, Partial<IUser>>({
+            query (data) {
+                const {_id, ...body} = data
+                return {
+                    url: `/users/${_id}`,
+                    method: 'PUT',
+                    body
+                }
+            }
+        }),
+        changePassword: builder.mutation<{ message: string }, any>({
+            query (body) {
+                return {
+                    url: `/users/reset`,
+                    method: 'PUT',
+                    body
+                }
+            }
+        }),
+        deleteUser: builder.mutation({
+            query (id) {
+                return {
+                    url: `/users/${id}`,
+                    method: 'DELETE'
+                }
+            }
+        }),
         addWishList: builder.mutation({
             query: (body: {
                 id: string;
@@ -30,7 +56,6 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'post', body}
             }
         }),
-
         deleteWishList: builder.mutation({
             query: (body: {
                 id: string;
@@ -41,4 +66,11 @@ export const userApi = createApi({
     })
 })
 
-export const {useGetUserQuery, useAddWishListMutation, useDeleteWishListMutation} = userApi
+export const {
+    useGetUserQuery,
+    useUpdateUserMutation,
+    useChangePasswordMutation,
+    useDeleteUserMutation,
+    useAddWishListMutation,
+    useDeleteWishListMutation
+} = userApi
