@@ -1,131 +1,135 @@
-import React from 'react'
-import {useGetUserQuery} from '../../services/userApi'
+import React, {useEffect, useRef, useState} from 'react'
+import {useGetUserQuery, useUpdateUserMutation} from '../../services/userApi'
 import {Loader} from '../layout'
 import ErrorPage from 'next/error'
+import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import {useForm} from 'react-hook-form'
+import {setUser} from '../../features/authSlice'
+import {setHotels} from '../../features/hotelSlice'
+import {Button} from '../core'
+import {CiEdit} from '../../utils/icons'
+import {toast} from 'react-toastify'
+
+type FormValues = {
+    name: string;
+    email: string;
+    phone: string;
+};
 
 const PersonalDetails = () => {
-    const {data: user, isLoading, error} = useGetUserQuery()
-    if (isLoading) {
+    const {user, token} = useAppSelector((state) => state.persistedReducer.auth)
+    const {data: userData, isLoading: getLoading, isSuccess, error} = useGetUserQuery(user?._id as string)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(
+                setUser({user: userData, token})
+            )
+        }
+    }, [dispatch, userData, isSuccess])
+
+    const [updateUser, {isLoading: isUpdating}] = useUpdateUserMutation()
+
+    const {register, handleSubmit, watch} = useForm<FormValues>({
+        defaultValues: {
+            name: user?.name,
+            email: user?.email,
+            phone: user?.phone
+        }
+    })
+
+    const onSubmit = handleSubmit(async (dataForm) => {
+        if (user) {
+            try {
+                const result = await updateUser({_id: user._id, ...dataForm}).unwrap()
+                dispatch(setUser(
+                    {
+                        user: result,
+                        token
+                    }
+                ))
+                toast.success('Update success')
+            } catch (error: any) {
+                toast.error(`Something went wrong`)
+            }
+        }
+    })
+
+    // Check is change to enable button Submit
+    const [isChange, setIsChange] = useState<boolean>(false)
+    useEffect(() => {
+        if (watch().name !== user?.name || watch().email !== user?.email || watch().phone !== user?.phone) {
+            setIsChange(true)
+        } else {
+            setIsChange(false)
+        }
+    }, [watch(), user])
+
+    if (getLoading) {
         return (
-            <div className="w-screen mt-20 flex items-center justify-center">
+            <div className="w-full mt-20 flex items-center justify-center">
                 <Loader/>
             </div>
         )
     }
-    if (error) {
-        // @ts-ignore
-        const status = error.status || 404
-        return <ErrorPage statusCode={status}/>
-    }
+
     return (
         <div>
             <div>
                 <h1 className="font-bold text-2xl">Personal details</h1>
                 <h2>Update your info and find out how it&apos;s used.</h2>
             </div>
-            <div className="mt-2.5 flex flex-col text-sm">
-                <div className="border-y px-2.5 py-4 flex w-full ">
+            <div>
+                <div className="border-y px-2.5 py-4 flex w-full items-center ">
                     <span className="w-1/4 font-medium">Display name</span>
-                    <details className="group select-none w-full">
-                        <summary
-                            className="group flex items-center rounded-lg px-4 py-2 "
-                        >
-                            <div className="ml-3">
-                                <div className="group-open:hidden"> {user?.name} </div>
-                                <div className="hidden group-open:block">
-                                    <span>Display name </span>
-                                    <span className="text-red-500">*</span>
-                                </div>
-                            </div>
-
-                            <div
-                                className="ml-auto shrink-0 text-secondary cursor-pointer p-2 rounded-md hover:bg-blue-100">
-                                <span className="group-open:hidden"> Edit </span>
-                                <span className="hidden group-open:block">Cancel</span>
-                            </div>
-                        </summary>
-
-                        <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
-                            <div className="w-full">
-                                <input type="text" className="w-5/6 mb-2.5 "/>
-                            </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
-                                Save
-                            </button>
-                        </nav>
-                    </details>
+                    <div className="w-full relative">
+                        <input type="text" id="name-input"
+                            className="border-none rounded w-full p-4 pr-12"
+                            {...register('name')}
+                        />
+                        <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
+                            htmlFor="name-input">
+                            <CiEdit/>
+                        </label>
+                    </div>
                 </div>
-                {/* Email */}
-                <div className="border-y px-2.5 py-4 flex w-full">
+                <div className="border-y px-2.5 py-4 flex w-full items-center ">
                     <span className="w-1/4 font-medium">Email address</span>
-                    <details className="group select-none w-full">
-                        <summary
-                            className="group flex items-center rounded-lg px-4 py-2 "
-                        >
-                            <div className="ml-3">
-                                <div className="group-open:hidden flex flex-col gap-y-2.5">
-                                    <span>{user?.email}</span>
-                                    <span>This is the email address you use to sign in. It’s also where we send your booking confirmations.</span>
-                                </div>
-                                <div className="hidden group-open:block">
-                                    <span>Email address </span>
-                                    <span className="text-red-500">*</span>
-                                </div>
-                            </div>
-
-                            <div
-                                className="ml-auto shrink-0 text-secondary cursor-pointer p-2 rounded-md hover:bg-blue-100">
-                                <span className="group-open:hidden"> Edit </span>
-                                <span className="hidden group-open:block">Cancel</span>
-                            </div>
-                        </summary>
-
-                        <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
-                            <div className="w-full flex flex-col">
-                                <input type="text" className="w-5/6 mb-2.5"/>
-
-                            </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
-                                Save
-                            </button>
-                        </nav>
-                    </details>
+                    <div className="w-full relative">
+                        <input type="text" id="email-input"
+                            className="border-none rounded w-full p-4 pr-12"
+                            {...register('email')}
+                        />
+                        <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
+                            htmlFor="email-input">
+                            <CiEdit/>
+                        </label>
+                    </div>
                 </div>
-                {/* Phone */}
-                <div className="border-y px-2.5 py-4 flex w-full">
-                    <span className="w-1/4 font-medium">Phone number</span>
-                    <details className="group select-none w-full">
-                        <summary
-                            className="group flex items-center rounded-lg px-4 py-2 "
-                        >
-                            <div className="ml-3">
-                                <div className="group-open:hidden flex flex-col gap-y-2.5">
-                                    <span>Add your phone number</span>
-                                    <span>TProperties or attractions you book can use this number to contact you. You can also use it to sign in.</span>
-                                </div>
-                                <div className="hidden group-open:block">
-                                    <span>Phone number</span>
-                                </div>
-                            </div>
-
-                            <div
-                                className="ml-auto shrink-0 text-secondary cursor-pointer p-2 rounded-md hover:bg-blue-100">
-                                <span className="group-open:hidden"> Edit </span>
-                                <span className="hidden group-open:block">Cancel</span>
-                            </div>
-                        </summary>
-
-                        <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
-                            <div className="w-full flex flex-col">
-                                <input type="text" className="w-5/6 mb-2.5"/>
-                            </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
-                                Save
-                            </button>
-                        </nav>
-                    </details>
+                <div className="border-y px-2.5 py-4 flex w-full items-center ">
+                    <span className="w-1/4 font-medium">Phone</span>
+                    <div className="w-full relative">
+                        <input type="text" id="phone-input"
+                            className="border-none rounded w-full p-4 pr-12"
+                            {...register('phone')}
+                        />
+                        <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
+                            htmlFor="phone-input">
+                            <CiEdit/>
+                        </label>
+                    </div>
                 </div>
+                {
+                    isChange && (
+                        <div onClick={onSubmit} className="float-right mt-5 mr-5">
+                            <Button text={`${isUpdating ? 'Updating...' : 'Save'}`} textColor="text-white"
+                                bgColor="bg-lightPrimary"/>
+                        </div>
+                    )
+                }
+
             </div>
+
         </div>
     )
 }

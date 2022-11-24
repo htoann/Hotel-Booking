@@ -1,6 +1,66 @@
-import React from 'react'
+import React, {useRef} from 'react'
+import {useChangePasswordMutation, useDeleteUserMutation} from '../../services/userApi'
+import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import {logout, setUser} from '../../features/authSlice'
+import {toast} from 'react-toastify'
+import {useRouter} from 'next/router'
+import {useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
 const Security = () => {
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+
+    const {user} = useAppSelector((state) => state.persistedReducer.auth)
+
+    // Delete Account
+    const [deleteUser, {isLoading: isDeleting}] = useDeleteUserMutation()
+    const handleDeleteMyAccount = async () => {
+        try {
+            const result = await deleteUser(user?._id as string).unwrap()
+            toast.success(result.message || 'Delete success')
+            dispatch(logout())
+            // Fix error toast
+            setTimeout(() => router.push('/'), 1)
+        } catch (error: any) {
+            toast.error(error.data?.message || 'Something went wrong')
+        }
+    }
+
+    // Change Password
+    const [changePassword] = useChangePasswordMutation()
+    const formSchema = yup.object().shape({
+        password: yup.string()
+            .required('Password is required'),
+        newPassword: yup.string()
+            .required('New password is required')
+            .min(6, 'Password length should be at least 6 characters')
+            .notOneOf([yup.ref('password')], 'New password must be not match current password')
+    })
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: {errors, isValid}
+    } = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(formSchema)
+    })
+    const passwordRef = useRef<HTMLDivElement>(null)
+    const onSubmitChangePassword = handleSubmit(async (dataForm) => {
+        try {
+            const data = await changePassword(dataForm).unwrap()
+            toast.success(data.message)
+            setValue('password', '')
+            setValue('newPassword', '')
+            passwordRef.current?.click()
+        } catch (error: any) {
+            toast.error(error.data?.message || 'Something went wrong')
+        }
+    }
+    )
+
     return (
         <div>
             <div>
@@ -15,7 +75,7 @@ const Security = () => {
                         <summary
                             className="group flex items-center rounded-lg px-4 py-2 "
                         >
-                            <div className="ml-3">
+                            <div className="ml-3" ref={passwordRef}>
                                 <div className="group-open:hidden"> Reset your password regularly to keep your account
                                     secure
                                 </div>
@@ -33,13 +93,34 @@ const Security = () => {
                         <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
                             <div className=" flex flex-col">
                                 <label htmlFor="current-password">Current Password</label>
-                                <input id="current-password" type="password" className="w-2/6 mb-2.5 "/>
+                                <input id="current-password"
+                                    type="password"
+                                    className="w-2/6 mb-2.5 "
+                                    {...register('password')}
+                                />
+                                {errors.password && (
+                                    // @ts-ignore
+                                    <p className="text-red-500">{errors.password.message}</p>
+                                )}
                             </div>
                             <div className=" flex flex-col">
-                                <label htmlFor="password">New Password</label>
-                                <input id="password" type="password" className="w-2/6 mb-2.5 "/>
+                                <label htmlFor="new-password">New Password</label>
+                                <input
+                                    id="new-password"
+                                    type="password"
+                                    className="w-2/6 mb-2.5 "
+                                    {...register('newPassword')}
+                                />
+                                {errors.newPassword && (
+                                    // @ts-ignore
+                                    <p className="text-red-500">{errors.newPassword.message}</p>
+                                )}
                             </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
+                            <button
+                                className={`float-right w-max text-white ${isValid ? 'bg-lightPrimary' : 'bg-gray-400'} px-2.5 py-2 rounded-md`}
+                                disabled={!isValid}
+                                onClick={onSubmitChangePassword}
+                            >
                                 Save
                             </button>
                         </nav>
@@ -74,14 +155,17 @@ const Security = () => {
                                     We&apos;ll use it to fix problems and improve our services.</span>
                                 <input type="text" className=" mb-2.5"/>
                             </div>
-                            <button className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md">
-                                Delete account
+                            <button
+                                className="float-right w-max text-white bg-lightPrimary px-2.5 py-2 rounded-md"
+                                onClick={handleDeleteMyAccount}
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? 'Deleting...' : 'Delete account'}
                             </button>
                         </nav>
                     </details>
                 </div>
             </div>
-
         </div>
     )
 }
