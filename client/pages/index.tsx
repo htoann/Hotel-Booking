@@ -10,7 +10,7 @@ export default function Home () {
             </Head>
             <div className="flex flex-col mx-auto ">
                 <Search/>
-                <div className="mx-auto container overflow-hidden">
+                <div className="mx-auto container px-4 lg:px-6 overflow-hidden">
                     <Offers/>
                     <HotelType/>
                 </div>

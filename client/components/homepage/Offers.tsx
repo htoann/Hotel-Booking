@@ -12,13 +12,13 @@ const Offers = () => {
         {
             title: 'Save 15% with Late Escape Deals',
             description: 'Check one more destination off your wishlist',
-            button: 'Explore deals',
+            button: 'Explore',
             image: '1.avif'
         },
         {
             title: 'Escape for a while',
             description: 'Enjoy the freedom of a monthly stay on Booking',
-            button: 'Discover monthly stays',
+            button: 'Discover',
             image: '2.avif'
         },
         {
@@ -68,7 +68,7 @@ const Offers = () => {
         }
     ]
     return (
-        <div className="my-20 mx-auto max-w-screen-xl relative">
+        <div className="mt-48 sm:mt-32 lg:mt-28 mb-20 w-full relative">
             <div className="mb-5">
                 <h1 className="font-bold text-2xl text-black">Offers</h1>
                 <h2 className="text-primary font-light text-xl">Promotions, deals, and special offers for you</h2>
@@ -85,14 +85,15 @@ const Offers = () => {
                     {offers.map(offer =>
                         <SwiperSlide key={offer.title}>
                             <div className="relative w-full rounded-2xl overflow-hidden">
-                                <Image className="absolute -z-10" src={`/assets/images/offer/${offer.image}`}
+                                <Image className="absolute w-full h-full -z-10 object-cover"
+                                    src={`/assets/images/offer/${offer.image}`}
                                     alt={offer.title}
                                     width={1000}
-                                    height={200}
+                                    height={300}
                                     loading={'lazy'}
                                 />
-                                <div className="px-5 py-10 text-white">
-                                    <h2 className="font-bold mb-2 text-3xl">{offer.title}</h2>
+                                <div className="p-2.5 sm:px-5 sm:py-10 text-white">
+                                    <h2 className="font-bold mb-2 text-2xl sm:text-3xl h-24 sm:h-16 lg:h-max">{offer.title}</h2>
                                     <h2 className="mb-5">{offer.description}</h2>
                                     <Button text={offer.button} textColor={'text-white'}
                                         bgColor={'bg-lightPrimary'}/>
@@ -104,7 +105,7 @@ const Offers = () => {
                 </Swiper>
             </div>
 
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {/* Fix key index */}
                 {locations.map((location, index) =>
                     <Link href={`/search/${location.city}`} key={index}>

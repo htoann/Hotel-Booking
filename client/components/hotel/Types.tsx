@@ -13,36 +13,34 @@ const Types = ({type, setType}: Props) => {
         .filter((value, index, self) => self.indexOf(value) === index)
 
     return (
-        <div className="lg:col-span-3 xl:col-span-3 w-full">
-            <div className="w-full flex gap-x-2">
+        <div className="w-full flex flex-wrap justify-center sm:justify-start gap-x-2">
+            <button
+                className={`w-max px-5 py-2.5 flex items-center justify-start border rounded-3xl  ${
+                    type === 'all'
+                        ? 'text-secondary border-current bg-gray-100 hover:bg-gray-100'
+                        : ' text-primary border-transparent hover:bg-gray-200'
+                }
+              `}
+                onClick={() => setType('all')}
+            >
+                All
+            </button>
+            {types?.map((item) => (
                 <button
-                    className={`w-max px-5 py-2.5 flex items-center justify-start border rounded-3xl  ${
-                        type === 'all'
+                    key={item}
+                    className={`w-max px-5 py-2.5 flex items-center justify-start gap-x-2 border rounded-3xl  ${
+                        type === item
                             ? 'text-secondary border-current bg-gray-100 hover:bg-gray-100'
                             : ' text-primary border-transparent hover:bg-gray-200'
-                    }
-              `}
-                    onClick={() => setType('all')}
-                >
-                    All
-                </button>
-                {types?.map((item) => (
-                    <button
-                        key={item}
-                        className={`w-max px-5 py-2.5 flex items-center justify-start gap-x-2 border rounded-3xl  ${
-                            type === item
-                                ? 'text-secondary border-current bg-gray-100 hover:bg-gray-100'
-                                : ' text-primary border-transparent hover:bg-gray-200'
-                        } 
+                    } 
                  `}
-                        onClick={() => setType(item)}
-                    >
-                        <p className="first-letter:uppercase">{item}</p>
-                    </button>
-                ))}
-            </div>
-
+                    onClick={() => setType(item)}
+                >
+                    <p className="first-letter:uppercase">{item}</p>
+                </button>
+            ))}
         </div>
+
     )
 }
 

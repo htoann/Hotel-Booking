@@ -12,7 +12,7 @@ interface Props {
 const Button = ({text, textColor, bgColor, IcAfter, fullWidth}: Props) => {
     return (
         <div
-            className={` py-2 px-4 ${textColor} ${bgColor} ${fullWidth ? 'w-full' : 'w-max'} rounded border border-current 
+            className={`p-1.5 sm:py-2 sm:px-4 ${textColor} ${bgColor} ${fullWidth ? 'w-full' : 'w-max'} rounded border border-current 
             outline-none hover:underline flex items-center justify-center gap-1 cursor-pointer`}
         >
             <span> {text}</span>

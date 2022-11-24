@@ -4,6 +4,7 @@ import Hotels from './Hotels'
 import {useAppDispatch} from '../../store/hooks'
 import {useGetHotelsQuery} from '../../services/hotelApi'
 import {setHotels} from '../../features/hotelSlice'
+import {Loader} from '../layout'
 
 const HotelType = () => {
     const dispatch = useAppDispatch()
@@ -18,7 +19,11 @@ const HotelType = () => {
     }, [dispatch, hotels, isSuccess])
 
     if (isLoading) {
-        return <div>Loading</div>
+        return (
+            <div className="w-full mt-20 flex items-center justify-center">
+                <Loader/>
+            </div>
+        )
     }
     return (
         <div className="flex flex-col gap-y-5">
