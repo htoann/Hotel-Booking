@@ -14,7 +14,7 @@ import {
     MdAirportShuttle,
     MdSmokeFree
 } from 'react-icons/md'
-import {CiLocationOn} from 'react-icons/ci'
+import {CiEdit, CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
 import {FiTrash} from 'react-icons/fi'
 import {BsFillShareFill, BsFlower1, BsShieldLock} from 'react-icons/bs'
@@ -60,5 +60,6 @@ export {
 
     RiUserSettingsLine,
     BsShieldLock,
-    FiTrash
+    FiTrash,
+    CiEdit
 }
