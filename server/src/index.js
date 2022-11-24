@@ -8,8 +8,17 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
 
+import fileUpload from "express-fileupload";
+
 const forms = multer();
 const app = express();
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 // App Setup
 app.use(

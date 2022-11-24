@@ -6,16 +6,18 @@ const UserSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
     password: {
       type: String,
       required: true,
-      minLength: 6
+      minLength: 6,
     },
     username: {
       type: String,
@@ -28,6 +30,7 @@ const UserSchema = new mongoose.Schema(
     },
     city: {
       type: String,
+      trim: true
     },
     phone: {
       type: String,

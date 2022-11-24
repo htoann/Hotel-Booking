@@ -1,6 +1,7 @@
 import User from "../user/userModel";
 import { createError } from "../utils/createMessage";
 import token from "../utils/token";
+import fs from "fs";
 
 export const auth = (req, res, next) => {
   if (
@@ -55,4 +56,57 @@ export const admin = (req, res, next) => {
       });
     });
   }
+};
+
+export const uploadAvatar = async (req, res, next) => {
+  try {
+    if (!req.files || Object.keys(req.files).length === 0)
+      return createError(res, 400, "No files were uploaded.");
+
+    if (req.files.photos.length > 1) {
+      req.files.map((file) => {
+        if (file.size > 1024 * 1024) {
+          removeTmp(file.tempFilePath);
+          return createError(res, 400, "Size too large.");
+        } // 1mb
+
+        if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+          removeTmp(file.tempFilePath);
+          return createError(res, 400, "File format is incorrect.");
+        }
+      });
+    }
+    next();
+  } catch (err) {
+    console.log(err);
+    return createError(res, 500, err);
+  }
+};
+
+export const uploadPhotos = async (req, res, next) => {
+  try {
+    if (!req.files || Object.keys(req.files).length === 0)
+      return createError(res, 400, "No files were uploaded.");
+
+    if (req.files.photos.length > 1) {
+      req.files.photos.map((file) => {
+        if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+          return createError(res, 400, "File format is incorrect.");
+        }
+      });
+    } else {
+      return createError(res, 400, "Please select at least 2 photos");
+    }
+
+    next();
+  } catch (err) {
+    console.log(err);
+    return createError(res, 500, err);
+  }
+};
+
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
 };
