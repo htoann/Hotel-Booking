@@ -1,4 +1,4 @@
-import { admin } from "../api/middlewares";
+import { auth } from "../api/middlewares";
 import roomController from "./roomController";
 
 const router = require("express").Router();
@@ -7,10 +7,10 @@ router.get("/", roomController.getAllRooms);
 
 router.get("/:id", roomController.getRoom);
 
-router.post("/:hotelid", admin, roomController.createRoom);
+router.post("/:hotelid", auth, roomController.createRoom);
 
-router.put("/:id", admin, roomController.updateRoom);
+router.put("/:id", auth, roomController.updateRoom);
 
-router.delete("/:id/:hotelid", admin, roomController.deleteRoom);
+router.delete("/:id/:hotelid", auth, roomController.deleteRoom);
 
 export default router;

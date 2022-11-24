@@ -1,14 +1,14 @@
-import { admin } from "../api/middlewares";
+import { auth } from "../api/middlewares";
 import hotelController from "./hotelController";
 
 const router = require("express").Router();
 
-router.post("/", admin, hotelController.createHotel);
+router.post("/", auth, hotelController.createHotel);
 
 router
   .route("/:id")
-  .put(admin, hotelController.updateHotel)
-  .delete(admin, hotelController.deleteHotel);
+  .put(auth, hotelController.updateHotel)
+  .delete(auth, hotelController.deleteHotel);
 
 router.get("/search/:id", hotelController.getHotel);
 router.get("/", hotelController.getAllHotels);

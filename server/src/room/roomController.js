@@ -10,17 +10,23 @@ export default {
     const newRoom = new Room(req.body);
 
     try {
-      const savedRoom = await newRoom.save();
-      try {
-        await Hotel.findByIdAndUpdate(hotelId, {
-          $push: { rooms: savedRoom._id },
-        });
-      } catch (err) {
-        return createError(res, 404, err || "No document found with that id");
+      const doc = await Hotel.findOne({
+        hotelId,
+        user: req.user.id,
+      });
+
+      if (!doc) {
+        return createError(res, 404, "You are not allowed");
       }
+
+      const savedRoom = await newRoom.save();
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $push: { rooms: savedRoom._id },
+      });
+
       res.status(200).json(savedRoom);
     } catch (err) {
-      next(err);
+      return createError(res, 404, err || "No document found with that id");
     }
   },
 

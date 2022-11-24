@@ -5,8 +5,18 @@ import initDatabase from "./initDatabase";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import bodyParser from "body-parser";
+
+import fileUpload from "express-fileupload";
 
 const app = express();
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 // App Setup
 app.use(
@@ -19,7 +29,8 @@ app.use(
 );
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 initDatabase();
 

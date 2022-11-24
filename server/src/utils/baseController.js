@@ -1,17 +1,10 @@
 const APIFeatures = require("./apiFeatures");
 const { createError, createMessage } = require("./createMessage");
 
-exports.deleteOne = (Model, reqUser, newParams) => async (req, res) => {
-  if (req.params.username == "admin") {
-    return createError(res, 403, "Can not delete admin");
-  }
-  if (req.params.id !== req.user.id) {
-    return createError(res, 403, "You are not allow");
-  }
+exports.deleteOne = (Model) => async (req, res) => {
+
   try {
-    const doc = newParams
-      ? await Model.findOneAndDelete({ username: req.params.username })
-      : await Model.findByIdAndDelete(reqUser ? req.user.id : req.params.id);
+    const doc = await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
       return createError(res, 404, "No document found with that id");
@@ -23,21 +16,12 @@ exports.deleteOne = (Model, reqUser, newParams) => async (req, res) => {
   }
 };
 
-exports.updateOne = (Model, reqUser, newParams) => async (req, res) => {
-  if (req.params.id !== req.user.id) {
-    return createError(res, 403, "You are not allow");
+exports.updateOne = (Model, reqUser) => async (req, res) => {
+  if (req.body.isAdmin) {
+    return createError(res, 404, "You can't update the role");
   }
   try {
-    const doc = newParams
-      ? await Model.findOneAndUpdate(
-          { username: req.params.username },
-          req.body,
-          {
-            new: true,
-            runValidators: true,
-          }
-        )
-      : await Model.findByIdAndUpdate(
+    const doc = await Model.findByIdAndUpdate(
           reqUser ? req.user.id : req.params.id,
           req.body,
           {
