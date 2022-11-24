@@ -1,15 +1,48 @@
 import Room from "../room/roomModel";
 import APIFeatures from "../utils/apiFeatures";
-import { createError } from "../utils/createMessage";
+import { createError, createMessage } from "../utils/createMessage";
 import Hotel from "./hotelModel";
 const base = require("../utils/baseController");
 
 export default {
-  createHotel: base.createOne(Hotel),
+  createHotel: async (req, res) => {
+    try {
+      const hotel = await Hotel.create({ user: req.user, ...req.body });
+      res.status(201).json(hotel);
+    } catch (error) {
+      return createError(res, 404, error || "Something went wrong");
+    }
+  },
 
-  updateHotel: base.updateOne(Hotel),
+  updateHotel: async (req, res) => {
+    try {
+      const doc = await Hotel.findOneAndUpdate(
+        { user: req.user.id },
+        req.body,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      if (!doc) return createError(res, 404, "You are not allowed");
 
-  deleteHotel: base.deleteOne(Hotel),
+      return createMessage(res, 200, "Updated successfully");
+    } catch (error) {
+      return createError(res, 404, error || "No document found with that id");
+    }
+  },
+
+  deleteHotel: async (req, res) => {
+    try {
+      const doc = await Hotel.findOneAndDelete({ user: req.user.id });
+
+      if (!doc) return createError(res, 404, "You are not allowed");
+
+      return createMessage(res, 200, "Deleted successfully");
+    } catch (error) {
+      return createError(res, 404, error || "No document found with that id");
+    }
+  },
 
   getHotel: base.getOne(Hotel),
 
