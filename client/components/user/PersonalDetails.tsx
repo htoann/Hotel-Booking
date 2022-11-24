@@ -13,6 +13,7 @@ import {toast} from 'react-toastify'
 type FormValues = {
     name: string;
     email: string;
+    phone: string;
 };
 
 const PersonalDetails = () => {
@@ -32,34 +33,32 @@ const PersonalDetails = () => {
     const {register, handleSubmit, watch} = useForm<FormValues>({
         defaultValues: {
             name: user?.name,
-            email: user?.email
+            email: user?.email,
+            phone: user?.phone
         }
     })
 
-    const onSubmit = handleSubmit((data) => {
+    const onSubmit = handleSubmit(async (dataForm) => {
         if (user) {
-            updateUser({_id: user._id, ...data}).unwrap()
-                .then((result) => {
-                    dispatch(
-                        setUser(
-                            {
-                                user: result,
-                                token
-                            }
-                        )
-                    )
-                    toast.success('Update success')
-                })
-                .catch((_e) => {
-                    toast.error(`Update fail. Something went wrong`)
-                })
+            try {
+                const result = await updateUser({_id: user._id, ...dataForm}).unwrap()
+                dispatch(setUser(
+                    {
+                        user: result,
+                        token
+                    }
+                ))
+                toast.success('Update success')
+            } catch (error: any) {
+                toast.error(`Something went wrong`)
+            }
         }
     })
 
     // Check is change to enable button Submit
     const [isChange, setIsChange] = useState<boolean>(false)
     useEffect(() => {
-        if (watch().name !== user?.name || watch().email !== user?.email) {
+        if (watch().name !== user?.name || watch().email !== user?.email || watch().phone !== user?.phone) {
             setIsChange(true)
         } else {
             setIsChange(false)
@@ -73,11 +72,7 @@ const PersonalDetails = () => {
             </div>
         )
     }
-    if (error) {
-        // @ts-ignore
-        const status = error.status || 404
-        return <ErrorPage statusCode={status}/>
-    }
+
     return (
         <div>
             <div>
@@ -111,9 +106,22 @@ const PersonalDetails = () => {
                         </label>
                     </div>
                 </div>
+                <div className="border-y px-2.5 py-4 flex w-full items-center ">
+                    <span className="w-1/4 font-medium">Phone</span>
+                    <div className="w-full relative">
+                        <input type="text" id="phone-input"
+                            className="border-none rounded w-full p-4 pr-12"
+                            {...register('phone')}
+                        />
+                        <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
+                            htmlFor="phone-input">
+                            <CiEdit/>
+                        </label>
+                    </div>
+                </div>
                 {
                     isChange && (
-                        <div onClick={onSubmit} className="float-right mr-5">
+                        <div onClick={onSubmit} className="float-right mt-5 mr-5">
                             <Button text={`${isUpdating ? 'Updating...' : 'Save'}`} textColor="text-white"
                                 bgColor="bg-lightPrimary"/>
                         </div>
