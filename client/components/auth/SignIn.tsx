@@ -12,6 +12,7 @@ import {useLoginUserMutation} from '../../services/authApi'
 import {setUser} from '../../features/authSlice'
 import {useRouter} from 'next/router'
 import { setHotelWishList } from '../../features/appSlice'
+import Head from 'next/head'
 
 interface Props {
     setIsSignIn: (arg: boolean) => void;
@@ -56,8 +57,12 @@ const SignIn = ({setIsSignIn}: Props) => {
             toast.error((loginError as any)?.data?.message ? (loginError as any).data.message : 'Some thing went error')
         }
     }, [isLoginError])
+    
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <Head>
+                <title>Sign In</title>
+            </Head>
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                 <div className=" rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
                     <div className="w-3/5 p-5">
