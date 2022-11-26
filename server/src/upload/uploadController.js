@@ -35,13 +35,17 @@ export default {
 
   deleteImage: async (req, res) => {
     try {
-      const url = req.body.url;
+      const url = req.body;
       if (url.length < 1) {
         return createError(res, 500, "Invalid url");
       }
       const fileName = url.substring(url.length - 24, url.length - 4);
-      cloudinary.uploader.destroy(fileName, () => {
-        return createMessage(res, 200, "Delete image successfully");
+      cloudinary.uploader.destroy(fileName, {}, (err, result) => {
+        if (result.result === 'not found') {
+          return createError(res, 500, "Something went wrong");
+        } else {
+          return createMessage(res, 200, "Delete image successfully");
+        }
       });
     } catch (err) {
       console.log(err);
