@@ -43,7 +43,7 @@ const Header = () => {
         {
             icon: <RiSuitcaseLine/>,
             name: 'Bookings & Trips',
-            link: '/'
+            link: '/user/booking'
         },
         {
             icon: <AiOutlineWallet/>,

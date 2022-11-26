@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  useGetHotelRoomsQuery,
-  useBookingRoomMutation,
+  useGetHotelRoomsQuery
 } from "../../services/roomApi";
+import { useBookingRoomMutation } from "../../services/bookingApi";
 import { FaUser } from "../../utils/icons";
 import { Loader } from "../layout";
 import { Button } from "../core";
@@ -108,6 +108,7 @@ const RoomHotel = ({ hotelId }: Props) => {
   ] = useBookingRoomMutation();
 
   const bookingBody: any = {
+    hotelId: hotelId,
     roomId: roomsReserve[0]?._id,
     checkIn: checkIn,
     checkOut: checkOut,
