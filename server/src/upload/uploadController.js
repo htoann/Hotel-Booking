@@ -1,6 +1,5 @@
-import fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
-import { createError } from "../utils/createMessage";
+import { createError, createMessage } from "../utils/createMessage";
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -28,6 +27,22 @@ export default {
         urls.push(newPath);
       }
       return res.json({ url: urls });
+    } catch (err) {
+      console.log(err);
+      return createError(res, 500, err);
+    }
+  },
+
+  deleteImage: async (req, res) => {
+    try {
+      const url = req.body.url;
+      if (url.length < 1) {
+        return createError(res, 500, "Invalid url");
+      }
+      const fileName = url.substring(url.length - 24, url.length - 4);
+      cloudinary.uploader.destroy(fileName, () => {
+        return createMessage(res, 200, "Delete image successfully");
+      });
     } catch (err) {
       console.log(err);
       return createError(res, 500, err);
