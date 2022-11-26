@@ -16,7 +16,7 @@ const HotelPreview = ({id, image, name, title, large}: Props) => {
             <div className="w-full h-full flex flex-col gap-y-2 transition-all hover:scale-105 p-2">
                 <Image
                     className={
-                        !large ? `w-full h-32 object-cover` : `max-w-xs h-64 object-cover`
+                        !large ? `w-full h-32 object-cover` : `w-full h-64 object-cover`
                     }
                     src={image}
                     alt={name}

@@ -93,16 +93,16 @@ const HotelDetailPage = () => {
                 <Head>
                     <title>{hotel.name}</title>
                 </Head>
-                <div className="my-4 mx-auto max-w-screen-xl overflow-hidden ">
-                    <div className="flex pt-2">
-                        <div className="w-1/5">
+                <div className="my-4 mx-auto container px-4 lg:px-6 overflow-hidden ">
+                    <div className="flex pt-2 gap-x-5">
+                        <div className="hidden lg:block w-1/5">
                             <SearchVertical/>
                         </div>
-                        <div className="w-4/5 pl-5">
+                        <div className="w-full lg:w-4/5">
                             <div>
-                                <div className="flex justify-between">
+                                <div className="flex justify-between flex-wrap">
                                     <div className="flex gap-x-2">
-                                        <p className="first-letter:uppercase text-sm text-white bg-gray-500 w-max px-1.5 py-0.5 rounded">
+                                        <p className="first-letter:uppercase text-sm text-white bg-gray-500 w-max h-max px-1.5 py-0.5 rounded">
                                             {hotel.type}
                                         </p>
                                         <StarRating data={hotel.rating}/>
@@ -134,7 +134,7 @@ const HotelDetailPage = () => {
                                 <h1 className="my-2 text-xl font-bold">{hotel.title}</h1>
                             </div>
                             <div>
-                                <div className="text-secondary flex gap-x-1.5 items-center mb-4">
+                                <div className="text-secondary flex flex-wrap gap-x-2.5 items-center mb-4">
                                     <MdLocationOn/>
                                     <h2 className="text-primary">{hotel.address.name}</h2>
                                     <p
@@ -150,8 +150,8 @@ const HotelDetailPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex">
-                        <div className="w-4/5 py-5">
+                    <div className="flex flex-wrap">
+                        <div className="w-full lg:w-4/5 py-5">
                             <p>{hotel.desc}</p>
                             <p>
                                 Couples in particular like the location – they rated it
@@ -160,7 +160,7 @@ const HotelDetailPage = () => {
                             </p>
                             <div className="mt-2">
                                 <h2 className="font-bold text-lg">Most popular facilities</h2>
-                                <ul className="flex gap-x-2.5 mt-4">
+                                <ul className="flex flex-wrap gap-x-2.5 mt-4">
                                     <li className="flex gap-x-1.5 items-center text-green-500 text-xl">
                                         <AiOutlineWifi/>
                                         <p className="text-primary text-base">Free WiFi</p>
@@ -188,7 +188,7 @@ const HotelDetailPage = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="w-1/5">
+                        <div className="w-full lg:w-1/5">
                             <div className="text-black flex flex-col gap-y-2.5 p-2">
                                 <h1 className="font-bold">Property Highlights</h1>
                                 <div className="flex items-center text-2xl">
@@ -211,6 +211,7 @@ const HotelDetailPage = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="mt-5 border-t border-current">
                         <div className="my-2.5 w-full">
                             <h1 className="font-bold text-2xl mb-4">Availability</h1>

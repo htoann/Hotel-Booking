@@ -27,11 +27,11 @@ const Header = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         dispatch(logout())
         dispatch(setHotelWishList([]))
         toast.success('User logged out...')
-        router.push('/auth')
+        await router.push('/auth')
     }
 
     const accountMenu = [
@@ -90,12 +90,12 @@ const Header = () => {
     ]
 
     return <header className="w-full bg-primary">
-        <nav className=" px-4 lg:px-6 py-2.5">
-            <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+        <nav className="">
+            <div className="flex flex-wrap justify-between items-center gap-2.5 mx-auto container px-4 lg:px-6 py-2.5 ">
                 <Link href="/">
                     <span className="self-center text-3xl font-semibold whitespace-nowrap text-white">Booking</span>
                 </Link>
-                <div className="flex flex-end items-center gap-4">
+                <div className=" flex flex-end items-center gap-2 sm:gap-4">
                     <Link href="/user/join">
                         <Button text="List your property" textColor="text-white" bgColor="bg-transparent"/>
                     </Link>
@@ -111,7 +111,7 @@ const Header = () => {
                                             overflow-hidden">
                                         <HiUser size={30}/>
                                     </div>
-                                    <span>Your account</span>
+                                    <span className="hidden md:block">Your account</span>
                                 </button>
                                 <ul className="w-max absolute z-50 right-0 hidden text-primary pt-2 group-hover:block">
                                     {accountMenu.map(item =>
@@ -137,29 +137,24 @@ const Header = () => {
                         </>
                         : <>
                             <Link href="/auth">
-                                <Button text="Register" textColor="text-primary" bgColor="bg-white"/>
-                            </Link>
-                            <Link href="/auth#sign-in">
                                 <Button text="Sign In" textColor="text-primary" bgColor="bg-white"/>
                             </Link>
                         </>}
                 </div>
             </div>
         </nav>
-        <nav className=" px-4 lg:px-6 py-2.5">
-            <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <ul className="w-full flex justify-center items-center gap-x-2 text-white">
-                    {menu.map(item =>
-                        <li key={item.name}
-                            className="rounded-3xl hover:bg-white hover:bg-opacity-25 whitespace-no-wrap">
-                            <Link href={`${item.link}`} className="flex items-center gap-x-2.5 py-2 px-4">
-                                {item.icon}
-                                <span>{item.name}</span>
-                            </Link>
-                        </li>
-                    )}
-                </ul>
-            </div>
+        <nav className="hidden sm:block px-2 lg:px-4 py-2.5">
+            <ul className="mx-auto container flex flex-wrap justify-center items-center gap-x-2 text-white">
+                {menu.map(item =>
+                    <li key={item.name}
+                        className="rounded-3xl hover:bg-white hover:bg-opacity-25 whitespace-no-wrap">
+                        <Link href={`${item.link}`} className="flex items-center gap-x-2.5 py-2 px-4 ">
+                            {item.icon}
+                            <span>{item.name}</span>
+                        </Link>
+                    </li>
+                )}
+            </ul>
         </nav>
     </header>
 }

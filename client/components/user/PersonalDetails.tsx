@@ -80,11 +80,11 @@ const PersonalDetails = () => {
                 <h2>Update your info and find out how it&apos;s used.</h2>
             </div>
             <div>
-                <div className="border-y px-2.5 py-4 flex w-full items-center ">
-                    <span className="w-1/4 font-medium">Display name</span>
+                <div className="border-y px-2.5 py-4 flex flex-wrap md:flex-nowrap w-full items-center ">
+                    <span className="w-full md:w-1/4 font-medium">Display name</span>
                     <div className="w-full relative">
                         <input type="text" id="name-input"
-                            className="border-none rounded w-full p-4 pr-12"
+                            className="border-none rounded w-full md:p-4 pr-12"
                             {...register('name')}
                         />
                         <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
@@ -93,11 +93,11 @@ const PersonalDetails = () => {
                         </label>
                     </div>
                 </div>
-                <div className="border-y px-2.5 py-4 flex w-full items-center ">
-                    <span className="w-1/4 font-medium">Email address</span>
+                <div className="border-y px-2.5 py-4 flex flex-wrap md:flex-nowrap w-full items-center ">
+                    <span className="w-full md:w-1/4 font-medium">Email address</span>
                     <div className="w-full relative">
                         <input type="text" id="email-input"
-                            className="border-none rounded w-full p-4 pr-12"
+                            className="border-none rounded w-full md:p-4 pr-12"
                             {...register('email')}
                         />
                         <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"
@@ -106,11 +106,11 @@ const PersonalDetails = () => {
                         </label>
                     </div>
                 </div>
-                <div className="border-y px-2.5 py-4 flex w-full items-center ">
-                    <span className="w-1/4 font-medium">Phone</span>
+                <div className="border-y px-2.5 py-4 flex flex-wrap md:flex-nowrap w-full items-center ">
+                    <span className="w-full md:w-1/4 font-medium">Phone</span>
                     <div className="w-full relative">
                         <input type="text" id="phone-input"
-                            className="border-none rounded w-full p-4 pr-12"
+                            className="border-none rounded w-full md:p-4 pr-12"
                             {...register('phone')}
                         />
                         <label className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer"

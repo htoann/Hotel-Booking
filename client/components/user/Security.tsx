@@ -69,13 +69,13 @@ const Security = () => {
             </div>
             <div className="mt-2.5 flex flex-col text-sm">
                 {/* Password */}
-                <div className="border-y px-2.5 py-4 flex w-full ">
-                    <span className="w-1/4 font-medium">Password</span>
+                <div className="border-y px-2.5 py-4 flex flex-wrap md:flex-nowrap w-full ">
+                    <span className="w-full md:w-1/4 font-medium">Password</span>
                     <details className="group select-none w-full">
                         <summary
-                            className="group flex items-center rounded-lg px-4 py-2 "
+                            className="group flex flex-wrap items-center rounded-lg md:px-4 py-2 "
                         >
-                            <div className="ml-3" ref={passwordRef}>
+                            <div className="md:ml-3" ref={passwordRef}>
                                 <div className="group-open:hidden"> Reset your password regularly to keep your account
                                     secure
                                 </div>
@@ -90,12 +90,12 @@ const Security = () => {
                             </div>
                         </summary>
 
-                        <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
+                        <nav aria-label="Users Nav" className="mt-2 md:ml-8 transition-all">
                             <div className=" flex flex-col">
                                 <label htmlFor="current-password">Current Password</label>
                                 <input id="current-password"
                                     type="password"
-                                    className="w-2/6 mb-2.5 "
+                                    className="w-full md:w-2/6 mb-2.5 "
                                     {...register('password')}
                                 />
                                 {errors.password && (
@@ -108,7 +108,7 @@ const Security = () => {
                                 <input
                                     id="new-password"
                                     type="password"
-                                    className="w-2/6 mb-2.5 "
+                                    className="w-full md:w-2/6 mb-2.5 "
                                     {...register('newPassword')}
                                 />
                                 {errors.newPassword && (
@@ -127,13 +127,13 @@ const Security = () => {
                     </details>
                 </div>
                 {/* Account */}
-                <div className="border-y px-2.5 py-4 flex w-full">
-                    <span className="w-1/4 font-medium">Delete account</span>
+                <div className="border-y px-2.5 py-4 flex flex-wrap md:flex-nowrap w-full">
+                    <span className="w-full md:w-1/4 font-medium">Delete account</span>
                     <details className="group select-none w-full">
                         <summary
-                            className="group flex items-center rounded-lg px-4 py-2 "
+                            className="group flex flex-wrap items-center rounded-lg md:px-4 py-2 "
                         >
-                            <div className="ml-3">
+                            <div className="md:ml-3">
                                 <div className="group-open:hidden flex flex-col gap-y-2.5">
                                     <span>Permanently delete your account</span>
                                 </div>
@@ -149,8 +149,8 @@ const Security = () => {
                             </div>
                         </summary>
 
-                        <nav aria-label="Users Nav" className="mt-2 ml-8 transition-all">
-                            <div className="w-5/6 flex flex-col">
+                        <nav aria-label="Users Nav" className="mt-2 md:ml-8 transition-all">
+                            <div className="w-full md:w-5/6 flex flex-col gap-2">
                                 <span>Do you have any feedback you&apos;d like to share before you go?
                                     We&apos;ll use it to fix problems and improve our services.</span>
                                 <input type="text" className=" mb-2.5"/>

@@ -30,9 +30,18 @@ const Hotels = ({type}: Props) => {
 
     return (
         <Swiper
+            breakpoints={{
+                640: {
+                    slidesPerView: 2
+                },
+                768: {
+                    slidesPerView: 3
+                },
+                1024: {
+                    slidesPerView: 5
+                }
+            }}
             spaceBetween={30}
-            slidesPerView={5}
-            // loop={true}
             navigation={true}
             modules={[Navigation]}
             className="select-none"

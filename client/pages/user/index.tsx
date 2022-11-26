@@ -26,13 +26,14 @@ const UserPage = () => {
                 <title>Personal</title>
             </Head>
 
-            <div className="container mx-auto">
-                <div className="w-full flex py-4">
-                    <div className="w-3/12 h-max mr-2.5 border rounded-xl overflow-hidden">
+            <div className="mx-auto container px-4 lg:px-6">
+                <div className="w-full flex flex-col md:flex-row gap-4 py-4">
+                    <div
+                        className="md:w-3/12 flex flex-wrap md:flex-col h-max border rounded-xl">
                         {sidebar.map(item => (
                             <div
                                 key={item.name}
-                                className={`p-4 flex gap-x-2.5 items-center border cursor-pointer
+                                className={`p-4 flex gap-x-2.5 items-center cursor-pointer
                             hover:text-secondary hover:underline
                             ${active === item.id ? 'text-secondary' : ''}
                             `}
@@ -43,7 +44,7 @@ const UserPage = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="w-9/12 pl-2.5">
+                    <div className="w-full md:w-9/12 pl-2.5">
                         {itemActive?.component}
                     </div>
                 </div>

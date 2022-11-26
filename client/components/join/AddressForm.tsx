@@ -32,8 +32,8 @@ const AddressForm = ({
             })
     }
     return (
-        <div className="mt-5 flex gap-x-10">
-            <form className="w-1/3 flex flex-col gap-x-2.5"
+        <div className="mt-5 flex flex-col md:flex-row gap-x-10">
+            <form className="w-full md:w-1/3 flex flex-col gap-x-2.5"
             >
                 <label htmlFor="address">Address</label>
                 <input
@@ -51,15 +51,18 @@ const AddressForm = ({
                     onBlur={getLocationAddress}
                 />
             </form>
-            {address.lng && address.lng && <div className="w-2/3 p-5">
-                <span className="text-sm text-primary">
+            {
+                address.lng && address.lng &&
+                <div className="w-full md:w-2/3 md:p-5">
+                    <span className="text-sm text-primary">
                     To show the exact address of your home, please mark your location on the map by clicking to your location or search your location
-                    <span>(You can draw your mark to exact address in the map)</span>
-                </span>
-                <div className='mt-5'>
-                    <AddLocation address={address} updateFields={updateFields}/>
+                        <span>(You can draw your mark to exact address in the map)</span>
+                    </span>
+                    <div className='mt-5'>
+                        <AddLocation address={address} updateFields={updateFields}/>
+                    </div>
                 </div>
-            </div>}
+            }
         </div>
     )
 }
