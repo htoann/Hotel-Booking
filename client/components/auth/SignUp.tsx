@@ -61,7 +61,7 @@ const SignUp = ({setIsSignIn}: Props) => {
         setIsSignIn(true)
     }
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <Head>
           <title>Sign Up</title>
         </Head>
@@ -211,7 +211,7 @@ const SignUp = ({setIsSignIn}: Props) => {
           </div>
         </main>
       </div>
-    );
+    )
 }
 
 export default SignUp

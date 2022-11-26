@@ -17,13 +17,13 @@ const WishListPage = () => {
             <div
                 className={
                     wishListHotels && wishListHotels.length > 0
-                        ? `grid grid-cols-1 gap-4 md:grid-cols-2 p-2 mt-8 lg:grid-cols-3 justify-center mx-auto max-w-screen-xl overflow-hidden`
+                        ? `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10 md:mt-20 mx-auto container px-4 lg:px-6`
                         : `w-screen mt-20 flex items-center justify-center`
                 }
             >
                 {wishListHotels && wishListHotels.length > 0 ? (
                     wishListHotels?.map((hotel) => (
-                        <div key={hotel._id}>
+                        <div key={hotel._id} className="w-full border rounded-xl">
                             <HotelPreview
                                 id={hotel._id}
                                 image={hotel.photos[0]}

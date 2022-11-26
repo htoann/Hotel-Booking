@@ -20,7 +20,15 @@ const ImageGallery = ({photos}: Props) => {
             <div className="h-96">
                 <Swiper
                     spaceBetween={10}
-                    slidesPerView={2.1}
+                    breakpoints={{
+                        768: {
+                            slidesPerView: 2
+                        },
+                        1024: {
+                            slidesPerView: 2.1
+                        }
+                    }}
+                    slidesPerView={1.5}
                     navigation={true}
                     modules={[Navigation]}
                     className="h-full"

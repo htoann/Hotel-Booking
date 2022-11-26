@@ -20,40 +20,43 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
             )}
             {data?.map((hotel) => (
                 <Link href={`/hotel/${hotel._id}`} key={hotel._id}>
-                    <div className="flex border p-5 mb-5">
+                    <div className="flex flex-col lg:flex-row gap-1 border p-5 mb-5">
                         <Image
-                            className="object-cover"
-                            width={200}
-                            height={200}
+                            className="w-full lg:w-1/4 object-cover"
+                            width={500}
+                            height={500}
                             src={hotel.photos[0]}
                             alt={hotel.name}
                         />
-                        <div className="mx-4">
-                            <div className="flex">
-                                <p className="text-xl font-bold mb-2 text-secondary">
-                                    {hotel.title}
-                                </p>
-                                <StarRating data={hotel.rating}/>
-                            </div>
-                            <span className="text-sm underline text-secondary cursor-pointer capitalize">
-                                {hotel.city}
-                            </span>
-                            <span className="text-sm underline text-secondary ml-2 cursor-pointer">
+                        <div className="flex flex-col lg:flex-row gap-1">
+                            <div className="lg:mx-4">
+                                <div className="flex flex-wrap gap-1">
+                                    <p className="text-xl font-bold text-secondary">
+                                        {hotel.title}
+                                    </p>
+                                    <StarRating data={hotel.rating}/>
+                                </div>
+                                <span className="text-sm underline text-secondary cursor-pointer capitalize">
+                                    {hotel.city}
+                                </span>
+                                <span className="text-sm underline text-secondary ml-2 cursor-pointer">
                                Show on map
-                            </span>
-                            <p className="text-sm mt-2">{hotel.descShort}</p>
-                        </div>
-                        <div className="ml-auto font-semibold flex flex-col">
-                            <div
-                                className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right mb-4 w-10 h-10"
-                            >
-                                {hotel.score}
+                                </span>
+                                <p className="text-sm mt-2">{hotel.descShort}</p>
                             </div>
-                            <Button
-                                text="Show prices"
-                                textColor="text-white"
-                                bgColor="bg-lightPrimary"
-                            />
+                            <div
+                                className="font-semibold flex flex-row lg:flex-col justify-between items-center lg:items-end ">
+                                <div
+                                    className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4 w-10 h-10"
+                                >
+                                    {hotel.score}
+                                </div>
+                                <Button
+                                    text="Show prices"
+                                    textColor="text-white"
+                                    bgColor="bg-lightPrimary"
+                                />
+                            </div>
                         </div>
                     </div>
                 </Link>
