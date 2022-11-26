@@ -70,10 +70,12 @@ const Join = () => {
 
     return (
         <div
-            className="container mx-auto relative p-2.5"
+            className="mx-auto container px-4 lg:px-6 py-6 relative"
         >
             <form onSubmit={onSubmit}>
-                <div style={{position: 'absolute', top: '.5rem', right: '.5rem'}}>
+                <div
+                    className="absolute top-0 right-0"
+                >
                     {currentStepIndex + 1} / {steps.length}
                 </div>
                 {step}
