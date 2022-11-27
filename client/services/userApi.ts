@@ -62,6 +62,27 @@ export const userApi = createApi({
             }) => {
                 return {url: '/users/wishlist', method: 'delete', body}
             }
+        }),
+        createHotel: builder.mutation({
+            query: (body: {
+                title: string;
+                type: string;
+                desc: string;
+                descShort: string;
+                city: string;
+                address: {
+                    name: string;
+                    lat?: number;
+                    lng?: number;
+                };
+                distance: string;
+                photos: string[];
+                featured: boolean;
+                name: string;
+                cheapestPrice: number;
+            }) => {
+                return {url: '/hotels', method: 'post', body}
+            }
         })
     })
 })
@@ -72,5 +93,6 @@ export const {
     useChangePasswordMutation,
     useDeleteUserMutation,
     useAddWishListMutation,
-    useDeleteWishListMutation
+    useDeleteWishListMutation,
+    useCreateHotelMutation
 } = userApi
