@@ -4,6 +4,8 @@ import {useMultistepForm} from '../../hooks/useMultiStepForm'
 import {AddressForm, HotelInfoForm, ImagesForm, TypeForm} from '../../components/join'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
+import {useUploadImagesMutation} from '../../services/uploadApi'
+import {useCreateHotelMutation} from '../../services/userApi'
 
 export interface HotelForm {
     title: string;
@@ -18,9 +20,9 @@ export interface HotelForm {
     };
     distance: string;
     photos: string[];
-    cheapestPrice: number;
     featured: boolean;
     name: string;
+    cheapestPrice: number;
 }
 
 const Join = () => {
@@ -33,11 +35,11 @@ const Join = () => {
         address: {
             name: ''
         },
-        distance: '',
+        distance: '1',
         photos: [],
-        cheapestPrice: 0,
         featured: false,
-        name: ''
+        name: '',
+        cheapestPrice: 10
     }
     const router = useRouter()
     const [data, setData] = useState(INITIAL_DATA)
@@ -56,17 +58,42 @@ const Join = () => {
             <ImagesForm key={3}{...data} updateFields={updateFields}/>
         ])
 
-    function onSubmit (e: FormEvent) {
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!isLastStep) return next()
-        console.log(data)
-        toast.success('Join to success')
-        router.push('/')
+        try {
+            const result = await createHotel(data).unwrap()
+            console.log(result)
+            toast.success('Join to success')
+        } catch (e) {
+            console.log(e)
+            toast.error('Something went wrong')
+        }
+
+        // router.push('/')
     }
 
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
+    const [createHotel, {isLoading: isCreating}] = useCreateHotelMutation()
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', alertUser)
+        window.addEventListener('unload', handleTabClosing)
+        return () => {
+            window.removeEventListener('beforeunload', alertUser)
+            window.removeEventListener('unload', handleTabClosing)
+        }
+    })
+    const handleTabClosing = () => {
+        console.log('close')
+        // removeTempPhotos()
+    }
+    const alertUser = (event: any) => {
+        event.preventDefault()
+        event.returnValue = ''
+    }
 
     return (
         <div
