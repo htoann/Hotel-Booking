@@ -35,7 +35,8 @@ export default {
 
   deleteImage: async (req, res) => {
     try {
-      const url = req.body;
+      const url = req.body.url;
+      console.log(url);
       if (url.length < 1) {
         return createError(res, 500, "Invalid url");
       }
