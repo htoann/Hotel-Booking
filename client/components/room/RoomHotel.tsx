@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
-  useGetHotelRoomsQuery
-} from "../../services/roomApi";
-import { useBookingRoomMutation } from "../../services/bookingApi";
-import { FaUser } from "../../utils/icons";
-import { Loader } from "../layout";
-import { Button } from "../core";
+    useGetHotelRoomsQuery
+} from '../../services/roomApi'
+import { useBookingRoomMutation } from '../../services/bookingApi'
+import { FaUser } from '../../utils/icons'
+import { Loader } from '../layout'
+import { Button } from '../core'
 import {IRoom} from '../../models'
 import {toast} from 'react-toastify'
 

@@ -4,7 +4,7 @@ import ReactMapGL, {
     NavigationControl
 } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import React, {useEffect, useRef, useState} from 'react'
+import React from 'react'
 import Geocoder from './Geocoder'
 import {mapboxAccessToken} from '../../utils/config'
 import {AddressFormProps} from '../join/AddressForm'
