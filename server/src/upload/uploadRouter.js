@@ -1,9 +1,9 @@
-import { auth, uploadAvatar, uploadPhotos } from "../api/middlewares";
+import { auth, uploadImage } from "../api/middlewares";
 import uploadController from "./uploadController";
 
 const router = require("express").Router();
 
-router.post("/avatar", auth, uploadAvatar, uploadController.uploadAvatar);
-router.post("/hotel/photos", auth, uploadPhotos, uploadController.uploadPhotos);
+router.post("/image", auth, uploadImage, uploadController.uploadImage);
+router.put("/image", auth, uploadController.deleteImage);
 
 export default router;
