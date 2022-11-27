@@ -1,8 +1,7 @@
-// Wait API upload image
-
 import React, {useState} from 'react'
 import {FiTrash} from '../../utils/icons'
 import {toast} from 'react-toastify'
+import {useUploadImagesMutation} from '../../services/uploadApi'
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
@@ -19,36 +18,58 @@ const ImagesForm = (
         updateFields
     }: ImagesFormProps
 ) => {
-    const [files, setFiles] = useState<any>({})
-    const handleNewFileUpload = (e: any) => {
+    const [files, setFiles] = useState<string[]>(photos)
+
+    const [uploadImages, {isLoading: isUploadingImages}] = useUploadImagesMutation()
+
+    const handleNewFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const {files: newFiles} = e.target
-        if (newFiles.length) {
-            let updatedFiles = addNewFiles(newFiles)
-            setFiles(updatedFiles)
-            // callUpdateFilesCb(updatedFiles)
-        }
-    }
-    const addNewFiles = (newFiles: any) => {
-        for (let file of newFiles) {
-            if (file.size <= DEFAULT_MAX_FILE_SIZE_IN_BYTES) {
-                files[file.name] = file
-            } else {
-                toast.error(`${file.name} size too large`)
+        if (newFiles?.length) {
+            try {
+                for (let i = 0; i < newFiles.length; ++i) {
+                    const file = newFiles[i]
+                    if (file.size <= DEFAULT_MAX_FILE_SIZE_IN_BYTES) {
+                        const photo = await uploadImageToCloud(file)
+                        if (photo) {
+                            setFiles([...files, photo])
+                        }
+                        updateFields({
+                            photos: files
+                        })
+                    } else {
+                        toast.error(`${file.name} size too large`)
+                    }
+                }
+            } catch (e) {
+                toast.error('Something went wrong')
             }
         }
-        return {...files}
     }
-    const convertNestedObjectToArray = (nestedObj: any) =>
-        Object.keys(nestedObj).map((key) => nestedObj[key])
+    const uploadImageToCloud = async (file: File) => {
+        try {
+            const {url} = await uploadImages({photos: file}).unwrap()
+            return url
+        } catch (e) {
+            toast.error(`${file.name} upload fail`)
+        }
+    }
 
-    // const callUpdateFilesCb = (files: any) => {
-    //     const filesAsArray = convertNestedObjectToArray(files)
-    //     updateFilesCb(filesAsArray)
-    // }
-    const removeFile = (fileName: any) => {
-        delete files[fileName]
-        setFiles({...files})
-        // callUpdateFilesCb({...files})
+    const removeFile = (file: string) => {
+        // try {
+        //     await uploadImage({id: file}).unwrap()
+        //     const newFiles = files.filter((e) => e !== file)
+        //     setFiles(newFiles)
+        //     updateFields({
+        //         photos: files
+        //     })
+        // } catch (e) {
+        //     toast.error('Something went wrong')
+        // }
+        const newFiles = files.filter((e) => e !== file)
+        setFiles(newFiles)
+        updateFields({
+            photos: files
+        })
     }
     return (
         <main className="container mx-auto max-w-screen-lg h-full">
@@ -91,7 +112,7 @@ const ImagesForm = (
                     </h1>
                     <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
                         {
-                            Object.keys(files).length === 0
+                            files.length === 0
                                 ? <li id="empty"
                                     className="h-full w-full text-center flex flex-col items-center justify-center items-center">
                                     <img className="mx-auto w-32"
@@ -100,24 +121,23 @@ const ImagesForm = (
                                     <span className="text-small text-gray-500">No files selected</span>
                                 </li>
                                 : <section className="flex flex-wrap gap-5">
-                                    {Object.keys(files).map((fileName, index) => {
-                                        let file = files[fileName]
-                                        let isImageFile = file.type.split('/')[0] === 'image'
+                                    {files.map((file, index) => {
+                                        // let isImageFile = file.type.split('/')[0] === 'image'
                                         return (
-                                            <div key={fileName} className="relative border">
-                                                {isImageFile && (
-                                                    <img className="h-40 object-cover"
-                                                        src={URL.createObjectURL(file)}
-                                                        alt={`file preview ${index}`}
-                                                    />
-                                                )}
+                                            <div key={`${file}`} className="relative border">
+                                                {/* {isImageFile && ( */}
+                                                <img className="h-40 object-cover"
+                                                    src={file}
+                                                    alt={`file preview ${file}`}
+                                                />
+                                                {/* )} */}
                                                 <div>
                                                     <div
                                                         className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2
                                                                 bg-white border rounded-full p-1 text-red-500
                                                                 cursor-pointer hover:bg-red-500 hover:text-white
                                                                 "
-                                                        onClick={() => removeFile(fileName)}
+                                                        onClick={() => removeFile(file)}
                                                     >
                                                         <FiTrash/>
                                                     </div>

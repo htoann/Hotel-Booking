@@ -13,7 +13,8 @@ import storage from 'redux-persist/lib/storage'
 import authReducer from '../features/authSlice'
 import hotelReducer from '../features/hotelSlice'
 import appReducer from '../features/appSlice'
-import {authApi, hotelApi, roomApi, userApi} from '../services'
+
+import {authApi, hotelApi, roomApi, uploadApi, userApi, bookingApi} from '../services'
 
 const persistConfig = {
     key: 'root',
@@ -35,14 +36,16 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [hotelApi.reducerPath]: hotelApi.reducer,
         [roomApi.reducerPath]: roomApi.reducer,
-        [userApi.reducerPath]: userApi.reducer
+        [userApi.reducerPath]: userApi.reducer,
+        [uploadApi.reducerPath]: uploadApi.reducer,
+        [bookingApi.reducerPath]: bookingApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
             }
-        }).concat(authApi.middleware, hotelApi.middleware, roomApi.middleware)
+        }).concat(authApi.middleware, hotelApi.middleware, roomApi.middleware, bookingApi.middleware)
 })
 export const persistor = persistStore(store)
 
@@ -50,4 +53,4 @@ export const persistor = persistStore(store)
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
