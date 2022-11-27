@@ -16,11 +16,11 @@ export const roomApi = createApi({
             }
             return headers
         }
-  }),
+    }),
     endpoints: (builder) => ({
         getHotelRooms: builder.query<IRoom[], string>({
             query: (id) => `/hotels/room/${id}`
-        }),
+        })
     })
 })
 

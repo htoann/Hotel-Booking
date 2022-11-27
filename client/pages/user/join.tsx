@@ -4,7 +4,6 @@ import {useMultistepForm} from '../../hooks/useMultiStepForm'
 import {AddressForm, HotelInfoForm, ImagesForm, TypeForm} from '../../components/join'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
-import {useUploadImagesMutation} from '../../services/uploadApi'
 import {useCreateHotelMutation} from '../../services/userApi'
 
 export interface HotelForm {

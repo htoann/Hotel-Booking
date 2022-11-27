@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import {useChangePasswordMutation, useDeleteUserMutation} from '../../services/userApi'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
-import {logout, setUser} from '../../features/authSlice'
+import {logout} from '../../features/authSlice'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'

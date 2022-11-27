@@ -1,5 +1,4 @@
 import React from 'react'
-import {validateInputCity} from '../../utils/validateInputCity'
 
 type HotelData = {
     name: string;

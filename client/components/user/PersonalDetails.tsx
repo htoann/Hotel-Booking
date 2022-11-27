@@ -1,11 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useGetUserQuery, useUpdateUserMutation} from '../../services/userApi'
 import {Loader} from '../layout'
-import ErrorPage from 'next/error'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
 import {useForm} from 'react-hook-form'
 import {setUser} from '../../features/authSlice'
-import {setHotels} from '../../features/hotelSlice'
 import {Button} from '../core'
 import {CiEdit} from '../../utils/icons'
 import {toast} from 'react-toastify'
@@ -18,7 +16,7 @@ type FormValues = {
 
 const PersonalDetails = () => {
     const {user, token} = useAppSelector((state) => state.persistedReducer.auth)
-    const {data: userData, isLoading: getLoading, isSuccess, error} = useGetUserQuery(user?._id as string)
+    const {data: userData, isLoading: getLoading, isSuccess} = useGetUserQuery(user?._id as string)
     const dispatch = useAppDispatch()
     useEffect(() => {
         if (isSuccess) {
@@ -26,7 +24,7 @@ const PersonalDetails = () => {
                 setUser({user: userData, token})
             )
         }
-    }, [dispatch, userData, isSuccess])
+    }, [dispatch, userData, isSuccess, token])
 
     const [updateUser, {isLoading: isUpdating}] = useUpdateUserMutation()
 
