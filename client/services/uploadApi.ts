@@ -18,11 +18,20 @@ export const uploadApi = createApi({
     }),
 
     endpoints: (builder) => ({
-        uploadImages: builder.mutation<{ url: string }, { photos: File }>({
+        uploadImages: builder.mutation<{ url: string[] }, FormData>({
             query: (body) => {
                 return {
-                    url: `/upload/hotel/photos`,
+                    url: `/upload/image`,
                     method: 'POST',
+                    body
+                }
+            }
+        }),
+        deleteImage: builder.mutation<{ message: string }, { url: string }>({
+            query: (body) => {
+                return {
+                    url: `/upload/image`,
+                    method: 'DELETE',
                     body
                 }
             }
