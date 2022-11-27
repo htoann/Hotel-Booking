@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IRoom } from '../models'
 import { RootState } from '../store/store'
+import {IBooking} from '../models'
 
 import { apiUrl } from '../utils/config'
 
-export const roomApi = createApi({
-    reducerPath: 'roomApi',
+export const bookingApi = createApi({
+    reducerPath: 'bookingApi',
     baseQuery: fetchBaseQuery({
         baseUrl: apiUrl,
         prepareHeaders: (headers, { getState, endpoint }) => {
@@ -16,12 +16,17 @@ export const roomApi = createApi({
             }
             return headers
         }
-  }),
+    }),
     endpoints: (builder) => ({
-        getHotelRooms: builder.query<IRoom[], string>({
-            query: (id) => `/hotels/room/${id}`
+        getAllBooking: builder.query<any, any>({
+            query: () => '/booking'
         }),
+        bookingRoom: builder.mutation({
+            query: (body: { roomId: string; checkIn: Date; checkOut: Date, price: Number }) => {
+                return { url: '/booking', method: 'post', body }
+            }
+        })
     })
 })
 
-export const { useGetHotelRoomsQuery } = roomApi
+export const { useGetAllBookingQuery, useBookingRoomMutation } = bookingApi

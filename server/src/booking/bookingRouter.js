@@ -3,6 +3,8 @@ import bookingController from "./bookingController";
 
 const router = require("express").Router();
 
+router.get("/", auth, bookingController.getAllBooking);
 router.post("/", auth, bookingController.booking);
+router.delete("/", auth, bookingController.deleteBooking);
 
 export default router;

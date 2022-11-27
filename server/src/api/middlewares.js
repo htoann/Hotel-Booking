@@ -6,7 +6,7 @@ import fs from "fs";
 export const auth = (req, res, next) => {
   if (
     !req.header("Authorization") &&
-    !req.header("Authorization").startsWith("Bearer")
+    !req.header("Authorization")?.startsWith("Bearer")
   ) {
     return createError(
       res,
@@ -32,7 +32,7 @@ export const auth = (req, res, next) => {
 export const admin = (req, res, next) => {
   if (
     !req.header("Authorization") &&
-    !req.header("Authorization").startsWith("Bearer")
+    !req.header("Authorization")?.startsWith("Bearer")
   ) {
     return createError(
       res,
@@ -58,35 +58,16 @@ export const admin = (req, res, next) => {
   }
 };
 
-export const uploadAvatar = async (req, res, next) => {
-  try {
-    if (!req.files || Object.keys(req.files).length === 0)
-      return createError(res, 400, "No files were uploaded.");
-    const file = req.files.photos;
-    if (file.length > 0) {
-      return createError(res, 400, "Please select only 1 image");
-    }
-    if (file.size > 1024 * 1024) {
-      removeTmp(file.tempFilePath);
-      return createError(res, 400, "Size too large.");
-    } // 1mb
-
-    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
-      removeTmp(file.tempFilePath);
-      return createError(res, 400, "File format is incorrect.");
-    }
-    next();
-  } catch (err) {
-    console.log(err);
-    return createError(res, 500, err);
-  }
-};
-
-export const uploadPhotos = async (req, res, next) => {
+export const uploadImage = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0)
       return createError(res, 400, "No files were uploaded.");
     const files = req.files.photos;
+
+    // if (file.size > 1024 * 1024) {
+    //   removeTmp(file.tempFilePath);
+    //   return createError(res, 400, "Size too large.");
+    // } // 1mb
 
     if (files.length > 1) {
       files.map((file) => {
@@ -95,7 +76,10 @@ export const uploadPhotos = async (req, res, next) => {
         }
       });
     } else {
-      return createError(res, 400, "Please select at least 2 photos");
+      if (files.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+        removeTmp(files.tempFilePath);
+        return createError(res, 400, "File format is incorrect.");
+      }
     }
     next();
   } catch (err) {
