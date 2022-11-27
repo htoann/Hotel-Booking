@@ -17,9 +17,9 @@ $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 
 Variable
 ```
-{{API_ENDPOINT}} : https://bookingapihotel.herokuapp.com/api
+{{API_ENDPOINT}} : https://bookings.up.railway.app/api
 ```
-Example get all hotels : https://bookingapihotel.herokuapp.com/api/hotels
+Example get all hotels : https://bookings.up.railway.app/api/hotels
 
 ### Start
 
