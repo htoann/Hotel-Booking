@@ -13,7 +13,7 @@ import storage from 'redux-persist/lib/storage'
 import authReducer from '../features/authSlice'
 import hotelReducer from '../features/hotelSlice'
 import appReducer from '../features/appSlice'
-import {authApi, hotelApi, roomApi, userApi} from '../services'
+import {authApi, hotelApi, roomApi, uploadApi, userApi} from '../services'
 
 const persistConfig = {
     key: 'root',
@@ -35,7 +35,8 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [hotelApi.reducerPath]: hotelApi.reducer,
         [roomApi.reducerPath]: roomApi.reducer,
-        [userApi.reducerPath]: userApi.reducer
+        [userApi.reducerPath]: userApi.reducer,
+        [uploadApi.reducerPath]: uploadApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

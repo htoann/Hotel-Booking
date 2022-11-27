@@ -1,6 +1,7 @@
 import {authApi} from './authApi'
 import {hotelApi} from './hotelApi'
 import {roomApi} from './roomApi'
-import { userApi } from './userApi'
+import {uploadApi} from './uploadApi'
+import {userApi} from './userApi'
 
-export {hotelApi, roomApi, authApi, userApi}
+export {hotelApi, roomApi, authApi, userApi, uploadApi}
