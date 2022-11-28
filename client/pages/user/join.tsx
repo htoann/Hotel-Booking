@@ -5,6 +5,7 @@ import {AddressForm, HotelInfoForm, ImagesForm, TypeForm} from '../../components
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import {useCreateHotelMutation} from '../../services/userApi'
+import {useDeleteImageMutation} from '../../services/uploadApi'
 
 export interface HotelForm {
     title: string;
@@ -64,12 +65,11 @@ const Join = () => {
             const result = await createHotel(data).unwrap()
             console.log(result)
             toast.success('Join to success')
+            await router.push('/')
         } catch (e) {
             console.log(e)
             toast.error('Something went wrong')
         }
-
-        // router.push('/')
     }
 
     const [createHotel, {isLoading: isCreating}] = useCreateHotelMutation()
@@ -85,9 +85,18 @@ const Join = () => {
             window.removeEventListener('unload', handleTabClosing)
         }
     })
-    const handleTabClosing = () => {
-        console.log('close')
-        // removeTempPhotos()
+    const [deleteImage] = useDeleteImageMutation()
+    const handleTabClosing = async () => {
+        try {
+            for (let i = 0; i < data.photos.length; i++) {
+                await deleteImage({url: data.photos[i]})
+            }
+            console.log('close')
+            // await removeTempPhotos()
+        } catch (e) {
+            console.log(e)
+            toast.error('Something went wrong')
+        }
     }
     const alertUser = (event: any) => {
         event.preventDefault()
@@ -115,7 +124,7 @@ const Join = () => {
                         </div>
                     )}
                     <button
-                        type="submit">
+                        type="submit" disabled={isCreating}>
                         <Button text={isLastStep ? 'Submit' : 'Next'} textColor="text-white" bgColor="bg-primary"/>
                     </button>
                 </div>

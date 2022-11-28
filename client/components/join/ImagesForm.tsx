@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import {FiTrash} from '../../utils/icons'
 import {toast} from 'react-toastify'
@@ -44,9 +44,6 @@ const ImagesForm = (
                         setFiles([...files, ...url])
                         setCounter(0)
                     }
-                    updateFields({
-                        photos: files
-                    })
                 }
             } catch (e) {
                 toast.error('Something went wrong')
@@ -58,22 +55,24 @@ const ImagesForm = (
             const {url} = await uploadImages(formData).unwrap()
             return url
         } catch (e) {
+            console.log(e)
             toast.error(`Upload fail`)
         }
     }
-
     const removeFile = async (file: string) => {
         try {
             const newFiles = files.filter((e) => e !== file)
             setFiles(newFiles)
-            updateFields({
-                photos: files
-            })
             await deleteImage({url: file}).unwrap()
         } catch (e) {
             console.log(e)
         }
     }
+    useEffect(() => {
+        updateFields({
+            photos: files
+        })
+    }, [files])
     return (
         <main className="container mx-auto max-w-screen-lg h-full">
             <div
