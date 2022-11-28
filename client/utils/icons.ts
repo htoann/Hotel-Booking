@@ -19,6 +19,7 @@ import {TbBeach} from 'react-icons/tb'
 import {FiTrash} from 'react-icons/fi'
 import {BsFillShareFill, BsFlower1, BsShieldLock} from 'react-icons/bs'
 import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
+import {IoMdAdd} from 'react-icons/io'
 
 export {
     HiUser,
@@ -61,5 +62,6 @@ export {
     RiUserSettingsLine,
     BsShieldLock,
     FiTrash,
-    CiEdit
+    CiEdit,
+    IoMdAdd
 }

@@ -4,6 +4,7 @@ import {IHotel} from '../../models'
 import Button from './Button'
 import StarRating from './StarRating'
 import Image from 'next/image'
+import {MdLocationOn} from '../../utils/icons'
 
 interface Props {
     data?: IHotel[];
@@ -28,7 +29,7 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
                             src={hotel.photos[0]}
                             alt={hotel.name}
                         />
-                        <div className="flex flex-col lg:flex-row gap-1">
+                        <div className="flex-1 flex flex-col justify-between lg:flex-row gap-1">
                             <div className="lg:mx-4">
                                 <div className="flex flex-wrap gap-1">
                                     <p className="text-xl font-bold text-secondary">
@@ -36,12 +37,16 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
                                     </p>
                                     <StarRating data={hotel.rating}/>
                                 </div>
-                                <span className="text-sm underline text-secondary cursor-pointer capitalize">
-                                    {hotel.city}
-                                </span>
-                                <span className="text-sm underline text-secondary ml-2 cursor-pointer">
+                                <div className="text-sm underline text-secondary flex items-center flex-wrap gap-2">
+                                    <MdLocationOn/>
+                                    <span className="cursor-pointer capitalize">
+                                        {hotel.city}
+                                    </span>
+                                    <span className="cursor-pointer">
                                Show on map
-                                </span>
+                                    </span>
+                                </div>
+
                                 <p className="text-sm mt-2">{hotel.descShort}</p>
                             </div>
                             <div
@@ -49,7 +54,7 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
                                 <div
                                     className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4 w-10 h-10"
                                 >
-                                    {hotel.score}
+                                    {hotel.score ? hotel.score : 'No score'}
                                 </div>
                                 <Button
                                     text="Show prices"

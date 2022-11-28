@@ -25,7 +25,7 @@ export interface HotelForm {
     cheapestPrice: number;
 }
 
-const Join = () => {
+const Create = () => {
     const INITIAL_DATA: HotelForm = {
         title: '',
         type: '',
@@ -64,7 +64,7 @@ const Join = () => {
         try {
             const result = await createHotel(data).unwrap()
             console.log(result)
-            toast.success('Join to success')
+            toast.success('Create to success')
             await router.push('/')
         } catch (e) {
             console.log(e)
@@ -133,4 +133,4 @@ const Join = () => {
     )
 }
 
-export default Join
+export default Create

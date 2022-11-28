@@ -17,8 +17,8 @@ export interface IHotel {
     photos: string[];
     cheapestPrice: number;
     featured: boolean;
-    rating: number;
-    score: number;
+    rating?: number;
+    score?: number;
     rooms: string[];
     __v: number;
     name: string;

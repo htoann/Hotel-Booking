@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {IUser} from '../models'
+import {IHotel, IUser} from '../models'
 import {RootState} from '../store/store'
 
 import {apiUrl} from '../utils/config'
@@ -83,6 +83,14 @@ export const userApi = createApi({
             }) => {
                 return {url: '/hotels', method: 'post', body}
             }
+        }),
+        getMyHotels: builder.query<IHotel[], void>({
+            query: () => `/hotels/me`
+        }),
+        deleteHotel: builder.mutation<void, string>({
+            query: (id) => {
+                return {url: `/hotels/${id}`, method: 'delete'}
+            }
         })
     })
 })
@@ -94,5 +102,7 @@ export const {
     useDeleteUserMutation,
     useAddWishListMutation,
     useDeleteWishListMutation,
-    useCreateHotelMutation
+    useCreateHotelMutation,
+    useGetMyHotelsQuery,
+    useDeleteHotelMutation
 } = userApi
