@@ -2,7 +2,7 @@ export interface Address {
     name: string;
     lat: number;
     lng: number;
-    _id: string;
+    _id?: string;
 }
 
 export interface IHotel {
@@ -22,4 +22,7 @@ export interface IHotel {
     rooms: string[];
     __v: number;
     name: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    user?: string
 }
