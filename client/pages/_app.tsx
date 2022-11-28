@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import {Layout} from '../components/layout'
 import {Router} from 'next/router'
 import NProgress from 'nprogress'
+import '../styles/CubeLoader.css'
 
 export default function App ({Component, pageProps}: AppProps) {
     NProgress.configure({showSpinner: false})

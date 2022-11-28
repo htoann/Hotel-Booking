@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import Image from 'next/image'
 import {FiTrash} from '../../utils/icons'
 import {toast} from 'react-toastify'
-import {useUploadImagesMutation} from '../../services/uploadApi'
+import {useDeleteImageMutation, useUploadImagesMutation} from '../../services/uploadApi'
+import CubeLoader from '../layout/CubeLoader'
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
@@ -19,25 +21,28 @@ const ImagesForm = (
     }: ImagesFormProps
 ) => {
     const [files, setFiles] = useState<string[]>(photos)
-
-    const [uploadImages, {isLoading: isUploadingImages}] = useUploadImagesMutation()
-
+    const [counter, setCounter] = useState(0)
+    const [uploadImages] = useUploadImagesMutation()
+    const [deleteImage] = useDeleteImageMutation()
     const handleNewFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const {files: newFiles} = e.target
-        if (newFiles?.length) {
+        if (newFiles) {
             try {
+                let formData = new FormData()
                 for (let i = 0; i < newFiles.length; ++i) {
                     const file = newFiles[i]
                     if (file.size <= DEFAULT_MAX_FILE_SIZE_IN_BYTES) {
-                        const photo = await uploadImageToCloud(file)
-                        if (photo) {
-                            setFiles([...files, photo])
-                        }
-                        updateFields({
-                            photos: files
-                        })
+                        formData.append('photos', file)
                     } else {
                         toast.error(`${file.name} size too large`)
+                    }
+                }
+                if (Array.from(formData.keys()).length > 0) {
+                    setCounter(Array.from(formData.keys()).length)
+                    const url = await uploadImageToCloud(formData)
+                    if (url) {
+                        setFiles([...files, ...url])
+                        setCounter(0)
                     }
                 }
             } catch (e) {
@@ -45,32 +50,29 @@ const ImagesForm = (
             }
         }
     }
-    const uploadImageToCloud = async (file: File) => {
+    const uploadImageToCloud = async (formData: FormData) => {
         try {
-            const {url} = await uploadImages({photos: file}).unwrap()
+            const {url} = await uploadImages(formData).unwrap()
             return url
         } catch (e) {
-            toast.error(`${file.name} upload fail`)
+            console.log(e)
+            toast.error(`Upload fail`)
         }
     }
-
-    const removeFile = (file: string) => {
-        // try {
-        //     await uploadImage({id: file}).unwrap()
-        //     const newFiles = files.filter((e) => e !== file)
-        //     setFiles(newFiles)
-        //     updateFields({
-        //         photos: files
-        //     })
-        // } catch (e) {
-        //     toast.error('Something went wrong')
-        // }
-        const newFiles = files.filter((e) => e !== file)
-        setFiles(newFiles)
+    const removeFile = async (file: string) => {
+        try {
+            const newFiles = files.filter((e) => e !== file)
+            setFiles(newFiles)
+            await deleteImage({url: file}).unwrap()
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    useEffect(() => {
         updateFields({
             photos: files
         })
-    }
+    }, [files])
     return (
         <main className="container mx-auto max-w-screen-lg h-full">
             <div
@@ -112,7 +114,7 @@ const ImagesForm = (
                     </h1>
                     <ul id="gallery" className="flex flex-1 flex-wrap -m-1">
                         {
-                            files.length === 0
+                            files.length === 0 && counter === 0
                                 ? <li id="empty"
                                     className="h-full w-full text-center flex flex-col items-center justify-center items-center">
                                     <img className="mx-auto w-32"
@@ -120,31 +122,34 @@ const ImagesForm = (
                                         alt="no data"/>
                                     <span className="text-small text-gray-500">No files selected</span>
                                 </li>
-                                : <section className="flex flex-wrap gap-5">
-                                    {files.map((file, index) => {
-                                        // let isImageFile = file.type.split('/')[0] === 'image'
-                                        return (
-                                            <div key={`${file}`} className="relative border">
-                                                {/* {isImageFile && ( */}
-                                                <img className="h-40 object-cover"
-                                                    src={file}
-                                                    alt={`file preview ${file}`}
-                                                />
-                                                {/* )} */}
-                                                <div>
-                                                    <div
-                                                        className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2
+                                : <section className="w-full grid grid-cols-2 lg:grid-cols-3 gap-5">
+                                    {files.map((file, index) => (
+                                        <div key={`${file}`} className="w-full h-40 relative border">
+                                            <Image
+                                                className="w-full h-full object-fill"
+                                                src={file}
+                                                alt={`file preview ${file}`}
+                                                width={2000}
+                                                height={1000}
+                                            />
+                                            <div
+                                                className={`absolute top-0 right-0 translate-x-1/2 -translate-y-1/2
                                                                 bg-white border rounded-full p-1 text-red-500
                                                                 cursor-pointer hover:bg-red-500 hover:text-white
-                                                                "
-                                                        onClick={() => removeFile(file)}
-                                                    >
-                                                        <FiTrash/>
-                                                    </div>
-                                                </div>
+                                                                `}
+                                                onClick={() => removeFile(file)}
+                                            >
+                                                <FiTrash/>
                                             </div>
-                                        )
-                                    })}
+                                        </div>
+                                    ))}
+                                    {[...Array(counter)].map((_, index) => (
+                                        <div key={index} className="w-full h-40 relative border">
+                                            <div className="w-full h-full flex justify-center items-center">
+                                                <CubeLoader/>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </section>
                         }
                     </ul>
