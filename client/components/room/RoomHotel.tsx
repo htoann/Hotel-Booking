@@ -165,10 +165,10 @@ const RoomHotel = ({hotelId}: Props) => {
                 </label>
             </div>
             <div className="w-full flex flex-wrap">
-                <div className="w-full md:w-4/5">
+                <div className="w-full xl:w-4/5 lg:w-full">
                     <div className="hidden md:grid grid-cols-12 bg-blue-400 text-white">
                         <div
-                            className="col-span-4 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center"
+                            className="xl:col-span-5 lg:col-span-6 md:col-span-7 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center"
                         >
                             Room Type
                         </div>
@@ -177,15 +177,15 @@ const RoomHotel = ({hotelId}: Props) => {
                             Sleeps
                         </div>
                         <div
-                            className="col-span-2 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
+                            className="xl:col-span-2 lg:col-span-1 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
                             Today&apos;s Price
                         </div>
                         <div
-                            className="col-span-3 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
+                            className="col-span-2 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
                             Your Choices
                         </div>
                         <div
-                            className="col-span-2 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
+                            className="xl:col-span-2 lg:col-span-2 md:col-span-1 text-sm 2xl:text-base border border-l-0 border-blue-500 p-1.5 flex justify-center items-center text-center">
                             Select amount
                         </div>
                     </div>
@@ -193,9 +193,9 @@ const RoomHotel = ({hotelId}: Props) => {
                         {rooms?.map((room) => (
                             <div key={room._id} className="grid mt-2.5 md:mt-0 md:grid-cols-12">
                                 <div
-                                    className="md:col-span-4 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
+                                    className="xl:col-span-5 lg:col-span-6 md:col-span-7 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
                                     <div>
-                                        <h2 className="w-full font-semibold underline text-base 2xl:text-2xl text-secondary w-max cursor-pointer">
+                                        <h2 className="w-full font-semibold underline text-base 2xl:text-xl text-secondary w-max cursor-pointer">
                                             {room.title}
                                         </h2>
                                         <p className="my-2 w-full">{room.desc}</p>
@@ -220,14 +220,14 @@ const RoomHotel = ({hotelId}: Props) => {
                                     </div>
                                 </div>
                                 <div
-                                    className="md:col-span-2 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
+                                    className="xl:col-span-2 lg:col-span-1 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
                                     <div>
-                                        <p className="font-semibold text-base 2xl:text-2xl">US${room.price}</p>
+                                        <p className="font-semibold text-base 2xl:text-xl break-all">US${room.price}</p>
                                         <p className="text-primary">Includes taxes and fees</p>
                                     </div>
                                 </div>
                                 <div
-                                    className="md:col-span-3 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
+                                    className="md:col-span-2 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
                                     <div>
                                         <h2 className="font-semibold">50% required to cancel</h2>
                                         <p>
@@ -242,7 +242,7 @@ const RoomHotel = ({hotelId}: Props) => {
                                     </div>
                                 </div>
                                 <div
-                                    className="md:col-span-2 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
+                                    className="xl:col-span-2 lg:col-span-2 md:col-span-1 text-sm 2xl:text-base border md:border-l-0 border-blue-500 p-1.5 flex md:justify-center items-center">
                                     <select
                                         className="w-full"
                                         defaultValue={0}
@@ -264,7 +264,7 @@ const RoomHotel = ({hotelId}: Props) => {
                 </div>
 
                 {/* Right */}
-                <div className="w-full md:w-1/5 border md:border-l-0 border-blue-500">
+                <div className="w-full xl:w-1/5 border md:border-l-0 border-blue-500">
                     <div
                         className="bg-blue-400 text-sm 2xl:text-base border-b-2 border-blue-500 p-1.5 flex justify-center items-center"
                     >
