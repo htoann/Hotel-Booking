@@ -6,6 +6,8 @@ import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import {useCreateHotelMutation} from '../../services/userApi'
 import {useDeleteImageMutation} from '../../services/uploadApi'
+import {useAppDispatch} from '../../store/hooks'
+import {addToMyHotels} from '../../features/hotelSlice'
 
 export interface HotelForm {
     title: string;
@@ -42,6 +44,7 @@ const Create = () => {
         cheapestPrice: 10
     }
     const router = useRouter()
+    const dispatch = useAppDispatch()
     const [data, setData] = useState(INITIAL_DATA)
 
     function updateFields (fields: Partial<HotelForm>) {
@@ -63,9 +66,9 @@ const Create = () => {
         if (!isLastStep) return next()
         try {
             const result = await createHotel(data).unwrap()
-            console.log(result)
+            dispatch(addToMyHotels(result))
+            await router.push('/join')
             toast.success('Create to success')
-            await router.push('/')
         } catch (e) {
             console.log(e)
             toast.error('Something went wrong')
@@ -73,9 +76,9 @@ const Create = () => {
     }
 
     const [createHotel, {isLoading: isCreating}] = useCreateHotelMutation()
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    // useEffect(() => {
+    //     console.log(data)
+    // }, [data])
 
     useEffect(() => {
         window.addEventListener('beforeunload', alertUser)

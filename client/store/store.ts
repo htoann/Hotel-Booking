@@ -44,7 +44,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
             }
-        }).concat(authApi.middleware, hotelApi.middleware, roomApi.middleware, bookingApi.middleware)
+        }).concat(authApi.middleware, hotelApi.middleware, roomApi.middleware, userApi.middleware, uploadApi.middleware, bookingApi.middleware)
 })
 export const persistor = persistStore(store)
 

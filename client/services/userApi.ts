@@ -6,6 +6,7 @@ import {apiUrl} from '../utils/config'
 
 export const userApi = createApi({
     reducerPath: 'userApi',
+    tagTypes: ['myHotels'],
     baseQuery: fetchBaseQuery({
         baseUrl: apiUrl,
         prepareHeaders: (headers, {getState, endpoint}) => {
@@ -63,34 +64,37 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'delete', body}
             }
         }),
-        createHotel: builder.mutation({
-            query: (body: {
-                title: string;
-                type: string;
-                desc: string;
-                descShort: string;
-                city: string;
-                address: {
-                    name: string;
-                    lat?: number;
-                    lng?: number;
-                };
-                distance: string;
-                photos: string[];
-                featured: boolean;
+        createHotel: builder.mutation<IHotel, {
+            title: string;
+            type: string;
+            desc: string;
+            descShort: string;
+            city: string;
+            address: {
                 name: string;
-                cheapestPrice: number;
-            }) => {
+                lat?: number;
+                lng?: number;
+            };
+            distance: string;
+            photos: string[];
+            featured: boolean;
+            name: string;
+            cheapestPrice: number;
+        }>({
+            query: (body) => {
                 return {url: '/hotels', method: 'post', body}
-            }
+            },
+            invalidatesTags: ['myHotels']
         }),
         getMyHotels: builder.query<IHotel[], void>({
-            query: () => `/hotels/me`
+            query: () => `/hotels/me`,
+            providesTags: ['myHotels']
         }),
         deleteHotel: builder.mutation<void, string>({
             query: (id) => {
                 return {url: `/hotels/${id}`, method: 'delete'}
-            }
+            },
+            invalidatesTags: ['myHotels']
         })
     })
 })

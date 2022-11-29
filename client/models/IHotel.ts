@@ -24,5 +24,6 @@ export interface IHotel {
     name: string;
     createdAt?: Date;
     updatedAt?: Date;
-    user?: string
+    user?: string;
+    published: boolean;
 }
