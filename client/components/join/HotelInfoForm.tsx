@@ -6,6 +6,7 @@ type HotelData = {
     desc: string;
     descShort: string;
     city: string;
+    distance: string;
 }
 
 type HotelInfoFormProps = HotelData & {
@@ -18,7 +19,8 @@ const HotelInfoForm = ({
     desc,
     descShort,
     city,
-    updateFields
+    updateFields,
+    distance
 }: HotelInfoFormProps) => {
     return (
         <div className="mt-5 p-5 flex flex-col gap-y-5 w-full md:w-1/2 mx-auto border rounded-lg">
@@ -86,6 +88,19 @@ const HotelInfoForm = ({
                     required
                     value={city}
                     onChange={e => updateFields({city: e.target.value})}
+                />
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="" className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Distance
+                    <span className="text-red-500"> *</span>
+                </label>
+                <input
+                    className="rounded"
+                    type="text"
+                    required
+                    value={distance}
+                    onChange={e => updateFields({distance: e.target.value})}
                 />
             </div>
         </div>

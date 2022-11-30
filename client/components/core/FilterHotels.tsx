@@ -25,7 +25,7 @@ const FilterHotels: React.FC<Props> = ({hotels, setHotelsType}) => {
             if (type !== 'all') {
                 if (rating !== 'all') {
                     const hotelsFilter = hotels?.filter(
-                        (el) => el.type === type && Math.round(el.rating) === +rating
+                        (el) => el.type === type && el.rating && Math.round(el.rating) === +rating
                     )
 
                     setHotelsType(hotelsFilter)
@@ -36,7 +36,7 @@ const FilterHotels: React.FC<Props> = ({hotels, setHotelsType}) => {
                 }
             } else if (rating !== 'all') {
                 const hotelsFilter = hotels?.filter(
-                    (el) => Math.round(el.rating) === +rating
+                    (el) => el.rating && Math.round(el.rating) === +rating
                 )
 
                 setHotelsType(hotelsFilter)
