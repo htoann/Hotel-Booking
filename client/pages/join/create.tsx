@@ -1,34 +1,16 @@
-import React, {FormEvent, useEffect, useState} from 'react'
+import React, {FormEvent, useState} from 'react'
 import {Button} from '../../components/core'
 import {useMultistepForm} from '../../hooks/useMultiStepForm'
-import {AddressForm, HotelInfoForm, ImagesForm, TypeForm} from '../../components/join'
+import {AddressForm, HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '../../components/join'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import {useCreateHotelMutation} from '../../services/userApi'
-import {useDeleteImageMutation} from '../../services/uploadApi'
 import {useAppDispatch} from '../../store/hooks'
 import {addToMyHotels} from '../../features/hotelSlice'
-
-export interface HotelForm {
-    title: string;
-    type: string;
-    desc: string;
-    descShort: string;
-    city: string;
-    address: {
-        name: string;
-        lat?: number;
-        lng?: number;
-    };
-    distance: string;
-    photos: string[];
-    featured: boolean;
-    name: string;
-    cheapestPrice: number;
-}
+import {IHotel} from '../../models/IHotel'
 
 const Create = () => {
-    const INITIAL_DATA: HotelForm = {
+    const INITIAL_DATA: IHotel = {
         title: '',
         type: '',
         desc: '',
@@ -37,17 +19,17 @@ const Create = () => {
         address: {
             name: ''
         },
-        distance: '1',
+        distance: '',
         photos: [],
         featured: false,
         name: '',
-        cheapestPrice: 10
+        published: false
     }
     const router = useRouter()
     const dispatch = useAppDispatch()
     const [data, setData] = useState(INITIAL_DATA)
 
-    function updateFields (fields: Partial<HotelForm>) {
+    function updateFields (fields: Partial<IHotel>) {
         setData(prev => {
             return {...prev, ...fields}
         })
@@ -58,7 +40,8 @@ const Create = () => {
             <TypeForm key={0} {...data} updateFields={updateFields}/>,
             <HotelInfoForm key={1} {...data} updateFields={updateFields}/>,
             <AddressForm key={2} {...data} updateFields={updateFields}/>,
-            <ImagesForm key={3}{...data} updateFields={updateFields}/>
+            <ImagesForm key={3}{...data} updateFields={updateFields}/>,
+            <PublishedForm key={4} {...data} updateFields={updateFields}/>
         ])
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -76,35 +59,6 @@ const Create = () => {
     }
 
     const [createHotel, {isLoading: isCreating}] = useCreateHotelMutation()
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
-
-    useEffect(() => {
-        window.addEventListener('beforeunload', alertUser)
-        window.addEventListener('unload', handleTabClosing)
-        return () => {
-            window.removeEventListener('beforeunload', alertUser)
-            window.removeEventListener('unload', handleTabClosing)
-        }
-    })
-    const [deleteImage] = useDeleteImageMutation()
-    const handleTabClosing = async () => {
-        try {
-            for (let i = 0; i < data.photos.length; i++) {
-                await deleteImage({url: data.photos[i]})
-            }
-            console.log('close')
-            // await removeTempPhotos()
-        } catch (e) {
-            console.log(e)
-            toast.error('Something went wrong')
-        }
-    }
-    const alertUser = (event: any) => {
-        event.preventDefault()
-        event.returnValue = ''
-    }
 
     return (
         <div

@@ -1,12 +1,12 @@
 export interface Address {
     name: string;
-    lat: number;
-    lng: number;
+    lat?: number;
+    lng?: number;
     _id?: string;
 }
 
 export interface IHotel {
-    _id: string;
+    _id?: string;
     title: string;
     type: string;
     desc: string;
@@ -15,12 +15,12 @@ export interface IHotel {
     address: Address;
     distance: string;
     photos: string[];
-    cheapestPrice: number;
+    cheapestPrice?: number;
     featured: boolean;
     rating?: number;
     score?: number;
-    rooms: string[];
-    __v: number;
+    rooms?: string[];
+    __v?: number;
     name: string;
     createdAt?: Date;
     updatedAt?: Date;

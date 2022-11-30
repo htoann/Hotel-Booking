@@ -2,7 +2,7 @@ import {HiUser} from 'react-icons/hi'
 import {AiOutlineUser, AiOutlineWallet, AiOutlineHeart, AiOutlineCar, AiFillHeart, AiOutlineWifi} from 'react-icons/ai'
 import {Ri24HoursFill, RiSuitcaseLine, RiTaxiWifiLine, RiUserSettingsLine} from 'react-icons/ri'
 import {VscSignOut} from 'react-icons/vsc'
-import {BiBed, BiHide, BiShowAlt} from 'react-icons/bi'
+import {BiBed, BiHide, BiShowAlt, BiArrowBack} from 'react-icons/bi'
 import {GiEarthAsiaOceania} from 'react-icons/gi'
 import {
     MdOutlineAttractions,
@@ -12,7 +12,8 @@ import {
     MdLocationOn,
     MdFamilyRestroom,
     MdAirportShuttle,
-    MdSmokeFree
+    MdSmokeFree,
+    MdUpdate
 } from 'react-icons/md'
 import {CiEdit, CiLocationOn} from 'react-icons/ci'
 import {TbBeach} from 'react-icons/tb'
@@ -63,5 +64,8 @@ export {
     BsShieldLock,
     FiTrash,
     CiEdit,
-    IoMdAdd
+    IoMdAdd,
+    MdUpdate,
+    BiArrowBack
+
 }

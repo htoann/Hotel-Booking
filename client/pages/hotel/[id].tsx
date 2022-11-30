@@ -215,7 +215,7 @@ const HotelDetailPage = () => {
                     <div className="mt-5 border-t border-current">
                         <div className="my-2.5 w-full">
                             <h1 className="font-bold text-2xl mb-4">Availability</h1>
-                            <RoomHotel hotelId={hotel._id}/>
+                            <RoomHotel hotelId={hotel._id || id}/>
                         </div>
                     </div>
                 </div>

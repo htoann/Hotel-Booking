@@ -16,7 +16,7 @@ interface Type {
 
 const plans: Type[] = [
     {
-        type: 'resort',
+        type: 'resorts',
         description: 'Furnished and self-catering accommodations where guests rent the entire place.'
     },
     {
@@ -30,6 +30,10 @@ const plans: Type[] = [
     {
         type: 'apartments',
         description: 'Furnished and self-catering accommodations where guests rent the entire place.'
+    },
+    {
+        type: 'cabins',
+        description: 'Furnished and self-catering accommodations where guests rent the entire place.'
     }
 ]
 
@@ -40,15 +44,17 @@ export default function TypeForm ({
     const [selected, setSelected] = useState<Type>({type: type})
 
     useEffect(() => {
-        updateFields({type: selected.type})
-    }, [selected])
+        setSelected({type: type})
+    }, [type])
 
     return (
         <div>
             <h1 className="font-bold text-2xl mt-2.5">Choose type</h1>
             <div className="w-full px-4 py-16">
                 <div className="mx-auto w-full max-w-md">
-                    <RadioGroup value={selected} onChange={setSelected}>
+                    <RadioGroup value={selected} onChange={(e) => {
+                        updateFields({type: e.type})
+                    }}>
                         <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
                         <div className="space-y-2">
                             {plans.map((plan) => (

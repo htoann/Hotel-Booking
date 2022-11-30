@@ -3,6 +3,7 @@ import {IHotel, IUser} from '../models'
 import {RootState} from '../store/store'
 
 import {apiUrl} from '../utils/config'
+import {HotelForm} from '../models/IHotel'
 
 export const userApi = createApi({
     reducerPath: 'userApi',
@@ -64,23 +65,7 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'delete', body}
             }
         }),
-        createHotel: builder.mutation<IHotel, {
-            title: string;
-            type: string;
-            desc: string;
-            descShort: string;
-            city: string;
-            address: {
-                name: string;
-                lat?: number;
-                lng?: number;
-            };
-            distance: string;
-            photos: string[];
-            featured: boolean;
-            name: string;
-            cheapestPrice: number;
-        }>({
+        createHotel: builder.mutation<IHotel, HotelForm>({
             query: (body) => {
                 return {url: '/hotels', method: 'post', body}
             },
@@ -93,6 +78,17 @@ export const userApi = createApi({
         deleteHotel: builder.mutation<void, string>({
             query: (id) => {
                 return {url: `/hotels/${id}`, method: 'delete'}
+            },
+            invalidatesTags: ['myHotels']
+        }),
+        updateHotel: builder.mutation<void, Partial<IHotel>>({
+            query: (data) => {
+                const {_id, ...body} = data
+                return {
+                    url: `/hotels/${_id}`,
+                    method: 'PUT',
+                    body
+                }
             },
             invalidatesTags: ['myHotels']
         })
@@ -108,5 +104,6 @@ export const {
     useDeleteWishListMutation,
     useCreateHotelMutation,
     useGetMyHotelsQuery,
-    useDeleteHotelMutation
+    useDeleteHotelMutation,
+    useUpdateHotelMutation
 } = userApi
