@@ -8,13 +8,13 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const ListBookingPage = () => {
     const { hotels } = useAppSelector((state) => state.persistedReducer.hotel)
-    const { data, isLoading, isSuccess, error } = useGetAllBookingQuery({})
+    const { data, isLoading, isSuccess } = useGetAllBookingQuery({})
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (isSuccess) dispatch(setBookings(data))
-    }, [dispatch])
+    }, [dispatch, data, isSuccess])
 
     const { bookings } = useAppSelector((state) => state.persistedReducer.app)
 
@@ -54,7 +54,7 @@ const ListBookingPage = () => {
                             </div>
                         ))}
 
-                        {bookings.map((booking: any) => (
+                        {bookings?.map((booking: any) => (
                             <div key={booking._id} className="ml-2">
                                 <h3 className="font-bold text-xl">USD {booking.price}</h3>
                                 <p>Checkin: {booking.checkIn}</p>

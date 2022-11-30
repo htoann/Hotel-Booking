@@ -1,5 +1,5 @@
 <h1 align="center">
-✈ Booking Hotel 🏨
+✈ Hotel Booking 🏨
 </h1>
 <p align="center">
 Find your next stay
@@ -34,65 +34,49 @@ client/
 ...
 ```
 
-# Usage (run fullstack app on your machine)
-
-## Prerequisites
-- [MongoDB](https://gist.github.com/nrollr/9f523ae17ecdbb50311980503409aeb3)
-- [Node](https://nodejs.org/en/download/) ^10.0.0
-- [npm](https://nodejs.org/en/download/package-manager/)
+# Usage
 
 Notice, you need client and server runs concurrently in different terminal session, in order to make them talk to each other
 
 ## Client side usage (PORT: 3000)
 ```terminal
-$ cd client          // go to client folder
-$ yarn # or npm i    // npm install packages
-$ npm run dev        // run it locally
+$ cd client
+$ yarn # or npm i
+$ npm run dev
 // deployment for client app
-$ npm run build // this will compile the react code using webpack and generate a folder called docs in the root level
-$ npm run start // this will run the files in docs, this behavior is exactly the same how gh-pages will run your static site
+$ npm run build
+$ npm run start
 ```
 
 ## Server side usage (PORT: 8000)
 
 ### Prepare your secret
-
-run the script at the first level:
-
 (You need to add a JWT_SECRET in .env to connect to MongoDB)
-
-```terminal
-// in the root level
-$ echo "JWT_SECRET = YOUR_JWT_SECRET" >> .env
-```
 
 ### Start
 
 ```terminal
-$ cd server   // go to server folder
-$ npm i       // npm install packages
-$ npm run dev // run it locally
-$ npm run build // this will build the server code to es5 js codes and generate a dist file
+$ cd server
+$ npm i
+$ npm run dev
+$ npm run build
 ```
 
-## Deploy Server to [Heroku](https://dashboard.heroku.com/)
-```terminal
-$ npm i -g heroku
-$ heroku login
-...
-$ heroku create
-$ npm run heroku:add <your-super-amazing-heroku-app>
-// remember to run this command in the root level, not the server level, so if you follow the documentation along, you may need to do `cd ..`
-$ pwd
-/Users/<your-name>/mern
-$ npm run deploy:heroku
+### Deploy Server to [Railway](https://railway.app/)
+
+### Environment variables
+
 ```
+# Client .env.local file
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=
 
-### After creating heroku
-
-remember to update the file of client/webpack.prod.js
-```javascript
- 'API_URI': JSON.stringify('https://your-super-amazing-heroku-app.herokuapp.com')
+# Server .env file
+JWT_SECRET = 
+MONGODB_URI = 
+CLOUD_NAME = 
+CLOUD_API_KEY = 
+CLOUD_API_SECRET = 
 ```
 
 ## Standard
