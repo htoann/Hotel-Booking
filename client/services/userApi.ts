@@ -1,11 +1,13 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {IUser} from '../models'
+import {IHotel, IUser} from '../models'
 import {RootState} from '../store/store'
 
 import {apiUrl} from '../utils/config'
+import {HotelForm} from '../models/IHotel'
 
 export const userApi = createApi({
     reducerPath: 'userApi',
+    tagTypes: ['myHotels'],
     baseQuery: fetchBaseQuery({
         baseUrl: apiUrl,
         prepareHeaders: (headers, {getState, endpoint}) => {
@@ -63,26 +65,32 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'delete', body}
             }
         }),
-        createHotel: builder.mutation({
-            query: (body: {
-                title: string;
-                type: string;
-                desc: string;
-                descShort: string;
-                city: string;
-                address: {
-                    name: string;
-                    lat?: number;
-                    lng?: number;
-                };
-                distance: string;
-                photos: string[];
-                featured: boolean;
-                name: string;
-                cheapestPrice: number;
-            }) => {
+        createHotel: builder.mutation<IHotel, HotelForm>({
+            query: (body) => {
                 return {url: '/hotels', method: 'post', body}
-            }
+            },
+            invalidatesTags: ['myHotels']
+        }),
+        getMyHotels: builder.query<IHotel[], void>({
+            query: () => `/hotels/me`,
+            providesTags: ['myHotels']
+        }),
+        deleteHotel: builder.mutation<void, string>({
+            query: (id) => {
+                return {url: `/hotels/${id}`, method: 'delete'}
+            },
+            invalidatesTags: ['myHotels']
+        }),
+        updateHotel: builder.mutation<void, Partial<IHotel>>({
+            query: (data) => {
+                const {_id, ...body} = data
+                return {
+                    url: `/hotels/${_id}`,
+                    method: 'PUT',
+                    body
+                }
+            },
+            invalidatesTags: ['myHotels']
         })
     })
 })
@@ -94,5 +102,8 @@ export const {
     useDeleteUserMutation,
     useAddWishListMutation,
     useDeleteWishListMutation,
-    useCreateHotelMutation
+    useCreateHotelMutation,
+    useGetMyHotelsQuery,
+    useDeleteHotelMutation,
+    useUpdateHotelMutation
 } = userApi

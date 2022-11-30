@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^1.1.3",
     "mapbox-gl": "^2.10.0",
+    "moment": "^2.29.4",
     "next": "13.0.0",
     "nprogress": "^0.2.0",
     "opencage-api-client": "^1.0.0",
