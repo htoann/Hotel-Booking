@@ -19,7 +19,7 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks'
 import {logout} from '../../features/authSlice'
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
-import {setHotelWishList} from '../../features/appSlice'
+import {setBookings, setHotelWishList} from '../../features/appSlice'
 
 const Header = () => {
     const router = useRouter()
@@ -30,6 +30,7 @@ const Header = () => {
     const handleLogout = async () => {
         dispatch(logout())
         dispatch(setHotelWishList([]))
+        dispatch(setBookings([]))
         toast.success('User logged out...')
         await router.push('/auth')
     }
