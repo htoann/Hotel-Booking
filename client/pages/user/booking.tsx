@@ -18,7 +18,7 @@ const ListBookingPage = () => {
 
     const { bookings } = useAppSelector((state) => state.persistedReducer.app)
 
-    const bookingListHotel = bookings.map((booking: any) =>
+    const bookingListHotel = bookings?.map((booking: any) =>
         hotels?.filter((hotel) => booking.hotelId === hotel._id)
     )
     if (isLoading) {
