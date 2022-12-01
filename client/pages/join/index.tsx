@@ -59,9 +59,9 @@ const JoinPage = () => {
                         <Button text={'New'} bgColor="bg-lightPrimary" textColor="text-white" IcAfter={IoMdAdd}/>
                     </Link>
                 </div>
-                {myHotels.length > 0
+                {myHotels?.length > 0
                     ? <div className="grid grid-cols-2 gap-x-10 gap-y-5">
-                        {myHotels.map((hotel) => (
+                        {myHotels?.map((hotel) => (
                             <div key={hotel._id}
                                 className="relative overflow-hidden rounded-lg shadow transition hover:shadow-lg">
                                 <Image
