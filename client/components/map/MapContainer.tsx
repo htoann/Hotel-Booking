@@ -49,8 +49,8 @@ const MapContainer = ({hotel}: { hotel: IHotel }) => {
                 {popupInfo && (
                     <Popup
                         anchor="top"
-                        longitude={popupInfo.address.lng}
-                        latitude={popupInfo.address.lat}
+                        longitude={popupInfo.address.lng!}
+                        latitude={popupInfo.address.lat!}
                         onClose={() => setPopupInfo(null)}
 
                     >

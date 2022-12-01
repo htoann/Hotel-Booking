@@ -3,7 +3,6 @@ import {IHotel, IUser} from '../models'
 import {RootState} from '../store/store'
 
 import {apiUrl} from '../utils/config'
-import {HotelForm} from '../models/IHotel'
 
 export const userApi = createApi({
     reducerPath: 'userApi',
@@ -65,7 +64,7 @@ export const userApi = createApi({
                 return {url: '/users/wishlist', method: 'delete', body}
             }
         }),
-        createHotel: builder.mutation<IHotel, HotelForm>({
+        createHotel: builder.mutation<IHotel, Partial<IHotel>>({
             query: (body) => {
                 return {url: '/hotels', method: 'post', body}
             },

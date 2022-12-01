@@ -7,7 +7,7 @@ const WishListPage = () => {
     const {hotels} = useAppSelector((state) => state.persistedReducer.hotel)
     const {wishList} = useAppSelector((state) => state.persistedReducer.app)
 
-    const wishListHotels = hotels?.filter((hotel) => wishList.includes(hotel._id))
+    const wishListHotels = hotels?.filter((hotel) => wishList.includes(hotel._id!))
 
     return (
         <>
@@ -25,7 +25,7 @@ const WishListPage = () => {
                     wishListHotels?.map((hotel) => (
                         <div key={hotel._id} className="w-full border rounded-xl">
                             <HotelPreview
-                                id={hotel._id}
+                                id={hotel._id!}
                                 image={hotel.photos[0]}
                                 name={hotel.name}
                                 title={hotel.title}
