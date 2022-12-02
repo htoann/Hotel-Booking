@@ -63,7 +63,7 @@ const ListBookingPage = () => {
                         ))}
                     </>
                 ) : (
-                    <h1 className="font-bold text-3xl">No hotels booking</h1>
+                    <h1 className="font-bold text-3xl">No room booking</h1>
                 )}
             </div>
         </>
