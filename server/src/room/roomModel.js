@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Hotel from "../hotel/hotelModel";
 
 const RoomSchema = new mongoose.Schema(
   {
@@ -22,5 +23,14 @@ const RoomSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+RoomSchema.statics.updateCheapestPrice = async function (hotelId, next) {
+  const roomCheapest = await this.find().sort({ price: 1 }).exec();
+  const cheapestPrice = roomCheapest[0].price;
+
+  await Hotel.findByIdAndUpdate(hotelId, {
+    $set: { cheapestPrice: cheapestPrice },
+  });
+};
 
 export default mongoose.model("Room", RoomSchema);
