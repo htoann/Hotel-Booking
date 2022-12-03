@@ -11,7 +11,6 @@ export interface IHotel {
     type: string;
     desc: string;
     descShort: string;
-    city: string;
     address: Address;
     distance: string;
     photos: string[];

@@ -1,7 +1,7 @@
 import React, {FormEvent, useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import {useUpdateHotelMutation} from '../../../services/userApi'
-import {Button} from '../../../components/core'
+import {BackButton, Button} from '../../../components/core'
 import {toast} from 'react-toastify'
 import {useAppSelector} from '../../../store/hooks'
 import {IHotel} from '../../../models'
@@ -16,7 +16,6 @@ const EditPage = () => {
 
     const [data, setData] = useState<IHotel>({
         address: {name: ''},
-        city: '',
         desc: '',
         descShort: '',
         distance: '',
@@ -68,6 +67,7 @@ const EditPage = () => {
         <div
             className="mx-auto container px-4 lg:px-6 py-6 relative"
         >
+            <BackButton text='Back to join page'/>
             <form onSubmit={onSubmit}>
                 <div
                     className="absolute top-0 right-0"
