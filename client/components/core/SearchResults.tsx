@@ -40,7 +40,7 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
                                 <div className="text-sm underline text-secondary flex items-center flex-wrap gap-2">
                                     <MdLocationOn/>
                                     <span className="cursor-pointer capitalize">
-                                        {hotel.city}
+                                        {hotel.address.name}
                                     </span>
                                     <span className="cursor-pointer">
                                Show on map
@@ -52,7 +52,7 @@ const SearchResults: React.FC<Props> = ({data, city}) => {
                             <div
                                 className="font-semibold flex flex-row lg:flex-col justify-between items-center lg:items-end ">
                                 <div
-                                    className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4 w-10 h-10"
+                                    className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4"
                                 >
                                     {hotel.score ? hotel.score : 'No score'}
                                 </div>
