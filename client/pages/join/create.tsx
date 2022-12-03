@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react'
-import {Button} from '../../components/core'
+import {BackButton, Button} from '../../components/core'
 import {useMultistepForm} from '../../hooks/useMultiStepForm'
 import {AddressForm, HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '../../components/join'
 import {toast} from 'react-toastify'
@@ -64,6 +64,7 @@ const Create = () => {
         <div
             className="mx-auto container px-4 lg:px-6 py-6 relative"
         >
+            <BackButton text='Back to join page'/>
             <form onSubmit={onSubmit}>
                 <div
                     className="absolute top-0 right-0"
