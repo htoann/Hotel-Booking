@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React, {useState} from 'react'
-import {validateInputCity} from '../../utils/validateInputCity'
 import Button from '../core/Button'
 
 const Search = () => {
@@ -50,7 +49,7 @@ const Search = () => {
                         </div>
 
                         <Link
-                            href={`search/${validateInputCity(city)}`}
+                            href={`search/${city}`}
                             className={!city ? 'pointer-events-none cursor-not-allowed' : ''}
                         >
                             <div>

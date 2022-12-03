@@ -16,7 +16,6 @@ const EditPage = () => {
 
     const [data, setData] = useState<IHotel>({
         address: {name: ''},
-        city: '',
         desc: '',
         descShort: '',
         distance: '',
