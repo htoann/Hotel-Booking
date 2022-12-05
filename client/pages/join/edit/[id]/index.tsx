@@ -1,13 +1,14 @@
 import React, {FormEvent, useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
-import {useUpdateHotelMutation} from '../../../services/userApi'
-import {Button} from '../../../components/core'
+import {useUpdateHotelMutation} from '../../../../services/userApi'
+import {BackButton, Button} from '../../../../components/core'
 import {toast} from 'react-toastify'
-import {useAppSelector} from '../../../store/hooks'
-import {IHotel} from '../../../models'
-import AddressForm from '../../../components/join/AddressForm'
-import {useMultistepForm} from '../../../hooks/useMultiStepForm'
-import {HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '../../../components/join'
+import {useAppSelector} from '../../../../store/hooks'
+import {IHotel} from '../../../../models'
+import AddressForm from '../../../../components/join/AddressForm'
+import {useMultistepForm} from '../../../../hooks/useMultiStepForm'
+import {HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '../../../../components/join'
+import Link from 'next/link'
 
 const EditPage = () => {
     const router = useRouter()
@@ -16,7 +17,6 @@ const EditPage = () => {
 
     const [data, setData] = useState<IHotel>({
         address: {name: ''},
-        city: '',
         desc: '',
         descShort: '',
         distance: '',
@@ -68,6 +68,12 @@ const EditPage = () => {
         <div
             className="mx-auto container px-4 lg:px-6 py-6 relative"
         >
+            <div className="flex justify-between items-center">
+                <BackButton text='Back to join page'/>
+                <Link href={`${id}/room`}>
+                    <Button text="Manager Room"/>
+                </Link>
+            </div>
             <form onSubmit={onSubmit}>
                 <div
                     className="absolute top-0 right-0"

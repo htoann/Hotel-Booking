@@ -8,6 +8,7 @@ import { Loader } from '../layout'
 import { Button } from '../core'
 import {IRoom} from '../../models'
 import {toast} from 'react-toastify'
+import { useRouter } from 'next/router'
 
 interface Props {
     hotelId: string;
@@ -50,6 +51,8 @@ const RoomHotel = ({hotelId}: Props) => {
     const [checkIn, setCheckIn] = useState<Date | null>()
     const [checkOut, setCheckOut] = useState<Date | null>()
 
+    const router = useRouter()
+
     const onChangeSelect = (room: IRoom, quantity: number) => {
         if (quantity === 0) {
             roomsReserve.forEach((item, i) => {
@@ -59,7 +62,6 @@ const RoomHotel = ({hotelId}: Props) => {
                     setPrice(price - item.quantity * item.price)
                 }
             })
-            setRoomsReserve([...roomsReserve])
         } else {
             const check = roomsReserve?.every((item) => {
                 return item._id !== room._id
@@ -112,7 +114,8 @@ const RoomHotel = ({hotelId}: Props) => {
         roomId: roomsReserve[0]?._id,
         checkIn: checkIn,
         checkOut: checkOut,
-        price: price
+        price: price,
+        quantity: roomsReserve[0]?.quantity,
     }
 
     const booking = async () => {
@@ -125,6 +128,7 @@ const RoomHotel = ({hotelId}: Props) => {
 
     if (isBookingSuccess) {
         toast.success('Booking Successfully')
+        router.push("/user/booking");
     }
 
     if (isBookingError) {
@@ -237,7 +241,7 @@ const RoomHotel = ({hotelId}: Props) => {
                                             – pay at the property
                                         </p>
                                         <p className="text-red-500">
-                                            Only {room.roomNumbers.length} rooms left on our site
+                                            Only {room.quantity} rooms left on our site
                                         </p>
                                     </div>
                                 </div>
@@ -251,7 +255,7 @@ const RoomHotel = ({hotelId}: Props) => {
                                         }}
                                     >
                                         <option value={0}>0</option>
-                                        {room.roomNumbers.map((e, index) => (
+                                        {Array.from(Array(room.quantity)).map((_, index) => (
                                             <option key={index} value={index + 1}>
                                                 {index + 1}
                                             </option>

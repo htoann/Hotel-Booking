@@ -22,11 +22,16 @@ export const bookingApi = createApi({
             query: () => '/booking'
         }),
         bookingRoom: builder.mutation({
-            query: (body: { roomId: string; checkIn: Date; checkOut: Date, price: Number }) => {
+            query: (body: IBooking) => {
                 return { url: '/booking', method: 'post', body }
+            }
+        }),
+        deleteBooking: builder.mutation({
+            query: (id) => {
+                return { url: `/booking/${id}`, method: 'delete'}
             }
         })
     })
 })
 
-export const { useGetAllBookingQuery, useBookingRoomMutation } = bookingApi
+export const { useGetAllBookingQuery, useBookingRoomMutation, useDeleteBookingMutation } = bookingApi

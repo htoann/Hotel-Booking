@@ -5,6 +5,6 @@ const router = require("express").Router();
 
 router.get("/", auth, bookingController.getAllBooking);
 router.post("/", auth, bookingController.booking);
-router.delete("/", auth, bookingController.deleteBooking);
+router.delete("/:id", auth, bookingController.deleteBooking);
 
 export default router;

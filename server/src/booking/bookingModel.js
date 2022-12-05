@@ -9,6 +9,7 @@ const BookingSchema = new mongoose.Schema(
     hotelId: { type: mongoose.Schema.ObjectId, ref: "Hotel" },
     roomId: { type: mongoose.Schema.ObjectId, ref: "Room" },
     price: Number,
+    quantity: Number,
   },
   {
     timestamps: true,

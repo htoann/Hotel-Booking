@@ -60,9 +60,9 @@ export default {
             const {min, max, city, limit} = req.query;
             let regexCity = new RegExp(city, "i")
             let query = {
-                published: true,
-                city: regexCity,
-                cheapestPrice: {
+                'published': true,
+                'address.name': regexCity,
+                'cheapestPrice': {
                     $gt: min || 1,
                     $lt: max || 999999,
                 },
