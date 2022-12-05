@@ -7,7 +7,7 @@ const app = express();
 // App Setup
 app.use(
   cors({
-    origin: ["https://bookinghotels.vercel.app", "http://localhost:3000"],
+    origin: ["https://bookinghotels.vercel.app", "http://localhost:3000", process.env.WEB_URL],
   })
 );
 app.use(morgan("dev"));
