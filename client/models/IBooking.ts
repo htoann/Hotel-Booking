@@ -5,4 +5,5 @@ export interface IBooking {
     checkIn: Date,
     checkOut: Date,
     price: Number,
+    quantity: Number
 }
