@@ -8,6 +8,7 @@ import {useCreateHotelMutation} from '../../services/userApi'
 import {useAppDispatch} from '../../store/hooks'
 import {addToMyHotels} from '../../features/hotelSlice'
 import {IHotel} from '../../models/IHotel'
+import withAuthentication from '../../components/withAuthentication'
 
 const Create = () => {
     const INITIAL_DATA: IHotel = {
@@ -90,4 +91,4 @@ const Create = () => {
     )
 }
 
-export default Create
+export default withAuthentication(Create)

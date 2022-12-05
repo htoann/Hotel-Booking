@@ -11,6 +11,7 @@ import Image from 'next/image'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
 import {deleteFromMyHotels, setMyHotels} from '../../features/hotelSlice'
 import {toast} from 'react-toastify'
+import withAuthentication from '../../components/withAuthentication'
 
 const JoinPage = () => {
     const {data = [], isLoading, isSuccess, error} = useGetMyHotelsQuery()
@@ -121,4 +122,4 @@ const JoinPage = () => {
     )
 }
 
-export default JoinPage
+export default withAuthentication(JoinPage)
