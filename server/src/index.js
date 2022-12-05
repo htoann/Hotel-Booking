@@ -21,7 +21,11 @@ app.use(
 // App Setup
 app.use(
   cors({
-    origin: ["https://bookinghotels.vercel.app", "http://localhost:3000"],
+    origin: [
+      "https://bookinghotels.vercel.app",
+      "http://localhost:3000",
+      process.env.WEB_URL,
+    ],
     methods: "GET, POST, PUT, DELETE, PATCH",
     credentials: true,
     maxAge: 3600,
