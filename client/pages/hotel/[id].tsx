@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import {useGetHotelQuery} from '../../services/hotelApi'
 import ErrorPage from 'next/error'
-import Head from 'next/head'
 import {
     MdLocationOn,
     AiFillHeart,
@@ -20,7 +19,7 @@ import {Button, SearchVertical} from '../../components/core'
 import {toast} from 'react-toastify'
 import {MapContainer} from '../../components/map'
 import {ImageGallery} from '../../components/hotel'
-import {Loader} from '../../components/layout'
+import {Layout, Loader} from '../../components/layout'
 import {RoomHotel} from '../../components/room'
 import StarRating from '../../components/core/StarRating'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
@@ -89,10 +88,12 @@ const HotelDetailPage = () => {
             }
         }
         return (
-            <>
-                <Head>
-                    <title>{hotel.name}</title>
-                </Head>
+            <Layout
+                metadata={{
+                    title: `${hotel.name} - Booking`,
+                    description: `${hotel.desc}`
+                }}
+            >
                 <div className="my-4 mx-auto container px-4 lg:px-6 overflow-hidden ">
                     <div className="flex pt-2 gap-x-5">
                         <div className="hidden lg:block w-1/5">
@@ -259,7 +260,7 @@ const HotelDetailPage = () => {
                         </div>
                     </Dialog>
                 </Transition>
-            </>
+            </Layout>
         )
     }
     return <div>Some thing is wrong</div>

@@ -1,10 +1,9 @@
-import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, {useEffect, useState} from 'react'
 import {SearchVertical} from '../../components/core'
 import FilterHotels from '../../components/core/FilterHotels'
 import SearchResults from '../../components/core/SearchResults'
-import {Loader} from '../../components/layout'
+import {Layout, Loader} from '../../components/layout'
 import {useGetHotelsQuery} from '../../services/hotelApi'
 
 const SearchPage = () => {
@@ -39,10 +38,12 @@ const SearchPage = () => {
     }
 
     return (
-        <>
-            <Head>
-                <title>Search city: {citySlug}</title>
-            </Head>
+        <Layout
+            metadata={{
+                title: `Search: ${citySlug} - Booking`,
+                description: `Booking`
+            }}
+        >
             <div className="mx-auto container px-4 lg:px-6 py-5 ">
                 <div className="w-full lg:flex gap-5">
                     <div className="w-full lg:w-1/4 h-min">
@@ -55,7 +56,7 @@ const SearchPage = () => {
                 </div>
 
             </div>
-        </>
+        </Layout>
 
     )
 }

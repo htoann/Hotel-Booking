@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import {Button} from '../../components/core'
 import {CiEdit, FiTrash, IoMdAdd} from '../../utils/icons'
 import {useDeleteHotelMutation, useGetMyHotelsQuery} from '../../services/userApi'
-import {Loader} from '../../components/layout'
+import {Layout, Loader} from '../../components/layout'
 import ErrorPage from 'next/error'
 import moment from 'moment'
 import Image from 'next/image'
@@ -50,10 +49,12 @@ const JoinPage = () => {
         return <ErrorPage statusCode={status}/>
     }
     return (
-        <>
-            <Head>
-                <title>Join Hotel</title>
-            </Head>
+        <Layout
+            metadata={{
+                title: `Join cooperation - Booking`,
+                description: `Join cooperation - Booking`
+            }}
+        >
             <div className="my-4 mx-auto container px-4 lg:px-6 overflow-hidden flex flex-col">
                 <div className="w-max">
                     <Link href="/join/create">
@@ -118,7 +119,7 @@ const JoinPage = () => {
                     </div>
                     : <div className="w-full flex justify-center">You are not create any hotel</div>}
             </div>
-        </>
+        </Layout>
     )
 }
 

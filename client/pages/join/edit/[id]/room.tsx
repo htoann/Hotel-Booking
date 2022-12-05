@@ -6,7 +6,7 @@ import {
     useGetHotelRoomsQuery,
     useUpdateRoomMutation
 } from '../../../../services/roomApi'
-import {Loader} from '../../../../components/layout'
+import {Layout, Loader} from '../../../../components/layout'
 import {IRoom} from '../../../../models'
 import {BackButton, Button} from '../../../../components/core'
 import {toast} from 'react-toastify'
@@ -49,100 +49,107 @@ const Room = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 lg:px-6 pt-5">
-            <BackButton/>
-            <div className="flex flex-col">
-                <div className="grid grid-cols-9 items-center justify-center text-center">
-                    <div className="col-span-2">Name</div>
-                    <div className="col-span-2">Description</div>
-                    <div>Price</div>
-                    <div>Max people</div>
-                    <div>Quantity</div>
-                    <div className="col-span-2">Manipulation</div>
+        <Layout
+            metadata={{
+                title: `Edit room hotel - Booking`,
+                description: `Join cooperation - Booking`
+            }}
+        >
+            <div className="container mx-auto px-4 lg:px-6 pt-5">
+                <BackButton/>
+                <div className="flex flex-col">
+                    <div className="grid grid-cols-9 items-center justify-center text-center">
+                        <div className="col-span-2">Name</div>
+                        <div className="col-span-2">Description</div>
+                        <div>Price</div>
+                        <div>Max people</div>
+                        <div>Quantity</div>
+                        <div className="col-span-2">Manipulation</div>
+                    </div>
+
+                    {rooms?.map((room) => (
+                        <RoomDetail key={room._id} {...room}/>
+                    ))
+                    }
+
+                    {/* Create room */}
+                    <div>
+                        <details className="group select-none w-full">
+                            <summary
+                                className="group w-max flex flex-wrap items-center ml-auto px-2.5"
+                            >
+                                <div className="group-open:hidden">
+                                    <Button text="Add more"/>
+                                </div>
+                                <div className="hidden group-open:block" ref={cancelRef}>
+                                    <Button text="Cancel"/>
+                                </div>
+                            </summary>
+                            <nav aria-label="Users Nav" className="transition-all">
+                                <div
+                                    className="grid grid-cols-9 gap-x-2.5 items-center justify-center text-center even:bg-gray-200 p-2.5">
+                                    <div className="col-span-2 w-full">
+                                        <input
+                                            type="text"
+                                            className="w-full"
+                                            required
+                                            value={data.title}
+                                            onChange={e => setData(
+                                                {...data, title: e.target.value}
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="col-span-2 w-full flex items-center">
+                                        <textarea
+                                            rows={1}
+                                            value={data.desc}
+                                            required
+                                            onChange={(e) => setData(
+                                                {...data, desc: e.target.value}
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="number" className="w-full" value={data.price}
+                                            onChange={e => setData(
+                                                {...data, price: +e.target.value}
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="number" className="w-full" value={data.maxPeople}
+                                            onChange={e => setData(
+                                                {...data, maxPeople: +e.target.value}
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="w-full">
+                                        <input type="number" className="w-full" value={data.quantity}
+                                            onChange={e => setData(
+                                                {...data, quantity: +e.target.value}
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="col-span-2 flex justify-end" onClick={handleCreateRoom}>
+                                        <Button text={isCreating ? 'Creating' : 'Save'}/>
+                                    </div>
+                                </div>
+
+                            </nav>
+                        </details>
+                    </div>
+
+                    {rooms?.length === 0 && <div className="mt-5 flex items-center justify-center text-center ">
+                        There are no rooms available in hotel
+                    </div>}
                 </div>
-
-                {rooms?.map((room) => (
-                    <RoomDetail key={room._id} {...room}/>
-                ))
-                }
-
-                {/* Create room */}
-                <div>
-                    <details className="group select-none w-full">
-                        <summary
-                            className="group w-max flex flex-wrap items-center ml-auto px-2.5"
-                        >
-                            <div className="group-open:hidden">
-                                <Button text="Add more"/>
-                            </div>
-                            <div className="hidden group-open:block" ref={cancelRef}>
-                                <Button text="Cancel"/>
-                            </div>
-                        </summary>
-                        <nav aria-label="Users Nav" className="transition-all">
-                            <div
-                                className="grid grid-cols-9 gap-x-2.5 items-center justify-center text-center even:bg-gray-200 p-2.5">
-                                <div className="col-span-2 w-full">
-                                    <input
-                                        type="text"
-                                        className="w-full"
-                                        required
-                                        value={data.title}
-                                        onChange={e => setData(
-                                            {...data, title: e.target.value}
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="col-span-2 w-full flex items-center">
-                                    <textarea
-                                        rows={1}
-                                        value={data.desc}
-                                        required
-                                        onChange={(e) => setData(
-                                            {...data, desc: e.target.value}
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="w-full">
-                                    <input type="number" className="w-full" value={data.price}
-                                        onChange={e => setData(
-                                            {...data, price: +e.target.value}
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="w-full">
-                                    <input type="number" className="w-full" value={data.maxPeople}
-                                        onChange={e => setData(
-                                            {...data, maxPeople: +e.target.value}
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="w-full">
-                                    <input type="number" className="w-full" value={data.quantity}
-                                        onChange={e => setData(
-                                            {...data, quantity: +e.target.value}
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="col-span-2 flex justify-end" onClick={handleCreateRoom}>
-                                    <Button text={isCreating ? 'Creating' : 'Save'}/>
-                                </div>
-                            </div>
-
-                        </nav>
-                    </details>
-                </div>
-
-                {rooms?.length === 0 && <div className="mt-5 flex items-center justify-center text-center ">
-                    There are no rooms available in hotel
-                </div>}
             </div>
-        </div>
+        </Layout>
     )
 }
 

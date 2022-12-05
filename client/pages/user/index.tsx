@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import Head from 'next/head'
+import withAuthentication from '../../components/withAuthentication'
+import {Layout} from '../../components/layout'
 import {PersonalDetails, Security} from '../../components/user'
 import {BsShieldLock, RiUserSettingsLine} from '../../utils/icons'
-import withAuthentication from '../../components/withAuthentication'
 
 const UserPage = () => {
     const sidebar = [
@@ -22,11 +22,12 @@ const UserPage = () => {
     const [active, setActive] = useState(1)
     const itemActive = sidebar.find((item) => item.id === active)
     return (
-        <>
-            <Head>
-                <title>Personal</title>
-            </Head>
-
+        <Layout
+            metadata={{
+                title: `Personal - Booking`,
+                description: `Booking`
+            }}
+        >
             <div className="mx-auto container px-4 lg:px-6">
                 <div className="w-full flex flex-col md:flex-row gap-4 py-4">
                     <div
@@ -50,7 +51,7 @@ const UserPage = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 
