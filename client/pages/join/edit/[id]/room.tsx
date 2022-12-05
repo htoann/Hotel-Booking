@@ -1,22 +1,44 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {useRouter} from 'next/router'
-import {useGetHotelRoomsQuery} from '../../../../services/roomApi'
+import {
+    useCreateRoomMutation,
+    useDeleteRoomMutation,
+    useGetHotelRoomsQuery,
+    useUpdateRoomMutation
+} from '../../../../services/roomApi'
 import {Loader} from '../../../../components/layout'
 import {IRoom} from '../../../../models'
-import {Button} from '../../../../components/core'
+import {BackButton, Button} from '../../../../components/core'
+import {toast} from 'react-toastify'
 
 const Room = () => {
     const router = useRouter()
     const hotelId = router.query?.id as string
     const {data: rooms, isLoading} = useGetHotelRoomsQuery(hotelId)
 
-    const [data, setData] = useState<IRoom>({
+    const cancelRef = useRef<HTMLDivElement>(null)
+    const INITIAL_DATA: IRoom = {
         desc: '',
         maxPeople: 0,
         price: 0,
-        roomNumbers: [],
+        quantity: 0,
         title: ''
-    })
+    }
+    const [data, setData] = useState<IRoom>(INITIAL_DATA)
+
+    const [createRoom, {isLoading: isCreating}] = useCreateRoomMutation()
+
+    const handleCreateRoom = async () => {
+        try {
+            await createRoom({...data, hotelId}).unwrap()
+            setData(INITIAL_DATA)
+            cancelRef.current?.click()
+            toast.success('Create room success')
+        } catch (e) {
+            console.log(e)
+            toast.error('Something went wrong')
+        }
+    }
     if (isLoading) {
         return (
             <div className="w-screen mt-20 flex items-center justify-center">
@@ -26,7 +48,8 @@ const Room = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 lg:px-6">
+        <div className="container mx-auto px-4 lg:px-6 pt-5">
+            <BackButton/>
             {rooms?.length === 0
                 ? <div className=" flex items-center justify-center text-center ">
                     There are no rooms available in hotel
@@ -45,6 +68,7 @@ const Room = () => {
                     ))
                     }
 
+                    {/* Create room */}
                     <div>
                         <details className="group select-none w-full">
                             <summary
@@ -53,7 +77,7 @@ const Room = () => {
                                 <div className="group-open:hidden">
                                     <Button text="Add more"/>
                                 </div>
-                                <div className="hidden group-open:block">
+                                <div className="hidden group-open:block" ref={cancelRef}>
                                     <Button text="Cancel"/>
                                 </div>
                             </summary>
@@ -61,7 +85,11 @@ const Room = () => {
                                 <div
                                     className="grid grid-cols-9 gap-x-2.5 items-center justify-center text-center even:bg-gray-200 p-2.5">
                                     <div className="col-span-2 w-full">
-                                        <input type="text" className="w-full" value={data.title}
+                                        <input
+                                            type="text"
+                                            className="w-full"
+                                            required
+                                            value={data.title}
                                             onChange={e => setData(
                                                 {...data, title: e.target.value}
                                             )}
@@ -72,6 +100,7 @@ const Room = () => {
                                         <textarea
                                             rows={1}
                                             value={data.desc}
+                                            required
                                             onChange={(e) => setData(
                                                 {...data, desc: e.target.value}
                                             )}
@@ -95,15 +124,15 @@ const Room = () => {
 
                                     </div>
                                     <div className="w-full">
-                                        <input type="number" className="w-full" value={data.roomNumbers.length}
-                                            // onChange={e => setData(
-                                            //     {...data, roomNumbers: +e.target.value}
-                                            // )}
+                                        <input type="number" className="w-full" value={data.quantity}
+                                            onChange={e => setData(
+                                                {...data, quantity: +e.target.value}
+                                            )}
                                         />
 
                                     </div>
-                                    <div className="col-span-2 flex justify-end">
-                                        <Button text="Save"/>
+                                    <div className="col-span-2 flex justify-end" onClick={handleCreateRoom}>
+                                        <Button text={isCreating ? 'Creating' : 'Save'}/>
                                     </div>
                                 </div>
 
@@ -120,15 +149,37 @@ export default Room
 
 const RoomDetail = (room: IRoom) => {
     const [isEdit, setIsEdit] = useState<boolean>(false)
-    const [data, setData] = useState(room)
+    const [dataEdit, setDataEdit] = useState(room)
+
+    const [updateRoom, {isLoading: isUpdating}] = useUpdateRoomMutation()
+    const [deleteRoom, {isLoading: isDeleting}] = useDeleteRoomMutation()
+    const handleUpdateRoom = async () => {
+        try {
+            await updateRoom(dataEdit).unwrap()
+            setIsEdit(false)
+            toast.success('Update room success')
+        } catch (e) {
+            console.log(e)
+            toast.error('Something went wrong')
+        }
+    }
+    const handleDeleteRoom = async () => {
+        try {
+            await deleteRoom(room._id as string).unwrap()
+            toast.success('Delete room success')
+        } catch (e) {
+            console.log(e)
+            toast.error('Something went wrong')
+        }
+    }
     return (
         <div
             className="grid grid-cols-9 gap-x-2.5 items-center justify-center border-y text-center p-2.5">
             <div className="col-span-2 w-full">
                 {isEdit
-                    ? <input type="text" className="w-full" value={data.title}
-                        onChange={e => setData(
-                            {...data, title: e.target.value}
+                    ? <input type="text" className="w-full" value={dataEdit.title}
+                        onChange={e => setDataEdit(
+                            {...dataEdit, title: e.target.value}
                         )}
                     />
                     : <span>{room.title}</span>
@@ -139,9 +190,9 @@ const RoomDetail = (room: IRoom) => {
                 {isEdit
                     ? <textarea
                         rows={1}
-                        value={data.desc}
-                        onChange={(e) => setData(
-                            {...data, desc: e.target.value}
+                        value={dataEdit.desc}
+                        onChange={(e) => setDataEdit(
+                            {...dataEdit, desc: e.target.value}
                         )}
                     />
                     : <span>{room.desc}</span>
@@ -149,9 +200,9 @@ const RoomDetail = (room: IRoom) => {
             </div>
             <div className="w-full">
                 {isEdit
-                    ? <input type="number" className="w-full" value={data.price}
-                        onChange={e => setData(
-                            {...data, price: +e.target.value}
+                    ? <input type="number" className="w-full" value={dataEdit.price}
+                        onChange={e => setDataEdit(
+                            {...dataEdit, price: +e.target.value}
                         )}
                     />
                     : <span>{room.price}$</span>
@@ -159,9 +210,9 @@ const RoomDetail = (room: IRoom) => {
             </div>
             <div className="w-full">
                 {isEdit
-                    ? <input type="number" className="w-full" value={data.maxPeople}
-                        onChange={e => setData(
-                            {...data, maxPeople: +e.target.value}
+                    ? <input type="number" className="w-full" value={dataEdit.maxPeople}
+                        onChange={e => setDataEdit(
+                            {...dataEdit, maxPeople: +e.target.value}
                         )}
                     />
                     : <span>{room.maxPeople}</span>
@@ -169,12 +220,12 @@ const RoomDetail = (room: IRoom) => {
             </div>
             <div className="w-full">
                 {isEdit
-                    ? <input type="number" className="w-full" value={data.roomNumbers.length}
-                        // onChange={e => setData(
-                        //     {...data, roomNumbers: +e.target.value}
-                        // )}
+                    ? <input type="number" className="w-full" value={dataEdit.quantity}
+                        onChange={e => setDataEdit(
+                            {...dataEdit, quantity: +e.target.value}
+                        )}
                     />
-                    : <span>{room.roomNumbers.length}</span>
+                    : <span>{room.quantity}</span>
                 }
             </div>
             <div className="col-span-2 flex gap-x-2.5 items-center justify-center">
@@ -187,8 +238,8 @@ const RoomDetail = (room: IRoom) => {
                         >
                             <Button text="Cancel" bgColor="bg-yellow-500"/>
                         </div>
-                        <div>
-                            <Button text="Update"/>
+                        <div onClick={handleUpdateRoom}>
+                            <Button text={isUpdating ? 'Updating' : 'Update'}/>
                         </div>
                     </>
                     : <>
@@ -199,8 +250,8 @@ const RoomDetail = (room: IRoom) => {
                         >
                             <Button text="Edit" bgColor="bg-green-500"/>
                         </div>
-                        <div>
-                            <Button text="Delete" bgColor="bg-red-500"/>
+                        <div onClick={handleDeleteRoom}>
+                            <Button text={isDeleting ? 'Deleting' : 'Delete'} bgColor="bg-red-500"/>
                         </div>
                     </>
                 }
