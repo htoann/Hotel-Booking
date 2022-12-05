@@ -10,7 +10,7 @@ export interface IRoom {
     desc: string;
     price: number;
     maxPeople: number;
-    roomNumbers: RoomNumber[];
+    quantity: number;
     createdAt: Date;
     updatedAt: Date;
     __v: number;
