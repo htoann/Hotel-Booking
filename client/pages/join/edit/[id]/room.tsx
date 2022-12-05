@@ -10,6 +10,7 @@ import {Loader} from '../../../../components/layout'
 import {IRoom} from '../../../../models'
 import {BackButton, Button} from '../../../../components/core'
 import {toast} from 'react-toastify'
+import withAuthentication from '../../../../components/withAuthentication'
 
 const Room = () => {
     const router = useRouter()
@@ -145,7 +146,7 @@ const Room = () => {
     )
 }
 
-export default Room
+export default withAuthentication(Room)
 
 const RoomDetail = (room: IRoom) => {
     const [isEdit, setIsEdit] = useState<boolean>(false)

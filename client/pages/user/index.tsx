@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import {PersonalDetails, Security} from '../../components/user'
 import {BsShieldLock, RiUserSettingsLine} from '../../utils/icons'
+import withAuthentication from '../../components/withAuthentication'
 
 const UserPage = () => {
     const sidebar = [
@@ -53,4 +54,4 @@ const UserPage = () => {
     )
 }
 
-export default UserPage
+export default withAuthentication(UserPage)
