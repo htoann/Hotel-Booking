@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface AppState {
     wishList: string[];
@@ -66,10 +66,13 @@ export const appSlice = createSlice({
                 state.reviews.push(action.payload)
             }
         },
+        deleteReviews: (state, action: PayloadAction<string>) => {
+            state.reviews = state.reviews.filter((review: any) => review._id !== action.payload)
+        },
     }
 })
 
-export const {setHotelWishList, addHotelToWishList, removeHotelFromWishList, setBookings, addBookings, deleteBookings, setReviews, addReviews} =
+export const { setHotelWishList, addHotelToWishList, removeHotelFromWishList, setBookings, addBookings, deleteBookings, setReviews, addReviews, deleteReviews } =
     appSlice.actions
 
 export default appSlice.reducer

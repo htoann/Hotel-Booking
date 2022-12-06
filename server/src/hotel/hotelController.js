@@ -133,7 +133,7 @@ export default {
 
   //     await Hotel.findByIdAndUpdate(hotelId, {
   //       $set: {
-  //         "reviews.$": review,
+  //         reviews: { _id: reviewId
   //       },
   //     });
 
@@ -160,7 +160,7 @@ export default {
       const hotelId = hotel._id;
 
       await Hotel.findByIdAndUpdate(hotelId, {
-        $pull: { "reviews.id": reviewId },
+        $pull: { reviews: { _id: reviewId } },
       });
 
       return createError(res, 200, "Deleted review successfully");

@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { usePostReviewMutation } from "../../services/hotelApi";
+import React, { useState } from "react";
+import {
+  usePostReviewMutation,
+  useDeleteReviewMutation,
+} from "../../services/hotelApi";
 import moment from "moment";
 import { Button } from "../../components/core";
 import Image from "next/image";
-import { AiOutlineClose } from "../../utils/icons";
+import { AiOutlineClose, CiEdit } from "../../utils/icons";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setReviews, addReviews } from "../../features/appSlice";
+import { addReviews, deleteReviews } from "../../features/appSlice";
+import Link from 'next/link'
 
-const HotelReview = ({ id, hotel, setShowModal }: any) => {
+const HotelReview = ({ reviews, id, setShowModal }: any) => {
   const [postReview] = usePostReviewMutation();
+  const [deleteReview] = useDeleteReviewMutation();
+
   const [review, setReview] = useState("");
   const [score, setScore] = useState(10);
 
-  const { user } = useAppSelector((state) => state.persistedReducer.auth)
+  const { user, token } = useAppSelector(
+    (state) => state.persistedReducer.auth
+  );
 
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(setReviews(hotel.reviews))
-  }, [dispatch, hotel.reviews, setShowModal, id])
-
-  const { reviews } = useAppSelector((state) => state.persistedReducer.app)
+  const dispatch = useAppDispatch();
 
   const handleChangeReview = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReview(e.target.value);
@@ -31,7 +33,7 @@ const HotelReview = ({ id, hotel, setShowModal }: any) => {
     setScore(+e.target.value);
   };
 
-  const handleReview = async () => {
+  const handleReview = () => {
     if (!review || !score) {
       toast.error("Please enter all fields");
     } else if (score < 0 || score > 10) {
@@ -42,6 +44,11 @@ const HotelReview = ({ id, hotel, setShowModal }: any) => {
       setReview("");
       toast.success("Review successfully");
     }
+  };
+  const handleDeleteReview = (id: string) => {
+    deleteReview(id);
+    dispatch(deleteReviews(id));
+    toast.success("Delete review successfully");
   };
   return (
     <>
@@ -67,8 +74,8 @@ const HotelReview = ({ id, hotel, setShowModal }: any) => {
                   </button>
                 </div>
                 <div className="relative p-6 flex-auto">
-                  {reviews?.map((review: any, index) => (
-                    <div key={index}>
+                  {reviews?.map((review: any, index: any) => (
+                    <div key={index} className="group">
                       <div className="grid grid-cols-3 gap-4">
                         <div className="flex items-center">
                           <div>
@@ -88,9 +95,26 @@ const HotelReview = ({ id, hotel, setShowModal }: any) => {
                           <p className="text-gray-500 text-xs leading-relaxed flex-1 w-64">
                             Reviewed: {moment(review.updatedAt).format("LLL")}
                           </p>
-                          <p className="text-black text-xl leading-relaxed flex-1 w-64 mr-2">
-                            {review.review}
-                          </p>
+                          <div className="flex">
+                            <input
+                              defaultValue={review.review}
+                              disabled={review.user._id === user?._id ? false : true}
+                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1"
+                            />
+                            {review.user._id === user?._id &&
+                              <>
+                                <div className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/3 mt-2">
+                                  <CiEdit />
+                                </div>
+                                <div
+                                  onClick={() => handleDeleteReview(review._id)}
+                                  className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/4 mt-2"
+                                >
+                                  <AiOutlineClose />
+                                </div>
+                              </>
+                            }
+                          </div>
                         </div>
                         <div>
                           <div className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4">
@@ -108,31 +132,48 @@ const HotelReview = ({ id, hotel, setShowModal }: any) => {
                 <h3 className="text-3xl font-semibold">No reviews</h3>
               </div>
             )}
-            <div className="relative p-6 flex-auto">
-              <span className="text-black">Write review</span>
-              <input
-                value={review}
-                className="form-input block rounded my-4 w-full w-96"
-                placeholder="Very good hotel"
-                onChange={handleChangeReview}
-              />
-              <span className="text-black">Score</span>
-              <input
-                value={score}
-                type="number"
-                className="form-input block rounded my-4"
-                placeholder="9.5"
-                onChange={handleChangeScore}
-              />
-              <div onClick={handleReview}>
-                <Button
-                  text="Review"
-                  textColor="text-white"
-                  bgColor="bg-primary"
-                  fullWidth={true}
-                />
+            {token ? (
+              <>
+                <div className="relative p-6 flex-auto">
+                  <span className="text-black">Write review</span>
+                  <input
+                    value={review}
+                    className="form-input block rounded my-4 w-full w-128"
+                    placeholder="Very good hotel"
+                    onChange={handleChangeReview}
+                  />
+                  <span className="text-black">Score</span>
+                  <input
+                    value={score}
+                    type="number"
+                    className="form-input block rounded my-4"
+                    placeholder="9.5"
+                    onChange={handleChangeScore}
+                  />
+                  <div className="mt-8" onClick={handleReview}>
+                    <Button
+                      text="Review"
+                      textColor="text-white"
+                      bgColor="bg-primary"
+                      fullWidth={true}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div>
+                <h3 className="font-semibold text-2xl mb-4 text-black text-center">
+                  Please login to review
+                </h3>
+                <Link href="/auth" className="flex text-center justify-center">
+                  <Button
+                    text="Login"
+                    textColor="text-white"
+                    bgColor="bg-primary"
+                  />
+                </Link>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
