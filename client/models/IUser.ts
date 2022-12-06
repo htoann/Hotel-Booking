@@ -8,5 +8,6 @@ export interface IUser {
     updatedAt: Date;
     __v: number;
     wishlist: string[];
-    phone?: string
+    phone?: string;
+    avatar?: string;
 }

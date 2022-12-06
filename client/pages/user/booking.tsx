@@ -1,16 +1,17 @@
-import React, {useEffect} from 'react'
-import {toast} from 'react-toastify'
-import {Button} from '../../components/core'
-import {HotelPreview} from '../../components/hotel'
-import {Layout, Loader} from '../../components/layout'
-import {setBookings} from '../../features/appSlice'
-import {useDeleteBookingMutation, useGetAllBookingQuery} from '../../services/bookingApi'
-import {useAppDispatch, useAppSelector} from '../../store/hooks'
+import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { Button } from '../../components/core'
+import { HotelPreview } from '../../components/hotel'
+import { Layout, Loader } from '../../components/layout'
+import { setBookings } from '../../features/appSlice'
+import { useDeleteBookingMutation, useGetAllBookingQuery } from '../../services/bookingApi'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import withAuthentication from '../../components/withAuthentication'
+import moment from "moment";
 
 const ListBookingPage = () => {
-    const {hotels} = useAppSelector((state) => state.persistedReducer.hotel)
-    const {data, isLoading, isSuccess} = useGetAllBookingQuery({})
+    const { hotels } = useAppSelector((state) => state.persistedReducer.hotel)
+    const { data, isLoading, isSuccess } = useGetAllBookingQuery({})
 
     const dispatch = useAppDispatch()
 
@@ -18,7 +19,7 @@ const ListBookingPage = () => {
         if (isSuccess) dispatch(setBookings(data))
     }, [dispatch, data, isSuccess])
 
-    const {bookings} = useAppSelector((state) => state.persistedReducer.app)
+    const { bookings } = useAppSelector((state) => state.persistedReducer.app)
 
     const bookingListHotel = bookings?.map((booking: any) =>
         hotels?.filter((hotel) => booking.hotelId === hotel._id)
@@ -52,7 +53,7 @@ const ListBookingPage = () => {
     if (isLoading) {
         return (
             <div className="w-screen mt-20 flex items-center justify-center">
-                <Loader/>
+                <Loader />
             </div>
         )
     }
@@ -87,8 +88,8 @@ const ListBookingPage = () => {
                         {bookings?.map((booking: any) => (
                             <div key={booking._id} className="ml-2">
                                 <h3 className="font-bold text-xl">USD {booking.price}</h3>
-                                <p>Checkin: {booking.checkIn}</p>
-                                <p>Checkout: {booking.checkOut}</p>
+                                <p>Checkin: {moment(booking.checkIn).format("LLL")}</p>
+                                <p>Checkout: {moment(booking.checkOut).format("LLL")}</p>
 
                                 <div onClick={() => handleDeleteBooking(booking._id)} className="mt-4">
                                     <Button
