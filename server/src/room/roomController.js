@@ -1,6 +1,6 @@
 import Room from "./roomModel";
 import Hotel from "../hotel/hotelModel";
-import { createError, createMessage } from "../utils/createMessage";
+import {createError, createMessage} from "../utils/createMessage";
 
 const base = require("../utils/baseController");
 
@@ -23,7 +23,7 @@ export default {
       await Room.updateCheapestPrice(hotelId);
 
       await Hotel.findByIdAndUpdate(hotelId, {
-        $push: { rooms: savedRoom._id },
+        $push: {rooms: savedRoom._id},
       });
 
       res.status(200).json(savedRoom);
@@ -44,7 +44,7 @@ export default {
         return createError(res, 404, "No document found with that id");
       }
 
-      const hotel = await Hotel.findOne({ rooms: { $in: roomId } });
+      const hotel = await Hotel.findOne({rooms: {$in: roomId}});
       const hotelId = hotel._id;
 
       await Room.updateCheapestPrice(hotelId);
@@ -56,19 +56,18 @@ export default {
   },
 
   deleteRoom: async (req, res) => {
-    const hotelId = req.params.hotelid;
+    // const hotelId = req.params.hotelid;
     try {
       await Room.findByIdAndDelete(req.params.id);
 
-      try {
-        await Hotel.findByIdAndUpdate(hotelId, {
-          $pull: { rooms: req.params.id },
-        });
 
-        await Room.updateCheapestPrice(hotelId);
-      } catch (err) {
-        return createError(res, 404, "No document found with that id");
-      }
+      const hotel = await Hotel.findOne({rooms: {$in: req.params.id}});
+      const hotelId = hotel._id;
+
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $pull: {rooms: req.params.id},
+      });
+      await Room.updateCheapestPrice(hotelId);
 
       return createMessage(res, 200, "Deleted successfully");
     } catch (err) {
