@@ -9,6 +9,7 @@ import {useAppDispatch} from '../../store/hooks'
 import {addToMyHotels} from '../../features/hotelSlice'
 import {IHotel} from '../../models/IHotel'
 import withAuthentication from '../../components/withAuthentication'
+import {Layout} from '../../components/layout'
 
 const Create = () => {
     const INITIAL_DATA: IHotel = {
@@ -61,33 +62,40 @@ const Create = () => {
     const [createHotel, {isLoading: isCreating}] = useCreateHotelMutation()
 
     return (
-        <div
-            className="mx-auto container px-4 lg:px-6 py-6 relative"
+        <Layout
+            metadata={{
+                title: `Create hotel - Booking`,
+                description: `Join cooperation - Booking`
+            }}
         >
-            <BackButton text='Back to join page'/>
-            <form onSubmit={onSubmit}>
-                <div
-                    className="absolute top-0 right-0"
-                >
-                    {currentStepIndex + 1} / {steps.length}
-                </div>
-                {step}
-                <div
-                    className="mt-2.5 flex justify-end gap-2.5"
+            <div
+                className="mx-auto container px-4 lg:px-6 py-6 relative"
+            >
+                <BackButton text='Back to join page'/>
+                <form onSubmit={onSubmit}>
+                    <div
+                        className="absolute top-0 right-0"
+                    >
+                        {currentStepIndex + 1} / {steps.length}
+                    </div>
+                    {step}
+                    <div
+                        className="mt-2.5 flex justify-end gap-2.5"
 
-                >
-                    {!isFirstStep && (
-                        <div onClick={back}>
-                            <Button text="Back" textColor="text-white" bgColor="bg-primary"/>
-                        </div>
-                    )}
-                    <button
-                        type="submit" disabled={isCreating}>
-                        <Button text={isLastStep ? 'Submit' : 'Next'} textColor="text-white" bgColor="bg-primary"/>
-                    </button>
-                </div>
-            </form>
-        </div>
+                    >
+                        {!isFirstStep && (
+                            <div onClick={back}>
+                                <Button text="Back" textColor="text-white" bgColor="bg-primary"/>
+                            </div>
+                        )}
+                        <button
+                            type="submit" disabled={isCreating}>
+                            <Button text={isLastStep ? 'Submit' : 'Next'} textColor="text-white" bgColor="bg-primary"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </Layout>
     )
 }
 

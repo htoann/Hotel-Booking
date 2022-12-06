@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import React from 'react'
+import {Layout} from '../../components/layout'
 import {HotelPreview} from '../../components/hotel'
 import {useAppSelector} from '../../store/hooks'
 
@@ -10,10 +10,12 @@ const WishListPage = () => {
     const wishListHotels = hotels?.filter((hotel) => wishList.includes(hotel._id!))
 
     return (
-        <>
-            <Head>
-                <title>Wishlist</title>
-            </Head>
+        <Layout
+            metadata={{
+                title: `Your wishlist - Booking`,
+                description: `Booking`
+            }}
+        >
             <div
                 className={
                     wishListHotels && wishListHotels.length > 0
@@ -37,7 +39,7 @@ const WishListPage = () => {
                     <h1 className="font-bold text-3xl">No hotels saved</h1>
                 )}
             </div>
-        </>
+        </Layout>
 
     )
 }

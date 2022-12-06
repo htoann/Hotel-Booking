@@ -1,9 +1,8 @@
-import Head from 'next/head'
 import React, {useEffect} from 'react'
 import {toast} from 'react-toastify'
 import {Button} from '../../components/core'
 import {HotelPreview} from '../../components/hotel'
-import {Loader} from '../../components/layout'
+import {Layout, Loader} from '../../components/layout'
 import {setBookings} from '../../features/appSlice'
 import {useDeleteBookingMutation, useGetAllBookingQuery} from '../../services/bookingApi'
 import {useAppDispatch, useAppSelector} from '../../store/hooks'
@@ -58,10 +57,12 @@ const ListBookingPage = () => {
         )
     }
     return (
-        <>
-            <Head>
-                <title>Bookings & Trips</title>
-            </Head>
+        <Layout
+            metadata={{
+                title: `Your booking - Booking`,
+                description: `Booking`
+            }}
+        >
             <div
                 className={
                     bookingListHotel && bookingListHotel.length > 0
@@ -103,7 +104,7 @@ const ListBookingPage = () => {
                     <h1 className="font-bold text-3xl">No room booking</h1>
                 )}
             </div>
-        </>
+        </Layout>
     )
 }
 

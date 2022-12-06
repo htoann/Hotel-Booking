@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react'
-import '../styles/globals.css'
 import type {AppProps} from 'next/app'
+import {Router} from 'next/router'
 import {Provider} from 'react-redux'
-import {store, persistor} from '../store/store'
 import {PersistGate} from 'redux-persist/integration/react'
 import {ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import {Layout} from '../components/layout'
-import {Router} from 'next/router'
 import NProgress from 'nprogress'
+import {store, persistor} from '../store/store'
+import {Header} from '../components/layout'
+
+import '../styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 import '../styles/CubeLoader.css'
 
 export default function App ({Component, pageProps}: AppProps) {
@@ -26,18 +27,17 @@ export default function App ({Component, pageProps}: AppProps) {
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <Layout>
-                    <Component {...pageProps} />
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={3000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        draggable={false}
-                        closeOnClick
-                        pauseOnHover
-                    />
-                </Layout>
+                <Header/>
+                <Component {...pageProps} />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    draggable={false}
+                    closeOnClick
+                    pauseOnHover
+                />
             </PersistGate>
         </Provider>
     )

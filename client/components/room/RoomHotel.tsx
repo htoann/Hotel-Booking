@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     useGetHotelRoomsQuery
 } from '../../services/roomApi'
-import { useBookingRoomMutation } from '../../services/bookingApi'
-import { FaUser } from '../../utils/icons'
-import { Loader } from '../layout'
-import { Button } from '../core'
+import {useBookingRoomMutation} from '../../services/bookingApi'
+import {FaUser} from '../../utils/icons'
+import {Loader} from '../layout'
+import {Button} from '../core'
 import {IRoom} from '../../models'
 import {toast} from 'react-toastify'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 
 interface Props {
     hotelId: string;
@@ -115,7 +115,7 @@ const RoomHotel = ({hotelId}: Props) => {
         checkIn: checkIn,
         checkOut: checkOut,
         price: price,
-        quantity: roomsReserve[0]?.quantity,
+        quantity: roomsReserve[0]?.quantity
     }
 
     const booking = async () => {
@@ -128,7 +128,7 @@ const RoomHotel = ({hotelId}: Props) => {
 
     if (isBookingSuccess) {
         toast.success('Booking Successfully')
-        router.push("/user/booking");
+        router.push('/user/booking')
     }
 
     if (isBookingError) {
