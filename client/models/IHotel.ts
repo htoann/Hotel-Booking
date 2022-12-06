@@ -25,4 +25,5 @@ export interface IHotel {
     updatedAt?: Date;
     user?: string;
     published: boolean;
+    reviews: object[];
 }

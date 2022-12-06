@@ -1,75 +1,100 @@
 import mongoose from "mongoose";
 
 const HotelSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true,
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        type: {
-            type: String,
-            enum: ["hotels", "apartments", "resorts", "villas", "cabins"],
-            required: true,
-        },
-        desc: {
-            type: String,
-            required: true,
-        },
-        descShort: {
-            type: String,
-            required: true,
-        },
-        address: {
-            type: {
-                name: String,
-                lat: Number,
-                lng: Number
-            },
-            required: true,
-        },
-        distance: {
-            type: String,
-            required: true,
-        },
-        photos: {
-            type: [String],
-            required: true,
-        },
-        cheapestPrice: {
-            type: Number,
-        },
-        featured: {
-            type: Boolean,
-            default: false,
-        },
-        rating: {
-            type: Number,
-            min: 0,
-            max: 5,
-        },
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      enum: ["hotels", "apartments", "resorts", "villas", "cabins"],
+      required: true,
+    },
+    desc: {
+      type: String,
+      required: true,
+    },
+    descShort: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: {
+        name: String,
+        lat: Number,
+        lng: Number,
+      },
+      required: true,
+    },
+    distance: {
+      type: String,
+      required: true,
+    },
+    photos: {
+      type: [String],
+      required: true,
+    },
+    cheapestPrice: {
+      type: Number,
+    },
+    featured: {
+      type: Boolean,
+      default: false,
+    },
+    rating: {
+      type: Number,
+      min: 0,
+      max: 5,
+      default: null,
+    },
+    score: {
+      type: Number,
+      min: 0,
+      max: 10,
+      default: null,
+    },
+    rooms: {
+      type: [String],
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
+    published: {
+      type: Boolean,
+      default: false,
+    },
+    reviews: [
+      {
+        review: String,
         score: {
-            type: Number,
-            min: 0,
-            max: 10,
-        },
-        rooms: {
-            type: [String],
+          type: Number,
+          min: 0,
+          max: 10,
         },
         user: {
-            type: mongoose.Schema.ObjectId, ref: "User"
+          type: Object,
+          ref: "User",
         },
-        published: {
-            type: Boolean,
-            default: false,
-        }
-    },
-    {
-        timestamps: true,
-    }
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+        updatedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
 );
 
 // autoIncrement.initialize(mongoose.connection);

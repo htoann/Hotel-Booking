@@ -1,5 +1,5 @@
 import {HiUser} from 'react-icons/hi'
-import {AiOutlineUser, AiOutlineWallet, AiOutlineHeart, AiOutlineCar, AiFillHeart, AiOutlineWifi} from 'react-icons/ai'
+import {AiOutlineUser, AiOutlineWallet, AiOutlineHeart, AiOutlineCar, AiFillHeart, AiOutlineWifi, AiOutlineClose} from 'react-icons/ai'
 import {Ri24HoursFill, RiSuitcaseLine, RiTaxiWifiLine, RiUserSettingsLine} from 'react-icons/ri'
 import {VscSignOut} from 'react-icons/vsc'
 import {BiBed, BiHide, BiShowAlt, BiArrowBack} from 'react-icons/bi'
@@ -22,12 +22,14 @@ import {BsFillShareFill, BsFlower1, BsShieldLock} from 'react-icons/bs'
 import {FaFacebookF, FaGoogle, FaParking, FaUser} from 'react-icons/fa'
 import {IoMdAdd} from 'react-icons/io'
 
+
 export {
     HiUser,
     AiOutlineUser,
     RiSuitcaseLine,
     AiOutlineWallet,
     AiOutlineHeart,
+    AiOutlineClose,
     VscSignOut,
     BiBed,
     MdOutlineAirplaneTicket,

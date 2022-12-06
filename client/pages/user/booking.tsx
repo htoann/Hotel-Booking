@@ -7,6 +7,7 @@ import { Loader } from '../../components/layout'
 import { setBookings } from '../../features/appSlice'
 import { useDeleteBookingMutation, useGetAllBookingQuery } from '../../services/bookingApi'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import moment from "moment";
 
 const ListBookingPage = () => {
     const { hotels } = useAppSelector((state) => state.persistedReducer.hotel)
@@ -85,14 +86,17 @@ const ListBookingPage = () => {
               {bookings?.map((booking: any) => (
                 <div key={booking._id} className="ml-2">
                   <h3 className="font-bold text-xl">USD {booking.price}</h3>
-                  <p>Checkin: {booking.checkIn}</p>
-                  <p>Checkout: {booking.checkOut}</p>
+                  <p>Checkin: {moment(booking.checkIn).format("LLL")}</p>
+                  <p>Checkout: {moment(booking.checkOut).format("LLL")}</p>
 
-                  <div onClick={() => handleDeleteBooking(booking._id)} className="mt-4">
+                  <div
+                    onClick={() => handleDeleteBooking(booking._id)}
+                    className="mt-4"
+                  >
                     <Button
-                        text="Delete"
-                        textColor="text-white"
-                        bgColor="bg-primary"
+                      text="Delete"
+                      textColor="text-white"
+                      bgColor="bg-primary"
                     />
                   </div>
                 </div>
