@@ -78,3 +78,13 @@ exports.getAll = (Model) => async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.deleteField = (Model, field) => async (req, res, next) => {
+//   try {
+//     await Model.updateMany({}, { $unset: `{ ${field}: 1 }` }, { multi: true });
+
+//     return createMessage(res, 200, "Delete field successfully");
+//   } catch (error) {
+//     return createError(res, 404, error || "No document found with that id");
+//   }
+// };

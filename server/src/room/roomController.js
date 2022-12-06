@@ -79,4 +79,24 @@ export default {
   getRoom: base.getOne(Room),
 
   getAllRooms: base.getAll(Room),
+
+  extend: async (req, res) => {
+    try {
+      const randomNumer = Math.round(Math.random() * (6 - 1) + 1);
+      const rooms = await Room.find().then((Rooms) => {
+        Rooms.forEach((r) => {
+          Room.updateOne(
+            { _id: r._id },
+            {
+              $set: { quantity: randomNumer },
+            }
+          );
+        });
+      });
+
+      return res.json(rooms);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
