@@ -27,7 +27,8 @@ const EditPage = () => {
         photos: [],
         published: false,
         title: '',
-        type: ''
+        type: '',
+        reviews: []
     })
 
     useEffect(() => {

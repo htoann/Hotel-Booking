@@ -72,7 +72,9 @@ const Create = () => {
             <div
                 className="mx-auto container px-4 lg:px-6 py-6 relative"
             >
-                <BackButton text='Back to join page'/>
+                <div className="mb-4">
+                    <BackButton text='Back to join page' />
+                </div>
                 <form onSubmit={onSubmit}>
                     <div
                         className="absolute top-0 right-0"

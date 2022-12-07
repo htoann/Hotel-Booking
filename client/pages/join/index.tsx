@@ -56,9 +56,9 @@ const JoinPage = () => {
             }}
         >
             <div className="my-4 mx-auto container px-4 lg:px-6 overflow-hidden flex flex-col">
-                <div className="w-max">
+                <div className="w-max mb-4">
                     <Link href="/join/create">
-                        <Button text={'New'} bgColor="bg-lightPrimary" textColor="text-white" IcAfter={IoMdAdd}/>
+                        <Button text={'New Hotel'} bgColor="bg-lightPrimary" textColor="text-white" IcAfter={IoMdAdd}/>
                     </Link>
                 </div>
                 {myHotels?.length > 0

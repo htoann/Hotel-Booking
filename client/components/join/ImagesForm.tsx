@@ -80,7 +80,7 @@ const ImagesForm = (
             >
                 <section className="h-full overflow-auto p-8 w-full h-full flex flex-col">
                     <label htmlFor="hidden-input"
-                        className=" relative border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                        className=" relative border-dashed border-2 border-gray-400 py-16 flex flex-col justify-center items-center">
                         <p className="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                             <span className="w-3/4 text-center">Drag and drop your files anywhere or</span>
                         </p>
@@ -97,7 +97,7 @@ const ImagesForm = (
                             Upload a file
                         </label>
                         <div id="overlay"
-                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 pointer-events-none z-50 rounded-md flex flex-col items-center">
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 pointer-events-none z-50 rounded-md flex flex-col items-center mt-3">
                             <i>
                                 <svg className="fill-current w-12 h-12 mb-3 text-blue-700"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -124,13 +124,13 @@ const ImagesForm = (
                                 </li>
                                 : <section className="w-full grid grid-cols-2 lg:grid-cols-3 gap-5">
                                     {files.map((file, index) => (
-                                        <div key={`${file}`} className="w-full h-40 relative border">
+                                        <div key={`${file}`} className="w-full h-50 relative border">
                                             <Image
-                                                className="w-full h-full object-fill"
+                                                className="w-full h-auto object-fill"
                                                 src={file}
                                                 alt={`file preview ${file}`}
-                                                width={2000}
-                                                height={1000}
+                                                width={260}
+                                                height={300}
                                             />
                                             <div
                                                 className={`absolute top-0 right-0 translate-x-1/2 -translate-y-1/2

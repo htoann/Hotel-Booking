@@ -35,7 +35,7 @@ const AddressForm = ({
         <div className="mt-5 flex flex-col md:flex-row gap-x-10">
             <form className="w-full md:w-1/3 flex flex-col gap-x-2.5"
             >
-                <label htmlFor="address">Address</label>
+                <label className="mb-4" htmlFor="address">Address</label>
                 <input
                     className="rounded"
                     type="text"
