@@ -24,7 +24,8 @@ const Create = () => {
         photos: [],
         featured: false,
         name: '',
-        published: false
+        published: false,
+        reviews: []
     }
     const router = useRouter()
     const dispatch = useAppDispatch()

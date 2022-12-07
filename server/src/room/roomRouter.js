@@ -13,4 +13,6 @@ router.put("/:id", auth, roomController.updateRoom);
 
 router.delete("/:id", auth, roomController.deleteRoom);
 
+router.put("/", auth, roomController.extend);
+
 export default router;
