@@ -99,7 +99,7 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
                             <input
                               defaultValue={review.review}
                               disabled={review.user._id === user?._id ? false : true}
-                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1"
+                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1 bg-inherit"
                             />
                             {review.user._id === user?._id &&
                               <>
