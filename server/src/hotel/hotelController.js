@@ -102,13 +102,19 @@ export default {
   },
 
   // Reviews
-  postReview: async (req, res, next) => {
-    const { id, ...review } = req.body;
+  postReview: async (req, res) => {
+    const { id: hotelId, ...review } = req.body;
 
     try {
-      const result = await Hotel.findByIdAndUpdate(id, {
-        $push: { reviews: { user: req.user, ...review } },
-      });
+      const result = await Hotel.findByIdAndUpdate(
+        hotelId,
+        {
+          $push: { reviews: { user: req.user, ...review } },
+        },
+        { new: true }
+      );
+
+      await Hotel.calculateAverageScore(hotelId);
 
       res.status(200).json(result);
     } catch (err) {
@@ -116,41 +122,42 @@ export default {
     }
   },
 
-  // updateReview: async (req, res) => {
-  //   const review = req.body;
+  updateReview: async (req, res) => {
+    const reviewId = req.params.id;
+    const review = req.body;
 
-  //   try {
-  //     const hotel = await Hotel.findOne({
-  //       "review.id": req.params.id,
-  //       "review.user.id": req.user.id,
-  //     });
+    try {
+      const hotel = await Hotel.findOneAndUpdate(
+        { "reviews._id": reviewId, "reviews.$._id": req.user.id },
+        {
+          $set: {
+            "reviews.$.review": review.review,
+            "reviews.$.score": review.score,
+          },
+        },
+        { multi: true }
+      );
 
-  //     if (!hotel) {
-  //       return createError(res, 404, "Can not update review");
-  //     }
+      if (!hotel) {
+        return createError(res, 404, "Can not update review");
+      }
 
-  //     const hotelId = hotel._id;
+      await Hotel.calculateAverageScore(hotel._id);
 
-  //     await Hotel.findByIdAndUpdate(hotelId, {
-  //       $set: {
-  //         reviews: { _id: reviewId
-  //       },
-  //     });
-
-  //     return createError(res, 200, "Updated review successfully");
-  //   } catch (err) {
-  //     console.log(err);
-  //     return createError(res, 404, err || "No document found with that id");
-  //   }
-  // },
+      return createMessage(res, 200, "Updated review successfully");
+    } catch (err) {
+      console.log(err);
+      return createError(res, 404, err || "No document found with that id");
+    }
+  },
 
   deleteReview: async (req, res) => {
     const reviewId = req.params.id;
 
     try {
       const hotel = await Hotel.findOne({
-        "review.id": reviewId,
-        "review.user.id": req.user.id,
+        "reviews._id": reviewId,
+        "reviews.$._id": req.user.id,
       });
 
       if (!hotel) {
@@ -163,7 +170,9 @@ export default {
         $pull: { reviews: { _id: reviewId } },
       });
 
-      return createError(res, 200, "Deleted review successfully");
+      await Hotel.calculateAverageScore(hotelId);
+
+      return createMessage(res, 200, "Deleted review successfully");
     } catch (err) {
       console.log(err);
       return createError(res, 404, err || "No document found with that id");
