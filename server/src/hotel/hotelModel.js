@@ -97,6 +97,35 @@ const HotelSchema = new mongoose.Schema(
   }
 );
 
+HotelSchema.statics.calculateAverageScore = async function (hotelId, next) {
+  const calAvg = await this.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(hotelId) } },
+    { $unwind: "$reviews" },
+    {
+      $group: {
+        _id: null,
+        score: { $avg: "$reviews.score" },
+      },
+    },
+  ]);
+
+  const avgScore = calAvg[0].score.toFixed(2);
+
+  try {
+    await this.findByIdAndUpdate(
+      hotelId,
+      {
+        $set: {
+          score: avgScore,
+        },
+      },
+      { new: true }
+    );
+  } catch (err) {
+    next(err);
+  }
+};
+
 // autoIncrement.initialize(mongoose.connection);
 
 // HotelSchema.plugin(autoIncrement.plugin, {

@@ -28,9 +28,13 @@ RoomSchema.statics.updateCheapestPrice = async function (hotelId, next) {
   const roomCheapest = await this.find().sort({ price: 1 }).exec();
   const cheapestPrice = roomCheapest[0].price;
 
-  await Hotel.findByIdAndUpdate(hotelId, {
-    $set: { cheapestPrice: cheapestPrice },
-  });
+  try {
+    await Hotel.findByIdAndUpdate(hotelId, {
+      $set: { cheapestPrice: cheapestPrice },
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 export default mongoose.model("Room", RoomSchema);
