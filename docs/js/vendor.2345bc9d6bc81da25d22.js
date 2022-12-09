@@ -9443,7 +9443,7 @@ Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
 function checkInt (buf, value, offset, ext, max, min) {
   if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
   if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
-  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset + ext > buf.length) throw new RangeError('Layout out of range')
 }
 
 Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
@@ -9678,8 +9678,8 @@ Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) 
 }
 
 function checkIEEE754 (buf, value, offset, ext, max, min) {
-  if (offset + ext > buf.length) throw new RangeError('Index out of range')
-  if (offset < 0) throw new RangeError('Index out of range')
+  if (offset + ext > buf.length) throw new RangeError('Layout out of range')
+  if (offset < 0) throw new RangeError('Layout out of range')
 }
 
 function writeFloat (buf, value, offset, littleEndian, noAssert) {

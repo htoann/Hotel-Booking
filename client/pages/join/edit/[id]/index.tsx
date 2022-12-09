@@ -11,11 +11,11 @@ import {HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '../../../../co
 import Link from 'next/link'
 import withAuthentication from '../../../../components/withAuthentication'
 import {Layout} from '../../../../components/layout'
+import {useGetHotelQuery} from '../../../../services/hotelApi'
 
 const EditPage = () => {
     const router = useRouter()
     const id = router.query?.id as string
-    const {myHotels} = useAppSelector((state) => state.persistedReducer.hotel)
 
     const [data, setData] = useState<IHotel>({
         address: {name: ''},
@@ -31,10 +31,13 @@ const EditPage = () => {
         reviews: []
     })
 
+    const {data: myHotel, isSuccess} = useGetHotelQuery(id)
+
     useEffect(() => {
-        const result = myHotels.find((hotel) => hotel._id === id)
-        result && setData(result)
-    }, [id, myHotels])
+        if (isSuccess) {
+            setData(myHotel)
+        }
+    }, [isSuccess, myHotel])
 
     function updateFields (fields: Partial<IHotel>) {
         setData(prev => {

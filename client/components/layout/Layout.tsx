@@ -21,8 +21,8 @@ const Layout = ({children, metadata}: Props) => {
                 <meta property="og:title" content={title}/>
                 <meta property="og:type" content="website"/>
                 <meta property="og:site_name" content="Le Cong Ly"/>
-                <meta property="og:url" content={`https://bookinghotels.vercel.app${asPath}`}/>
-                <link rel="canonical" href={`https://bookinghotels.vercel.app${asPath}`}/>
+                <meta property="og:url" content={`https://www.bookingroom.tech/${asPath}`}/>
+                <link rel="canonical" href={`https://www.bookingroom.tech/${asPath}`}/>
                 <meta property="og:description" content={description}/>
                 <meta name="description" content={description}/>
                 {date !== null && <meta property="article:published_time" content={String(date)}/>}
