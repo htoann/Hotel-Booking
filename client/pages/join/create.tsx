@@ -5,8 +5,6 @@ import {AddressForm, HotelInfoForm, ImagesForm, PublishedForm, TypeForm} from '.
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import {useCreateHotelMutation} from '../../services/userApi'
-import {useAppDispatch} from '../../store/hooks'
-import {addToMyHotels} from '../../features/hotelSlice'
 import {IHotel} from '../../models/IHotel'
 import withAuthentication from '../../components/withAuthentication'
 import {Layout} from '../../components/layout'
@@ -28,7 +26,6 @@ const Create = () => {
         reviews: []
     }
     const router = useRouter()
-    const dispatch = useAppDispatch()
     const [data, setData] = useState(INITIAL_DATA)
 
     function updateFields (fields: Partial<IHotel>) {
@@ -50,8 +47,7 @@ const Create = () => {
         e.preventDefault()
         if (!isLastStep) return next()
         try {
-            const result = await createHotel(data).unwrap()
-            dispatch(addToMyHotels(result))
+            await createHotel(data).unwrap()
             await router.push('/join')
             toast.success('Create to success')
         } catch (e) {
@@ -73,7 +69,7 @@ const Create = () => {
                 className="mx-auto container px-4 lg:px-6 py-6 relative"
             >
                 <div className="mb-4">
-                    <BackButton text='Back to join page' />
+                    <BackButton text='Back to join page'/>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div

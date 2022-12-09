@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Link from 'next/link'
 import {Button} from '../../components/core'
 import {CiEdit, FiTrash, IoMdAdd} from '../../utils/icons'
@@ -7,27 +7,16 @@ import {Layout, Loader} from '../../components/layout'
 import ErrorPage from 'next/error'
 import moment from 'moment'
 import Image from 'next/image'
-import {useAppDispatch, useAppSelector} from '../../store/hooks'
-import {deleteFromMyHotels, setMyHotels} from '../../features/hotelSlice'
 import {toast} from 'react-toastify'
 import withAuthentication from '../../components/withAuthentication'
 
 const JoinPage = () => {
-    const {data = [], isLoading, isSuccess, error} = useGetMyHotelsQuery()
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        if (isSuccess) {
-            dispatch(setMyHotels(data))
-        }
-    }, [data, dispatch, isSuccess])
-
-    const {myHotels} = useAppSelector((state) => state.persistedReducer.hotel)
+    const {data: myHotels = [], isLoading, error} = useGetMyHotelsQuery()
 
     const handleDelete = async (id: string) => {
         if (window.confirm('Are you sure to delete?')) {
             try {
                 await deleteHotel(id)
-                dispatch(deleteFromMyHotels(id))
                 toast.success('Delete success')
             } catch (e) {
                 toast.error('Something went wrong when delete')
