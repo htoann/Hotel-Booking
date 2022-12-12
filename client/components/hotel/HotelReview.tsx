@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   usePostReviewMutation,
   useDeleteReviewMutation,
+  useUpdateReviewMutation,
 } from "../../services/hotelApi";
 import moment from "moment";
 import { Button } from "../../components/core";
@@ -14,16 +15,17 @@ import Link from "next/link";
 const HotelReview = ({ reviews, id, setShowModal }: any) => {
   const [postReview] = usePostReviewMutation();
   const [deleteReview] = useDeleteReviewMutation();
+  const [updateReview] = useUpdateReviewMutation();
 
-  const [review, setReview] = useState("");
+  const [reviewInput, setReviewInput] = useState("");
   const [score, setScore] = useState(10);
 
   const { user, token } = useAppSelector(
     (state) => state.persistedReducer.auth
   );
 
-  const handleChangeReview = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setReview(e.target.value);
+  const handleChangeReview = (e: React.ChangeEvent<any>) => {
+    setReviewInput(e.target.value);
   };
 
   const handleChangeScore = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,14 +33,14 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
   };
 
   const handleReview = async () => {
-    if (!review || !score) {
+    if (!reviewInput || !score) {
       toast.error("Please enter all fields");
     } else if (score < 0 || score > 10) {
       toast.error("Score must be between 0 - 10");
     } else {
-      await postReview({ id, review, score });
+      await postReview({ id, review: reviewInput, score });
       toast.success("Review successfully");
-      setReview("");
+      setReviewInput("");
     }
   };
   const handleDeleteReview = async (id: string) => {
@@ -46,9 +48,18 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
       try {
         await deleteReview(id);
         toast.success("Delete review successfully");
-      } catch (e) {
+      } catch (err) {
         toast.error("Something went wrong when delete");
       }
+    }
+  };
+  const handleUpdateReview = async (id: string) => {
+    try {
+      await updateReview({ id, review: reviewInput });
+      toast.success("Update review successfully");
+      setReviewInput("");
+    } catch (err) {
+      toast.error("Something went wrong when update");
     }
   };
   return (
@@ -102,13 +113,14 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
                               disabled={
                                 review.user._id === user?._id ? false : true
                               }
-                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1 bg-inherit p-2 h-12"
+                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1 bg-inherit p-2 h-12 resize-none hover:resize"
+                              onChange={handleChangeReview}
                             />
                             {review.user._id === user?._id && (
                               <>
-                                <div className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/4 mt-2">
+                                {reviewInput && <div onClick={() => handleUpdateReview(review._id)} className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/4 mt-2">
                                   <CiEdit />
-                                </div>
+                                </div>}
                                 <div
                                   onClick={() => handleDeleteReview(review._id)}
                                   className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute left-3/4 mt-2 ml-2"
@@ -120,7 +132,7 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
                           </div>
                         </div>
                         <div>
-                          <div className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4">
+                          <div className="items-center p-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg float-right lg:mb-4 justify-center flex">
                             {review.score.toFixed(1)}
                           </div>
                         </div>
@@ -140,7 +152,7 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
                 <div className="relative p-6 flex-auto">
                   <span className="text-black">Write review</span>
                   <input
-                    value={review}
+                    value={reviewInput}
                     className="form-input block rounded my-4 w-full w-128"
                     placeholder="Very good hotel"
                     onChange={handleChangeReview}

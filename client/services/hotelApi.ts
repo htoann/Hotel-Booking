@@ -47,7 +47,15 @@ export const hotelApi = createApi({
             },
             invalidatesTags: ['hotels']
         }),
+        updateReview: builder.mutation({
+            query: (body: {
+                id: string; review: string
+            }) => {
+                return { url: `/hotels/review/${body.id}`, method: 'put', body }
+            },
+            invalidatesTags: ['hotels']
+        }),
     })
 })
 
-export const {useGetHotelsQuery, useGetHotelQuery, usePostReviewMutation, useDeleteReviewMutation} = hotelApi
+export const {useGetHotelsQuery, useGetHotelQuery, usePostReviewMutation, useDeleteReviewMutation, useUpdateReviewMutation} = hotelApi
