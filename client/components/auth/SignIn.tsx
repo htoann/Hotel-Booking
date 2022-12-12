@@ -43,12 +43,12 @@ const SignIn = ({setIsSignIn}: Props) => {
     }
     useEffect(() => {
         if (isLoginSuccess) {
-            toast.success('User Login Successfully')
             dispatch(
                 setUser({user: loginData.user, token: loginData.token})
             )
             dispatch(setHotelWishList(loginData.user.wishlist))
-            router.push('/')
+            router.push('/').then(() =>
+                toast.success('User Login Successfully'))
         }
     }, [isLoginSuccess])
 
