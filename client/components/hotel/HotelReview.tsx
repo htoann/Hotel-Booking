@@ -30,21 +30,21 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
     setScore(+e.target.value);
   };
 
-  const handleReview = () => {
+  const handleReview = async () => {
     if (!review || !score) {
       toast.error("Please enter all fields");
     } else if (score < 0 || score > 10) {
       toast.error("Score must be between 0 - 10");
     } else {
-      postReview({ id, review, score });
-      setReview("");
+      await postReview({ id, review, score });
       toast.success("Review successfully");
+      setReview("");
     }
   };
-  const handleDeleteReview = (id: string) => {
+  const handleDeleteReview = async (id: string) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
-        deleteReview(id);
+        await deleteReview(id);
         toast.success("Delete review successfully");
       } catch (e) {
         toast.error("Something went wrong when delete");
