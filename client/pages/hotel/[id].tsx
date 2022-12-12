@@ -54,7 +54,7 @@ const HotelDetailPage = () => {
 
     const [addWishList] = useAddWishListMutation()
     const [deleteWishList] = useDeleteWishListMutation()
-
+    
     useEffect(() => {
         if (hotel) dispatch(setReviews(hotel.reviews))
     }, [dispatch, hotel, setShowModal, id])
@@ -255,7 +255,6 @@ const HotelDetailPage = () => {
                             </div>
                         </div>
                     </div>
-
                     <div className="mt-5 border-t border-current">
                         <div className="my-2.5 w-full">
                             <h1 className="font-bold text-2xl mb-4">Availability</h1>
