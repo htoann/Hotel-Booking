@@ -22,6 +22,7 @@ router.get("/me", auth, hotelController.getHotelsByUser)
 router.post("/review", auth, hotelController.postReview);
 
 router.delete("/review/:id", auth, hotelController.deleteReview);
-// router.put("/review/:id", auth, hotelController.updateReview);
+
+router.put("/review/:id", auth, hotelController.updateReview);
 
 export default router;
