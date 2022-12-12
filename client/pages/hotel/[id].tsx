@@ -31,7 +31,6 @@ import {
   useAddWishListMutation,
   useDeleteWishListMutation,
 } from "../../services/userApi";
-import { setReviews, addReviews } from "../../features/appSlice";
 
 const HotelDetailPage = () => {
   const router = useRouter();
@@ -54,12 +53,6 @@ const HotelDetailPage = () => {
 
   const [addWishList] = useAddWishListMutation();
   const [deleteWishList] = useDeleteWishListMutation();
-
-  useEffect(() => {
-    if (hotel) dispatch(setReviews(hotel.reviews));
-  }, [dispatch, hotel, setShowModal, id]);
-
-  const { reviews } = useAppSelector((state) => state.persistedReducer.app);
 
   if (isLoading) {
     return (
@@ -148,14 +141,14 @@ const HotelDetailPage = () => {
                     </div>
                     <div onClick={() => setShowModal(true)}>
                       <Button
-                        text={`Guest reviews (${reviews?.length})`}
+                        text={`Guest reviews (${hotel?.reviews?.length})`}
                         textColor="text-white"
                         bgColor="bg-primary"
                       />
                     </div>
                     {showModal ? (
                       <HotelReview
-                        reviews={reviews}
+                        reviews={hotel?.reviews}
                         id={id}
                         setShowModal={setShowModal}
                       />

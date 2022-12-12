@@ -8,9 +8,8 @@ import { Button } from "../../components/core";
 import Image from "next/image";
 import { AiOutlineClose, CiEdit } from "../../utils/icons";
 import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { addReviews, deleteReviews } from "../../features/appSlice";
-import Link from 'next/link'
+import { useAppSelector } from "../../store/hooks";
+import Link from "next/link";
 
 const HotelReview = ({ reviews, id, setShowModal }: any) => {
   const [postReview] = usePostReviewMutation();
@@ -22,8 +21,6 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
   const { user, token } = useAppSelector(
     (state) => state.persistedReducer.auth
   );
-
-  const dispatch = useAppDispatch();
 
   const handleChangeReview = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReview(e.target.value);
@@ -40,19 +37,23 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
       toast.error("Score must be between 0 - 10");
     } else {
       postReview({ id, review, score });
-      dispatch(addReviews({ id, review, score, user }));
       setReview("");
       toast.success("Review successfully");
     }
   };
   const handleDeleteReview = (id: string) => {
-    deleteReview(id);
-    dispatch(deleteReviews(id));
-    toast.success("Delete review successfully");
+    if (window.confirm("Are you sure to delete?")) {
+      try {
+        deleteReview(id);
+        toast.success("Delete review successfully");
+      } catch (e) {
+        toast.error("Something went wrong when delete");
+      }
+    }
   };
   return (
     <>
-      <div className="items-right flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+      <div className="items-right flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
         <div
           className="relative w-auto h-auto max-w-3xl ml-auto"
           onClick={(e) => e.stopPropagation()}
@@ -96,24 +97,26 @@ const HotelReview = ({ reviews, id, setShowModal }: any) => {
                             Reviewed: {moment(review.updatedAt).format("LLL")}
                           </p>
                           <div className="flex">
-                            <input
+                            <textarea
                               defaultValue={review.review}
-                              disabled={review.user._id === user?._id ? false : true}
-                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1 bg-inherit"
+                              disabled={
+                                review.user._id === user?._id ? false : true
+                              }
+                              className="text-black text-xl leading-relaxed flex-1 w-64 mr-2 border-none rounded w-full md:py-1 bg-inherit p-2 h-12"
                             />
-                            {review.user._id === user?._id &&
+                            {review.user._id === user?._id && (
                               <>
-                                <div className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/3 mt-2">
+                                <div className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/4 mt-2">
                                   <CiEdit />
                                 </div>
                                 <div
                                   onClick={() => handleDeleteReview(review._id)}
-                                  className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute right-1/4 mt-2"
+                                  className="cursor-pointer items-center inline-flex cursor-pointer opacity-0 group-hover:opacity-100 text-2xl absolute left-3/4 mt-2 ml-2"
                                 >
                                   <AiOutlineClose />
                                 </div>
                               </>
-                            }
+                            )}
                           </div>
                         </div>
                         <div>
