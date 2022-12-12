@@ -127,8 +127,8 @@ const RoomHotel = ({hotelId}: Props) => {
     }
 
     if (isBookingSuccess) {
-        toast.success('Booking Successfully')
-        router.push('/user/booking')
+        router.push('/user/booking').then(() => toast.success('Booking Successfully')
+        )
     }
 
     if (isBookingError) {
